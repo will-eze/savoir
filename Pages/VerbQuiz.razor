@@ -1,0 +1,40 @@
+﻿@page "/VerbQuiz"
+
+<PageTitle>Verb Quiz</PageTitle>
+
+<div class="VerbQuiz">
+    <div class="VerbQuiz__header">
+        <h2 id="VerbQuiz__infinitive">verb</h2>
+        <h3 id="VerbQuiz__tense">tense</h3>
+    </div>
+    <div class="VerbQuiz__inputs">
+        <form onsubmit="return false" autocomplete="off">
+            <label for="je" class="VerbQuiz__pronouns">Je</label>
+            <input type="text" id="je" class="VerbQuiz__input" name="VerbQuiz__je" autocomplete="off">
+            <label id='je__result' class="result">result</label>
+
+            <label for="tu" class="VerbQuiz__pronouns">Tu</label>
+            <input type="text" id="tu" class="VerbQuiz__input" name="VerbQuiz__tu" autocomplete="off">
+            <label id='tu__result' class="result">result</label>
+
+            <label for="il" class="VerbQuiz__pronouns">Il/elle/on</label>
+            <input type="text" id="il" class="VerbQuiz__input" name="VerbQuiz__il" autocomplete="off">
+            <label id='il__result' class="result">result</label>
+
+            <label for="nous" class="VerbQuiz__pronouns">Nous</label>
+            <input type="text" id="nous" class="VerbQuiz__input" name="VerbQuiz__nous" autocomplete="off">
+            <label id='nous__result' class="result">result</label>
+
+            <label for="vous" class="VerbQuiz__pronouns">Vous</label>
+            <input type="text" id="vous" class="VerbQuiz__input" name="VerbQuiz__vous" autocomplete="off">
+            <label id='vous__result' class="result">result</label>
+
+            <label for="ils" class="VerbQuiz__pronouns">Ils/elles</label>
+            <input type="text" id="ils" class="VerbQuiz__input" name="VerbQuiz__ils" autocomplete="off">
+            <label id='ils__result' class="result">result</label>
+
+            <button type="submit" class="Quiz__submit" id="VerbQuiz__submit" onclick="">Submit</button>
+        </form> 
+    </div>
+
+</div>
