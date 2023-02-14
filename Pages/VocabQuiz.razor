@@ -1,20 +1,89 @@
 ﻿@page "/VocabQuiz"
+@inherits VerbQuizBase
+@using savoir.Data
 
 <PageTitle>Vocab Quiz</PageTitle>
 
 <div class="VocabQuiz">
     <div class="VocabQuiz__header">
-        <h2 id="VocabQuiz__module">Module Name</h2>
+        <h2 id="VocabQuiz__module">@GLOBALS.selectedModuleName</h2>
     </div>
     <div class="VocabQuiz__bubble">
-        <p id="VocabQuiz__vocab">Vocab</p>
+        <p id="VocabQuiz__vocab">@vocabQuiz.wordShownToUser</p>
     </div>
     <div class="VocabQuiz__input">
-        <input type="text" id="VocabQuiz__translation" placeholder="Enter the translation..." autocomplete="off"/>
-        <span class="VocabQuiz__result">##</span>
+        <input type="text" id="VocabQuiz__translation" disabled="@userInputDisabled" @bind="vocabQuiz.userInput" @bind:event="oninput" placeholder="Enter the translation..." autocomplete="off"/>
+        <span class="VocabQuiz__result"></span>
     </div>
     <div class="VocabQuiz__correctionBox">
-        <p id="VocabQuiz__correction">Correction</p>
+        <p id="VocabQuiz__correction">@correctionText()</p>
     </div>
-    <button type="submit" class="Quiz__submit" id="VocabQuiz__submit" onclick="">Submit</button>
+    <button type="submit" class="Quiz__submit" id="VocabQuiz__submit" @onclick="@ResetVocab">@buttonLabels[buttonLabelIndex]</button>
 </div>
+
+@code {
+    public VocabQuizBase vocabQuiz = new VocabQuizBase();
+
+    public string correctTranslation = string.Empty;
+
+    public string[] buttonLabels = new string[2] { "Submit", "Next" };
+    public int buttonLabelIndex = 0;
+    public bool userInputDisabled = false;
+
+    public bool displayTranslation = false;
+
+    public VocabQuiz()
+    {
+        vocabQuiz.RandomVocab();
+    }
+
+    public void ResetVocab()
+    {
+        if (vocabQuiz.userInput != string.Empty)
+        {
+            // if SUBMIT button clicked
+            if (buttonLabelIndex == 0)
+            {
+                buttonLabelIndex = 1;
+                userInputDisabled = true;
+
+                if (vocabQuiz.userInput == vocabQuiz.vocabInfo[0])
+                {
+                    // do something --> correct answer by user
+                }
+                else
+                {
+                    // do something --> wrong answer by user
+
+                    displayTranslation = true;
+                }
+
+
+            }
+
+            // if NEXT button clicked
+            else
+            {
+                buttonLabelIndex = 0;
+                userInputDisabled = false;
+
+                vocabQuiz.RandomVocab();
+
+                vocabQuiz.userInput = string.Empty;
+                displayTranslation = false;
+            }
+        }
+    }
+
+    public string correctionText()
+    {
+        if (displayTranslation)
+        {
+            return vocabQuiz.vocabInfo[0];
+        }
+        else
+        {
+            return string.Empty;
+        }
+    }
+}

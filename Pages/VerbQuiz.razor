@@ -1,40 +1,136 @@
-﻿@page "/VerbQuiz"
+﻿@inherits VerbQuizBase
+@page "/VerbQuiz"
 
 <PageTitle>Verb Quiz</PageTitle>
 
 <div class="VerbQuiz">
     <div class="VerbQuiz__header">
-        <h2 id="VerbQuiz__infinitive">verb</h2>
-        <h3 id="VerbQuiz__tense">tense</h3>
+        <h2 id="VerbQuiz__infinitive">@verbQuiz.verbinfo[0] </h2>
+        <h4 id="VerbQuiz__english">@verbQuiz.verbinfo[1]</h4>
+        <h3 id="VerbQuiz__tense">@verbQuiz.verbinfo[2]</h3>
     </div>
     <div class="VerbQuiz__inputs">
         <form onsubmit="return false" autocomplete="off">
-            <label for="je" class="VerbQuiz__pronouns">Je</label>
-            <input type="text" id="je" class="VerbQuiz__input" name="VerbQuiz__je" autocomplete="off">
-            <label id='je__result' class="result">result</label>
+            <label for="je" class="VerbQuiz__pronouns">@textJe</label>
+            <input type="text" id="je" class="VerbQuiz__input" name="VerbQuiz__je" disabled="@userInputDisabled"autocomplete="off" value="@verbQuiz.userVerbs[0]" @oninput="@textJeChanged">
+            <label id='je__result' class="result">@corrections[0]</label>
 
             <label for="tu" class="VerbQuiz__pronouns">Tu</label>
-            <input type="text" id="tu" class="VerbQuiz__input" name="VerbQuiz__tu" autocomplete="off">
-            <label id='tu__result' class="result">result</label>
+            <input type="text" id="tu" class="VerbQuiz__input" name="VerbQuiz__tu" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[1]" @bind:event="oninput">
+            <label id='tu__result' class="result">@corrections[1]</label>
 
             <label for="il" class="VerbQuiz__pronouns">Il/elle/on</label>
-            <input type="text" id="il" class="VerbQuiz__input" name="VerbQuiz__il" autocomplete="off">
-            <label id='il__result' class="result">result</label>
+            <input type="text" id="il" class="VerbQuiz__input" name="VerbQuiz__il" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[2]" @bind:event="oninput">
+            <label id='il__result' class="result">@corrections[2]</label>
 
             <label for="nous" class="VerbQuiz__pronouns">Nous</label>
-            <input type="text" id="nous" class="VerbQuiz__input" name="VerbQuiz__nous" autocomplete="off">
-            <label id='nous__result' class="result">result</label>
+            <input type="text" id="nous" class="VerbQuiz__input" name="VerbQuiz__nous" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[3]" @bind:event="oninput">
+            <label id='nous__result' class="result">@corrections[3]</label>
 
             <label for="vous" class="VerbQuiz__pronouns">Vous</label>
-            <input type="text" id="vous" class="VerbQuiz__input" name="VerbQuiz__vous" autocomplete="off">
-            <label id='vous__result' class="result">result</label>
+            <input type="text" id="vous" class="VerbQuiz__input" name="VerbQuiz__vous" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[4]" @bind:event="oninput">
+            <label id='vous__result' class="result">@corrections[4]</label>
 
             <label for="ils" class="VerbQuiz__pronouns">Ils/elles</label>
-            <input type="text" id="ils" class="VerbQuiz__input" name="VerbQuiz__ils" autocomplete="off">
-            <label id='ils__result' class="result">result</label>
+            <input type="text" id="ils" class="VerbQuiz__input" name="VerbQuiz__ils" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[5]" @bind:event="oninput">
+            <label id='ils__result' class="result">@corrections[5]</label>
 
-            <button type="submit" class="Quiz__submit" id="VerbQuiz__submit" onclick="">Submit</button>
+            <button type="submit" class="Quiz__submit" id="VerbQuiz__submit" @onclick="@ResetVerb">@buttonLabels[buttonLabelIndex]</button>
         </form> 
     </div>
 
 </div>
+
+@code {
+    public VerbQuizBase verbQuiz = new VerbQuizBase();
+
+    public string[] buttonLabels = new string[2] { "Submit", "Next" };
+
+    public int buttonLabelIndex = 0;
+
+    public bool userInputDisabled = false;
+
+    public string[] corrections = new string[6] { "", "", "", "", "", ""};
+
+    public string textJe = "Je";
+
+    public VerbQuiz()
+    {
+        verbQuiz.RandomVerb();
+    }
+
+    public void ResetVerb()
+    {
+        // if all user input fields are filled, execute IF block
+        if (verbQuiz.userVerbs.All(x => x != ""))
+        {
+            // if SUBMIT button clicked:
+            if (buttonLabelIndex == 0)
+            {
+                buttonLabelIndex = 1;
+
+                userInputDisabled = true;
+
+                // add corrections to answers
+
+                if (verbQuiz.verbinfo[2].ToLower().Contains("imperative"))
+                {
+                    // imperative only works for indexes 1, 3, 4 (tu, nous, vous) so this array makes it easier to loop through and correct user answers
+                    int[] tempIntArr = new int[3] { 1, 3, 4 };
+
+                    for (int i = 0; i<=2; i++)
+                    {
+                        if (verbQuiz.userVerbs[i] != verbQuiz.conjugations[i])
+                        {
+                            corrections[tempIntArr[i]] = verbQuiz.conjugations[i];
+                        }
+                    }
+                }
+
+                else
+                {
+                    for (int i = 0; i <= 5; i++)
+                    {
+                        if (verbQuiz.userVerbs[i] != verbQuiz.conjugations[i])
+                        {
+                            corrections[i] = verbQuiz.conjugations[i];
+                        }
+                    }
+                }
+            }
+
+            // if NEXT button clicked:
+            else 
+            {
+                buttonLabelIndex = 0;
+
+                userInputDisabled = false;
+
+                // reset the user input fields (which are bound to indexes of userVerbs) and the correction fields
+                for (int i = 0; i<=5; i++)
+                {
+                    verbQuiz.userVerbs[i] = string.Empty;
+                    corrections[i] = string.Empty;
+                }
+
+                // generate a new verb
+                verbQuiz.RandomVerb();
+            }
+        } 
+    }
+
+    public void textJeChanged(ChangeEventArgs args)
+    {
+        verbQuiz.userVerbs[0] = args.Value!.ToString()!;
+        char[] frenchVowels = new char[6] { 'a', 'e', 'i', 'o', 'u', 'h' };
+
+        if (frenchVowels.Contains(verbQuiz.userVerbs[0][0]))
+        {
+            textJe = "J'";
+        }
+        else
+        {
+            textJe = "Je";
+        }
+    }
+}

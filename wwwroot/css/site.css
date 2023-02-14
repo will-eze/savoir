@@ -28,6 +28,10 @@ html, body {
     border: none;
 }
 
+.set-btn:hover {
+    background: #b32121;
+}
+
 .set-btn:focus {
     background: #726EFF;
 }
