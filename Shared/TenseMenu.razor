@@ -1,96 +1,98 @@
-﻿<div class="TenseMenu">
+﻿@using savoir.Data
+
+<div class="TenseMenu" hidden="@TenseMenuHidden">
     <div class="TenseMenu__header">
         <h2>Tenses</h2>
         <p>Select the tenses you would like to practice</p>
     </div>
     <label class="toggle" for="present">
-        <input class="toggle__input" type="checkbox" id="present" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[0]" @onchange="((e) => CheckboxChanged(0))" id="present" />
         <span class="toggle__fill"></span>
         Present
     </label>
     <label class="toggle" for="imperfect">
-        <input class="toggle__input" type="checkbox" id="imperfect" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[1]" @onchange="((e) => CheckboxChanged(1))" id="imperfect" />
         <span class="toggle__fill"></span>
         Imperfect
     </label>
     <label class="toggle" for="passeSimple">
-        <input class="toggle__input" type="checkbox" id="passeSimple" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[2]" @onchange="((e) => CheckboxChanged(2))" id="passeSimple" />
         <span class="toggle__fill"></span>
         Passe simple
     </label>
     <label class="toggle" for="simpleFuture">
-        <input class="toggle__input" type="checkbox" id="simpleFuture" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[3]" @onchange="((e) => CheckboxChanged(3))" id="simpleFuture" />
         <span class="toggle__fill"></span>
         Simple future
     </label>
     <label class="toggle" for="conditional">
-        <input class="toggle__input" type="checkbox" id="conditional" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[4]" @onchange="((e) => CheckboxChanged(4))" id="conditional" />
         <span class="toggle__fill"></span>
         Conditional
     </label>
     <label class="toggle" for="subjunctive">
-        <input class="toggle__input" type="checkbox" id="subjunctive" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[5]" @onchange="((e) => CheckboxChanged(5))" id="subjunctive" />
         <span class="toggle__fill"></span>
         Subjunctive
     </label>
     <label class="toggle" for="imperfectSubjunctive">
-        <input class="toggle__input" type="checkbox" id="imperfectSubjunctive" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[6]" @onchange="((e) => CheckboxChanged(6))" id="imperfectSubjunctive" />
         <span class="toggle__fill"></span>
         Imperfect subjunctive
     </label>
     <label class="toggle" for="imperative">
-        <input class="toggle__input" type="checkbox" id="imperative" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[7]" @onchange="((e) => CheckboxChanged(7))" id="imperative" />
         <span class="toggle__fill"></span>
         Imperative
     </label>
     <label class="toggle" for="passeCompose">
-        <input class="toggle__input" type="checkbox" id="passeCompose" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[8]" @onchange="((e) => CheckboxChanged(8))" id="passeCompose" />
         <span class="toggle__fill"></span>
         Passe compose
     </label>
     <label class="toggle" for="pastPerfect">
-        <input class="toggle__input" type="checkbox" id="pastPerfect" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[9]" @onchange="((e) => CheckboxChanged(9))" id="pastPerfect" />
         <span class="toggle__fill"></span>
         Past perfect
     </label>
     <label class="toggle" for="futurePerfect">
-        <input class="toggle__input" type="checkbox" id="futurePerfect" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[10]" @onchange="((e) => CheckboxChanged(10))" id="futurePerfect" />
         <span class="toggle__fill"></span>
         Future perfect
     </label>
     <label class="toggle" for="pastConditional">
-        <input class="toggle__input" type="checkbox" id="pastConditional" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[11]" @onchange="((e) => CheckboxChanged(11))" id="pastConditional" />
         <span class="toggle__fill"></span>
         Past conditional
     </label>
     <label class="toggle" for="pastSubjunctive">
-        <input class="toggle__input" type="checkbox" id="pastSubjunctive" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[12]" @onchange="((e) => CheckboxChanged(12))" id="pastSubjunctive" />
         <span class="toggle__fill"></span>
         Past subjunctive
     </label>
     <label class="toggle" for="pluperfectSubjunctive">
-        <input class="toggle__input" type="checkbox" id="pluperfectSubjunctive" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[13]" @onchange="((e) => CheckboxChanged(13))" id="pluperfectSubjunctive" />
         <span class="toggle__fill"></span>
         Pluperfect subjunctive
     </label>
     <label class="toggle" for="pastAnterior">
-        <input class="toggle__input" type="checkbox" id="pastAnterior" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[14]" @onchange="((e) => CheckboxChanged(14))" id="pastAnterior" />
         <span class="toggle__fill"></span>
         Past anterior
     </label>
     <label class="toggle" for="pastImperative">
-        <input class="toggle__input" type="checkbox" id="pastImperative" />
+        <input class="toggle__input" type="checkbox" checked="@TensesChecked[15]" @onchange="((e) => CheckboxChanged(15))" id="pastImperative" />
         <span class="toggle__fill"></span>
         Past imperative
     </label>
 
     <div class="TenseMenu__buttons">
-        <div class="TenseMenu__buttons_studySet">
+        <div class="TenseMenu__buttons_studySet" hidden="@StudySetHidden">
             <button class="TenseMenu__buttons__practice" onclick="">
                 <a href="VerbQuiz">Practice</a>
             </button>
         </div>
-        <div class="TenseMenu__buttons_moduleSet">
+        <div class="TenseMenu__buttons_moduleSet" hidden="@ModuleSetHidden">
             <button class="TenseMenu__buttons__verbs" onclick="">
                 <a href="VerbQuiz">Verb</a>
                 </button>
@@ -100,3 +102,59 @@
         </div>
     </div>
 </div>
+
+@code {
+    [Parameter]
+    public bool TenseMenuHidden { get; set; }
+
+    [Parameter]
+    public bool StudySetHidden { get; set; }
+
+    [Parameter]
+    public bool ModuleSetHidden { get; set; }
+
+    // list of all available tenses
+    public string[] AllTenses = new string[16] { "present", "imperfect", "passe simple", "simple future", "conditional", "subjunctive", "imperfect subjunctive", "imperative", "passe compose", "past perfect", "future perfect", "past conditional", "past subjunctive", "pluperfect subjunctive", "past anterior", "past imperative" };
+
+    // list of tenses which should automatically be selected
+    public string[] DefaultTenses = new string[5] { "present", "passe compose", "imperfect", "simple future", "conditional" };
+
+    // stores the state of each checkbox
+    public bool[] TensesChecked { get; set; } = new bool[16];
+
+    private void CheckboxChanged(int i)
+    {
+        // updates the fields storing the checkbox's states and the selected tenses
+        TensesChecked[i] = !TensesChecked[i];
+        UpdateTensesSelected();
+    }
+
+    public TenseMenu()
+    {
+        // update the checkboxes such that the tenses contained in "DefaultTenses" are checked automatically.
+        for (int i = 0; i <= 15; i++)
+        {
+            if (DefaultTenses.Contains(AllTenses[i]))
+            {
+                TensesChecked[i] = true;
+            }
+        }
+
+        // initial update of TensesSelectedList --> to ensure that it's up-to-date even if the user makes no checkbox changes.
+        UpdateTensesSelected();
+    }
+
+    private void UpdateTensesSelected()
+    {
+        // updates "TensesSelectedList" to match the Checkbox's states (stored in TensesChecked)
+        GLOBALS.TensesSelectedList.Clear();
+
+        for (int i = 0; i <= 15; i++)
+        {
+            if (TensesChecked[i])
+            {
+                GLOBALS.TensesSelectedList.Add(AllTenses[i]);
+            }
+        }
+    }
+}
