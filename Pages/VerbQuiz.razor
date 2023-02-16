@@ -124,13 +124,22 @@
         verbQuiz.userVerbs[0] = args.Value!.ToString()!;
         char[] frenchVowels = new char[6] { 'a', 'e', 'i', 'o', 'u', 'h' };
 
-        if (frenchVowels.Contains(verbQuiz.userVerbs[0][0]))
+        if (verbQuiz.userVerbs[0].Length > 0)
         {
-            textJe = "J'";
+            if (frenchVowels.Contains(verbQuiz.userVerbs[0][0]))
+            {
+                textJe = "J'";
+            }
+            else
+            {
+                textJe = "Je";
+            }
         }
         else
         {
             textJe = "Je";
         }
+
     }
+
 }

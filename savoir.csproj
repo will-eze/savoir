@@ -6,8 +6,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Include="wwwroot\css\gear-icon.png" />
-  </ItemGroup>
-
 </Project>

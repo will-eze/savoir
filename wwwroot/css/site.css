@@ -5,46 +5,39 @@ html, body {
     background: #1A1916;
     color: #fff;
     padding-bottom: 20px;
+    height: 100%;
+    margin: 0;
 }
 
 .container{
     margin:0px;
     padding-left:70px;
-    max-width: 100%;
+    max-width: 65%;
 }
 
 #content{
     width: 100%;
 }
 
+button{
+    flex: 1;
+}
+
 .set-btn {
     background-color: #D9D9D9;
     padding: 20px 30px;
     border-radius: 15px;
-    font-size: 25px;
-    width: 20%;
+    font-size: 1.2rem;
     text-align: center;
-    margin: 10px 50px 20px 10px;
+    margin: 10px 30px 20px 0px;
     border: none;
-}
-
-.set-btn:hover {
-    background: #b32121;
-}
-
-.set-btn:focus {
-    background: #726EFF;
 }
 
 .sub-heading {
     font-style: normal;
     font-weight: 300;
-    font-size: 44px;
+    font-size: 2.5em;
     margin: 60px 0 20px 0;
-}
-
-h1:focus {
-    outline: none;
 }
 
 a, .btn-link {
@@ -66,6 +59,103 @@ label{
     display: block;
 }
 
+.TenseMenu {
+    float: right;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    background-color: #1A1916;
+    padding: 30px;
+    border-left: #fff 4px solid;
+}
+
+.TenseMenu__header{
+    text-align: center;
+}
+
+.TenseMenu__toggleBox{
+    height: 70%;
+    overflow-y:scroll;
+    overflow-x: hidden;
+}
+
+.toggle {
+    --width: 45px;
+    --height: calc(var(--width)/2);
+    --border-radius: calc(var(--height)/2);
+    display: block;
+    cursor: pointer;
+    margin: 8px;
+    font-size: 20px;
+}
+
+.toggle__input {
+    display: none;
+}
+
+.toggle__fill {
+    position: relative;
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--border-radius);
+    background: #919191;
+    transition: backgorund 0.2s;
+    display: inline-block;
+}
+
+.toggle__input:checked ~ .toggle__fill {
+    background: #726EFF;
+}
+
+.toggle__fill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: var(--height);
+    width: var(--height);
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    border-radius: var(--border-radius);
+    transition: transform 0.2s;
+}
+
+.TenseMenu__buttons__practice{
+    background-color: #726EFF;
+    font-size: 29px;
+    text-align: center;
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-radius: 30px;
+    margin-top: 30px;
+}
+
+.TenseMenu__buttons__verbs {
+    background-color: #726EFF;
+    font-size: 25px;
+    text-align: center;
+    width: 45%;
+    padding: 7px;
+    border: none;
+    border-radius: 30px;
+    margin: 30px 5px 30px 5px;
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: #fff;
+}
+
+.TenseMenu__buttons__practice:hover, .TenseMenu__buttons__verbs:hover {
+    background: #26b050;
+}
+
+.toggle__input:checked ~ .toggle__fill::after {
+    transform: translateX(var(--height));
+}
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
