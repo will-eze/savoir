@@ -6,39 +6,87 @@
 <div class="VerbQuiz">
     <div class="VerbQuiz__header">
         <h2 id="VerbQuiz__infinitive">@verbQuiz.verbinfo[0] </h2>
-        <h4 id="VerbQuiz__english">@verbQuiz.verbinfo[1]</h4>
         <h3 id="VerbQuiz__tense">@verbQuiz.verbinfo[2]</h3>
     </div>
     <div class="VerbQuiz__inputs">
         <form onsubmit="return false" autocomplete="off">
-            <label for="je" class="VerbQuiz__pronouns">@textJe</label>
-            <input type="text" id="je" class="VerbQuiz__input" name="VerbQuiz__je" disabled="@userInputDisabled"autocomplete="off" value="@verbQuiz.userVerbs[0]" @oninput="@textJeChanged">
-            <label id='je__result' class="result">@corrections[0]</label>
+            <table class="VerbQuiz__table">
+                <tr>
+                    <td>
+                        <label for="je" class="VerbQuiz__pronouns">@textJe</label>
+                    </td>
+                    <td>
+                        <input type="text" id="je" class="VerbQuiz__input" name="VerbQuiz__je" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[0]" @oninput="@textJeChanged">
+                    </td>
+                    <td>
+                        <label id='je__result' class="result">@corrections[0]</label>
+                    </td>
+                </tr>
 
-            <label for="tu" class="VerbQuiz__pronouns">Tu</label>
-            <input type="text" id="tu" class="VerbQuiz__input" name="VerbQuiz__tu" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[1]" @bind:event="oninput">
-            <label id='tu__result' class="result">@corrections[1]</label>
+                <tr>
+                    <td>
+                        <label for="tu" class="VerbQuiz__pronouns">Tu</label>
+                    </td>
+                    <td>
+                        <input type="text" id="tu" class="VerbQuiz__input" name="VerbQuiz__tu" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[1]" @bind:event="oninput">
+                    </td>
+                    <td>
+                        <label id='tu__result' class="result">@corrections[1]</label>
+                    </td>
+                </tr>
 
-            <label for="il" class="VerbQuiz__pronouns">Il/elle/on</label>
-            <input type="text" id="il" class="VerbQuiz__input" name="VerbQuiz__il" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[2]" @bind:event="oninput">
-            <label id='il__result' class="result">@corrections[2]</label>
+                <tr>
+                    <td>
+                        <label for="il" class="VerbQuiz__pronouns">Il/elle/on</label>
+                    </td>
+                    <td>
+                        <input type="text" id="il" class="VerbQuiz__input" name="VerbQuiz__il" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[2]" @bind:event="oninput">
+                    </td>
+                    <td>
+                        <label id='il__result' class="result">@corrections[2]</label>
+                    </td>
+                </tr>
 
-            <label for="nous" class="VerbQuiz__pronouns">Nous</label>
-            <input type="text" id="nous" class="VerbQuiz__input" name="VerbQuiz__nous" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[3]" @bind:event="oninput">
-            <label id='nous__result' class="result">@corrections[3]</label>
+                <tr>
+                    <td>
+                        <label for="nous" class="VerbQuiz__pronouns">Nous</label>
+                    </td>
+                    <td>
+                        <input type="text" id="nous" class="VerbQuiz__input" name="VerbQuiz__nous" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[3]" @bind:event="oninput">
+                    </td>
+                    <td>
+                        <label id='nous__result' class="result">@corrections[3]</label>
+                    </td>
+                </tr>
 
-            <label for="vous" class="VerbQuiz__pronouns">Vous</label>
-            <input type="text" id="vous" class="VerbQuiz__input" name="VerbQuiz__vous" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[4]" @bind:event="oninput">
-            <label id='vous__result' class="result">@corrections[4]</label>
+                <tr>
+                    <td>
+                        <label for="vous" class="VerbQuiz__pronouns">Vous</label>
+                    </td>
+                    <td>
+                        <input type="text" id="vous" class="VerbQuiz__input" name="VerbQuiz__vous" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[4]" @bind:event="oninput">
+                    </td>
+                    <td>
+                        <label id='vous__result' class="result">@corrections[4]</label>
+                    </td>
+                </tr>
 
-            <label for="ils" class="VerbQuiz__pronouns">Ils/elles</label>
-            <input type="text" id="ils" class="VerbQuiz__input" name="VerbQuiz__ils" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[5]" @bind:event="oninput">
-            <label id='ils__result' class="result">@corrections[5]</label>
+                <tr>
+                    <td>
+                        <label for="ils" class="VerbQuiz__pronouns">Ils/elles</label>
+                    </td>
+                    <td>
+                        <input type="text" id="ils" class="VerbQuiz__input" name="VerbQuiz__ils" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[5]" @bind:event="oninput">
+                    </td>
+                    <td>
+                        <label id='ils__result' class="result">@corrections[5]</label>
+                    </td>
+                </tr>
+            </table>
 
             <button type="submit" class="Quiz__submit" id="VerbQuiz__submit" @onclick="@ResetVerb">@buttonLabels[buttonLabelIndex]</button>
         </form> 
     </div>
-
 </div>
 
 @code {

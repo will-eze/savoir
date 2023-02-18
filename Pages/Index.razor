@@ -4,18 +4,21 @@
 
 <PageTitle>savoir</PageTitle>
 
-<h2 class="sub-heading">General Sets</h2>
-<button id="beginner" class="set-btn" style="@setColours[0]" @onclick="e => OnSetButtonPressed(0)">Beginner</button>
-<button id="intermediate" class="set-btn" style="@setColours[1]" @onclick="e => OnSetButtonPressed(1)">Intermediate</button>
-<button id="advanced" class="set-btn" style="@setColours[2]" @onclick="e => OnSetButtonPressed(2)">Advanced</button>
-<button id="master" class="set-btn" style="@setColours[3]" @onclick="e => OnSetButtonPressed(3)">Master</button>
+<div class="IndexPage">
+    <h2 class="sub-heading">General Sets</h2>
+    <button id="beginner" class="set-btn" style="@setColours[0]" @onclick="e => OnSetButtonPressed(0)">Beginner</button>
+    <button id="intermediate" class="set-btn" style="@setColours[1]" @onclick="e => OnSetButtonPressed(1)">Intermediate</button>
+    <button id="advanced" class="set-btn" style="@setColours[2]" @onclick="e => OnSetButtonPressed(2)">Advanced</button>
+    <button id="master" class="set-btn" style="@setColours[3]" @onclick="e => OnSetButtonPressed(3)">Master</button>
 
-<h2 class="sub-heading">Module Sets</h2>
-<button class="set-btn" style="@setColours[4]" @onclick="e => OnSetButtonPressed(4)">Identity & Culture</button>
-<button class="set-btn" style="@setColours[5]" @onclick="e => OnSetButtonPressed(5)">Local area, holiday & travel</button>
-<button class="set-btn" style="@setColours[6]" @onclick="e => OnSetButtonPressed(6)">School</button>
-<button class="set-btn" style="@setColours[7]" @onclick="e => OnSetButtonPressed(7)">Future aspirations, study & work</button>
-<button class="set-btn" style="@setColours[8]" @onclick="e => OnSetButtonPressed(8)">International & global dimension </button>
+    <h2 class="sub-heading">Module Sets</h2>
+    <button class="set-btn" style="@setColours[4]" @onclick="e => OnSetButtonPressed(4)">Identity & Culture</button>
+    <button class="set-btn" style="@setColours[5]" @onclick="e => OnSetButtonPressed(5)">Local area, holiday & travel</button>
+    <button class="set-btn" style="@setColours[6]" @onclick="e => OnSetButtonPressed(6)">School</button>
+    <button class="set-btn" style="@setColours[7]" @onclick="e => OnSetButtonPressed(7)">Future aspirations, study & work</button>
+    <button class="set-btn" style="@setColours[8]" @onclick="e => OnSetButtonPressed(8)">International & global dimension </button>
+</div>
+
 
 @code {
     string[] setNames = new string[] { "Beginner", "Intermediate", "Advanced", "Master", "Identity", "Holiday", "School", "Work", "Environment" };
