@@ -1,11 +1,12 @@
 ﻿@inherits VerbQuizBase
 @page "/VerbQuiz"
+@using savoir.Data
 
 <PageTitle>Verb Quiz</PageTitle>
 
 <div class="VerbQuiz">
-    <div class="VerbQuiz__header">
-        <h2 id="VerbQuiz__infinitive">@verbQuiz.verbinfo[0] </h2>
+    <div class="VerbQuiz__header" >
+        <h2 id="VerbQuiz__infinitive" @onclick="DisplayEnglishTranslation">@topText</h2>
         <h3 id="VerbQuiz__tense">@verbQuiz.verbinfo[2]</h3>
     </div>
     <div class="VerbQuiz__inputs">
@@ -16,10 +17,10 @@
                         <label for="je" class="VerbQuiz__pronouns">@textJe</label>
                     </td>
                     <td>
-                        <input type="text" id="je" class="VerbQuiz__input" name="VerbQuiz__je" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[0]" @oninput="@textJeChanged">
+                        <input type="text" id="je" class="VerbQuiz__input" name="VerbQuiz__je" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[0]" @oninput="((e) => OnTextChange(e, 0))">
                     </td>
                     <td>
-                        <label id='je__result' class="result">@corrections[0]</label>
+                        <label id='je__result' class="result">@CorrectionsText(0)</label>
                     </td>
                 </tr>
 
@@ -28,10 +29,10 @@
                         <label for="tu" class="VerbQuiz__pronouns">Tu</label>
                     </td>
                     <td>
-                        <input type="text" id="tu" class="VerbQuiz__input" name="VerbQuiz__tu" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[1]" @bind:event="oninput">
+                        <input type="text" id="tu" class="VerbQuiz__input" name="VerbQuiz__tu" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[1]" @oninput="((e) => OnTextChange(e, 1))">
                     </td>
                     <td>
-                        <label id='tu__result' class="result">@corrections[1]</label>
+                        <label id='tu__result' class="result">@CorrectionsText(1)</label>
                     </td>
                 </tr>
 
@@ -40,10 +41,10 @@
                         <label for="il" class="VerbQuiz__pronouns">Il/elle/on</label>
                     </td>
                     <td>
-                        <input type="text" id="il" class="VerbQuiz__input" name="VerbQuiz__il" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[2]" @bind:event="oninput">
+                        <input type="text" id="il" class="VerbQuiz__input" name="VerbQuiz__il" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[2]" @oninput="((e) => OnTextChange(e, 2))">
                     </td>
                     <td>
-                        <label id='il__result' class="result">@corrections[2]</label>
+                        <label id='il__result' class="result">@CorrectionsText(2)</label>
                     </td>
                 </tr>
 
@@ -52,10 +53,10 @@
                         <label for="nous" class="VerbQuiz__pronouns">Nous</label>
                     </td>
                     <td>
-                        <input type="text" id="nous" class="VerbQuiz__input" name="VerbQuiz__nous" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[3]" @bind:event="oninput">
+                        <input type="text" id="nous" class="VerbQuiz__input" name="VerbQuiz__nous" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[3]" @oninput="((e) => OnTextChange(e, 3))">
                     </td>
                     <td>
-                        <label id='nous__result' class="result">@corrections[3]</label>
+                        <label id='nous__result' class="result">@CorrectionsText(3)</label>
                     </td>
                 </tr>
 
@@ -64,10 +65,10 @@
                         <label for="vous" class="VerbQuiz__pronouns">Vous</label>
                     </td>
                     <td>
-                        <input type="text" id="vous" class="VerbQuiz__input" name="VerbQuiz__vous" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[4]" @bind:event="oninput">
+                        <input type="text" id="vous" class="VerbQuiz__input" name="VerbQuiz__vous" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[4]" @oninput="((e) => OnTextChange(e, 4))">
                     </td>
                     <td>
-                        <label id='vous__result' class="result">@corrections[4]</label>
+                        <label id='vous__result' class="result">@CorrectionsText(4)</label>
                     </td>
                 </tr>
 
@@ -76,35 +77,45 @@
                         <label for="ils" class="VerbQuiz__pronouns">Ils/elles</label>
                     </td>
                     <td>
-                        <input type="text" id="ils" class="VerbQuiz__input" name="VerbQuiz__ils" disabled="@userInputDisabled" autocomplete="off" @bind="verbQuiz.userVerbs[5]" @bind:event="oninput">
+                        <input type="text" id="ils" class="VerbQuiz__input" name="VerbQuiz__ils" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[5]" @oninput="((e) => OnTextChange(e, 5))">
                     </td>
                     <td>
-                        <label id='ils__result' class="result">@corrections[5]</label>
+                        <label id='ils__result' class="result">@CorrectionsText(5)</label>
                     </td>
                 </tr>
             </table>
 
-            <button type="submit" class="Quiz__submit" id="VerbQuiz__submit" @onclick="@ResetVerb">@buttonLabels[buttonLabelIndex]</button>
+            <button type="submit" class="Quiz__submit" id="VerbQuiz__submit" @onclick="ResetVerb">@buttonLabels[buttonLabelIndex]</button>
         </form> 
     </div>
 </div>
 
+<AccentBox AccentMenuHidden="accentMenuHidden" OnClick="OnAccentClicked"/>
+
 @code {
-    public VerbQuizBase verbQuiz = new VerbQuizBase();
+    public VerbQuizBase verbQuiz; 
 
     public string[] buttonLabels = new string[2] { "Submit", "Next" };
-
     public int buttonLabelIndex = 0;
-
     public bool userInputDisabled = false;
 
-    public string[] corrections = new string[6] { "", "", "", "", "", ""};
-
+    public bool displayCorrections = false;
     public string textJe = "Je";
+
+    public bool accentMenuHidden = true;
+    public int selectedField = -1;
+
+    public string topText;
 
     public VerbQuiz()
     {
+        verbQuiz = new VerbQuizBase();
+        // on creating the VerbQuiz page, we use the set selected + tenses selected to store the possible verbs/tenses.
+        verbQuiz.possibleVerbs = GLOBALS.VerbsSelectedList.ToArray();
+        verbQuiz.possibleTenses = GLOBALS.TensesSelectedList.ToArray();
+
         verbQuiz.RandomVerb();
+        topText = verbQuiz.verbinfo[0];
     }
 
     public void ResetVerb()
@@ -119,32 +130,7 @@
 
                 userInputDisabled = true;
 
-                // add corrections to answers
-
-                if (verbQuiz.verbinfo[2].ToLower().Contains("imperative"))
-                {
-                    // imperative only works for indexes 1, 3, 4 (tu, nous, vous) so this array makes it easier to loop through and correct user answers
-                    int[] tempIntArr = new int[3] { 1, 3, 4 };
-
-                    for (int i = 0; i<=2; i++)
-                    {
-                        if (verbQuiz.userVerbs[i] != verbQuiz.conjugations[i])
-                        {
-                            corrections[tempIntArr[i]] = verbQuiz.conjugations[i];
-                        }
-                    }
-                }
-
-                else
-                {
-                    for (int i = 0; i <= 5; i++)
-                    {
-                        if (verbQuiz.userVerbs[i] != verbQuiz.conjugations[i])
-                        {
-                            corrections[i] = verbQuiz.conjugations[i];
-                        }
-                    }
-                }
+                displayCorrections = true;
             }
 
             // if NEXT button clicked:
@@ -154,22 +140,71 @@
 
                 userInputDisabled = false;
 
-                // reset the user input fields (which are bound to indexes of userVerbs) and the correction fields
+                // reset the user input fields (which are bound to indexes of userVerbs)
                 for (int i = 0; i<=5; i++)
                 {
                     verbQuiz.userVerbs[i] = string.Empty;
-                    corrections[i] = string.Empty;
                 }
 
-                // generate a new verb
+                displayCorrections = false;
+
+                // generate a new verb + tense
                 verbQuiz.RandomVerb();
+                topText = verbQuiz.verbinfo[0];
             }
         } 
     }
 
-    public void textJeChanged(ChangeEventArgs args)
+    public string CorrectionsText(int i)
     {
-        verbQuiz.userVerbs[0] = args.Value!.ToString()!;
+        return (displayCorrections) ? verbQuiz.conjugations[i] : string.Empty;
+    }
+
+    public void OnTextChange(ChangeEventArgs args, int i)
+    {
+        selectedField = i;
+
+        if (args.Value.ToString() is not null)
+        {
+            verbQuiz.userVerbs[i] = args.Value.ToString();
+        }
+
+        // need to check last element of non-zero length array
+        if (verbQuiz.userVerbs[i].Length != 0)
+        {
+            if (verbQuiz.userVerbs[i].Contains('#'))
+            {
+                // if the user types an # symbol, display the accent box GUI and prevent further text input
+                accentMenuHidden = false;
+                userInputDisabled = true;
+            }
+        }
+
+
+        if (i == 0)
+        {
+            // update the subject field "je" to "j' " if first letter is vowel
+            textJeChanged();
+        }
+    }
+
+    public void OnAccentClicked(char accentClicked)
+    {
+        if (accentClicked == '#')
+        {
+            verbQuiz.userVerbs[selectedField] = verbQuiz.userVerbs[selectedField].Replace("#", "");
+        }
+        else
+        {
+            verbQuiz.userVerbs[selectedField] = verbQuiz.userVerbs[selectedField].Replace('#', accentClicked);
+        }
+
+        accentMenuHidden = true;
+        userInputDisabled = false;
+    }
+
+    public void textJeChanged()
+    {
         char[] frenchVowels = new char[6] { 'a', 'e', 'i', 'o', 'u', 'h' };
 
         if (verbQuiz.userVerbs[0].Length > 0)
@@ -190,4 +225,14 @@
 
     }
 
+    public async Task DisplayEnglishTranslation()
+    {
+        topText = verbQuiz.verbinfo[1];
+
+        await Task.Delay(3000);
+
+        await InvokeAsync(() => StateHasChanged());
+
+        topText = verbQuiz.verbinfo[0];
+    }
 }

@@ -5,73 +5,81 @@ namespace savoir.Pages
 {
     public class VerbQuizBase : ComponentBase
     {
-
-        // index 0 = french infinitive
-        // index 1 = english translation
-        // index 2 = tense
+        // {french_infinitive, english_translation, tense}
         public string[] verbinfo = new string[3];
 
-        // list of correct conjugations for current verb
-        public string[] conjugations = Array.Empty<string>();
+        // list of correct conjugations for currently selected verb
+        public string[] conjugations = new string[6] {"test1", "test2", "test3", "test4", "test5", "test6"};
 
+        // list of user conjugations for currently selected verb
         public string[] userVerbs = new string[6] {"", "", "", "", "", ""};
 
+        public string[] allTenses = new string[16] { "present", "imperfect", "simple past", "simple future", "conditional", "subjunctive", "imperfect subjunctive", "imperative", "past perfect", "pluperfect", "future perfect", "conditional perfect", "past subjunctive", "pluperfect subjunctive", "past anterior", "past imperative" };
+
+
+        public Dictionary<string, int> tenseStartingIndex = new();
+
+        public string[] possibleVerbs = new string[] { };
+        public string[] possibleTenses = new string[] { };
+
+        public VerbQuizBase()
+        {
+            for (int i = 0; i <= allTenses.Length - 1; i++)
+            {
+                tenseStartingIndex.Add(allTenses[i], 3 + i*6);
+            }
+        }
+        
+        
         public void RandomVerb()
         {
-            Random random = new Random();
+            Random rnd = new Random();
 
-            // list of all possible verbs / tenses from the set and selected tenses
-            string[] verbs = GLOBALS.VerbsSelectedList.ToArray();
-            string[] tenses = GLOBALS.TensesSelectedList.ToArray();
+            // 1 -- GENERATE RANDOM VERB
+            string verb = possibleVerbs[rnd.Next(0, possibleVerbs.Length)];
 
-            // generate a random verb and tense from the lists
-            string verb = verbs[random.Next(0, verbs.Length)];
-            string tense = tenses[random.Next(0, tenses.Length)];
 
-            // stores the record for the randomly selected verb as an array
-            string[] verb_info = new string[] { };
+            // 2 -- FIND VERB INDEX in small_conjugations.csv
+            string[] verbRecord = Array.Empty<string>();
 
             foreach (string record in GLOBALS.verbs_info)
             {
-                if (record.StartsWith(verb))
+                if (record.Split(',')[0] == verb)
                 {
-                    verb_info = record.Split(",");
+                    verbRecord = record.Split(',');
                 }
             }
 
-            string english_translation = verb_info[1];
+            // 3 -- FIND ALL CONJUGATIONS FOR THE VERB IN THE SELECTED / POSSIBLE TENSES
 
-            // locate the indexes of the randomly chosen tense's conjugations in 700_conjugations.csv
+            Dictionary<string, string[]> allConjugations = new Dictionary<string, string[]>();
 
-            List<int> tenses_indexesList = new List<int>();
-            int i = 0;
-            foreach (string temp in GLOBALS.verbs_headers)
+            foreach (string _tense in possibleTenses)
             {
-                if (temp.StartsWith(tense))
+                string[] tenseConjugations = new string[6] { "", "", "", "", "", ""}; 
+
+                for (int i = 0; i <= 5; i++)
                 {
-                    tenses_indexesList.Add(i);
+                    tenseConjugations[i] = verbRecord[tenseStartingIndex[_tense] + i];
                 }
-                i++;
+
+                // only add a tense if it has atleast 1 subject's conjugation available
+                if (conjugations.All(x => x!= "N/A"))
+                {
+                    allConjugations.Add(_tense, tenseConjugations);
+                }
+                
             }
 
-            int[] tenses_indexes = tenses_indexesList.ToArray();
+            // 4 -- GENERATE RANDOM TENSE AND FIND ITS' CONJUGATIONS 
 
-            // find the conjugations using the indexes found in tenses_indexes
+            string tense = allConjugations.ElementAt(rnd.Next(0, allConjugations.Count)).Key;
+            string[] _conjugations = allConjugations[tense];
 
-            List<string> conjugationsList = new List<string>();
-            List<string> verbinfoList = new List<string>();
+            // 5 -- UPDATE FIELDS "verbinfo" AND "conjugations"
 
-            foreach (int j in tenses_indexes)
-            {
-                conjugationsList.Add(verb_info[j]);
-            }
-
-            verbinfoList.Add(verb);
-            verbinfoList.Add(english_translation);
-            verbinfoList.Add(tense);
-
-            verbinfo = verbinfoList.ToArray();
-            conjugations = conjugationsList.ToArray();
+            verbinfo = new string[3] { verbRecord[0], verbRecord[1], tense };
+            conjugations = _conjugations;
         }
     }
 }

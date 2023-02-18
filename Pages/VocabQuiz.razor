@@ -12,14 +12,16 @@
         <p id="VocabQuiz__vocab">@vocabQuiz.wordShownToUser</p>
     </div>
     <div class="VocabQuiz__input">
-        <input type="text" id="VocabQuiz__translation" disabled="@userInputDisabled" @bind="vocabQuiz.userInput" @bind:event="oninput" placeholder="Enter the translation..." autocomplete="off"/>
+        <input type="text" id="VocabQuiz__translation" disabled="@userInputDisabled" value="@vocabQuiz.userInput" @oninput="((e) => OnTextChange(e))" placeholder="Enter the translation..." autocomplete="off"/>
         <span class="VocabQuiz__result"></span>
     </div>
     <div class="VocabQuiz__correctionBox">
         <p id="VocabQuiz__correction">@correctionText()</p>
     </div>
-    <button type="submit" class="Quiz__submit" id="VocabQuiz__submit" @onclick="@ResetVocab">@buttonLabels[buttonLabelIndex]</button>
+    <button type="submit" class="Quiz__submit" id="VocabQuiz__submit" @onclick="ResetVocab">@buttonLabels[buttonLabelIndex]</button>
 </div>
+
+<AccentBox AccentMenuHidden="accentMenuHidden" OnClick="OnAccentClicked" />
 
 @code {
     public VocabQuizBase vocabQuiz = new VocabQuizBase();
@@ -31,6 +33,8 @@
     public bool userInputDisabled = false;
 
     public bool displayTranslation = false;
+
+    public bool accentMenuHidden = true;
 
     public VocabQuiz()
     {
@@ -73,6 +77,38 @@
                 displayTranslation = false;
             }
         }
+    }
+
+    public void OnTextChange(ChangeEventArgs args)
+    {
+        if (args.Value.ToString() is not null)
+        {
+            vocabQuiz.userInput = args.Value.ToString();
+        }
+
+        if (vocabQuiz.userInput.Length != 0)
+        {
+            if (vocabQuiz.userInput.Contains('#'))
+            {
+                accentMenuHidden = false;
+                userInputDisabled = true;
+            }
+        }
+    }
+
+    public void OnAccentClicked(char accentClicked)
+    {
+        if (accentClicked == '#')
+        {
+            vocabQuiz.userInput = vocabQuiz.userInput.Replace("#", "");
+        }
+        else
+        {
+            vocabQuiz.userInput = vocabQuiz.userInput.Replace('#', accentClicked);
+        }
+
+        accentMenuHidden = true;
+        userInputDisabled = false;
     }
 
     public string correctionText()

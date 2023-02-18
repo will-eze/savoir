@@ -14,7 +14,7 @@
         <label class="toggle" for="passeCompose" style="display: block">
             <input style="vertical-align: middle" class="toggle__input" type="checkbox" checked="@TensesChecked[8]" @onchange="((e) => CheckboxChanged(8))" id="passeCompose" />
             <span style="vertical-align: middle" class="toggle__fill"></span>
-            Passé composé
+            Past perfect
         </label>
         <label class="toggle" for="imperfect" style="display: block">
             <input style="vertical-align: middle" class="toggle__input" type="checkbox" checked="@TensesChecked[1]" @onchange="((e) => CheckboxChanged(1))" id="imperfect" />
@@ -34,12 +34,12 @@
         <label class="toggle" for="pastPerfect" style="display: block">
             <input style="vertical-align: middle" class="toggle__input" type="checkbox" checked="@TensesChecked[9]" @onchange="((e) => CheckboxChanged(9))" id="pastPerfect" />
             <span style="vertical-align: middle" class="toggle__fill"></span>
-            Past perfect
+            Pluperfect
         </label>
         <label class="toggle" for="pastConditional" style="display: block">
             <input style="vertical-align: middle" class="toggle__input" type="checkbox" checked="@TensesChecked[11]" @onchange="((e) => CheckboxChanged(11))" id="pastConditional" />
             <span style="vertical-align: middle" class="toggle__fill"></span>
-            Past conditional
+            Conditional perfect
         </label>
         <label class="toggle" for="subjunctive" style="display: block">
             <input style="vertical-align: middle" class="toggle__input" type="checkbox" checked="@TensesChecked[5]" @onchange="((e) => CheckboxChanged(5))" id="subjunctive" />
@@ -64,7 +64,7 @@
         <label class="toggle" for="passeSimple" style="display: block">
             <input style="vertical-align: middle" class="toggle__input" type="checkbox" checked="@TensesChecked[2]" @onchange="((e) => CheckboxChanged(2))" id="passeSimple" />
             <span style="vertical-align: middle" class="toggle__fill"></span>
-            Passe simple
+            Simple past
         </label>
         <label class="toggle" for="pastSubjunctive" style="display: block">
             <input style="vertical-align: middle" class="toggle__input" type="checkbox" checked="@TensesChecked[12]" @onchange="((e) => CheckboxChanged(12))" id="pastSubjunctive" />
@@ -115,10 +115,10 @@
     public bool ModuleSetHidden { get; set; }
 
     // list of all available tenses
-    public string[] AllTenses = new string[16] { "present", "imperfect", "passe simple", "simple future", "conditional", "subjunctive", "imperfect subjunctive", "imperative", "passe compose", "past perfect", "future perfect", "past conditional", "past subjunctive", "pluperfect subjunctive", "past anterior", "past imperative" };
+    public string[] AllTenses = new string[16] { "present", "imperfect", "simple past", "simple future", "conditional", "subjunctive", "imperfect subjunctive", "imperative", "past perfect", "pluperfect", "future perfect", "conditional perfect", "past subjunctive", "pluperfect subjunctive", "past anterior", "past imperative" };
 
     // list of tenses which should automatically be selected
-    public string[] DefaultTenses = new string[5] { "present", "passe compose", "imperfect", "simple future", "conditional" };
+    public string[] DefaultTenses = new string[5] { "present", "past perfect", "imperfect", "simple future", "conditional" };
 
     // stores the state of each checkbox
     public bool[] TensesChecked { get; set; } = new bool[16];
@@ -126,18 +126,38 @@
     private void CheckboxChanged(int i)
     {
         // updates the fields storing the checkbox's states and the selected tenses
-        TensesChecked[i] = !TensesChecked[i];
+
+        // if the field they're trying to deselect is the only active one, then don't let them deselect.
+        if (TensesChecked.Count(x => x == true) == 1 && TensesChecked[i] == true)
+        {
+            return;
+        }
+        else
+        {
+            TensesChecked[i] = !TensesChecked[i];
+        }
+        
         UpdateTensesSelected();
     }
 
     public TenseMenu()
     {
         // update the checkboxes such that the tenses contained in "DefaultTenses" are checked automatically.
-        for (int i = 0; i <= 15; i++)
+        if (GLOBALS.TensesSelectedList.Count == 0)
         {
-            if (DefaultTenses.Contains(AllTenses[i]))
+            for(int i = 0; i <= 15; i++)
             {
-                TensesChecked[i] = true;
+                if (DefaultTenses.Contains(AllTenses[i]))
+                {
+                    TensesChecked[i] = true;
+                }
+            }
+        }
+        else
+        {
+            foreach (string _tense in GLOBALS.TensesSelectedList)
+            {
+                TensesChecked[Array.IndexOf(AllTenses, _tense)] = true;
             }
         }
 

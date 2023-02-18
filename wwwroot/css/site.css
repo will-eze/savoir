@@ -18,7 +18,7 @@ html, body {
 
 .IndexPage{
     margin-left: 70px;
-    max-width: 65%;
+    max-width: 90%;
 }
 
 #content {
@@ -32,6 +32,9 @@ button{
 .set-btn {
     background-color: #D9D9D9;
     padding: 20px 30px;
+    width: 22%;
+    height: 80px;
+    vertical-align: middle;
     border-radius: 15px;
     font-size: 1.2rem;
     text-align: center;

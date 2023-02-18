@@ -4,7 +4,7 @@
 
 <PageTitle>savoir</PageTitle>
 
-<div class="IndexPage">
+<div class="IndexPage" style="@indexPageStyle">
     <h2 class="sub-heading">General Sets</h2>
     <button id="beginner" class="set-btn" style="@setColours[0]" @onclick="e => OnSetButtonPressed(0)">Beginner</button>
     <button id="intermediate" class="set-btn" style="@setColours[1]" @onclick="e => OnSetButtonPressed(1)">Intermediate</button>
@@ -21,23 +21,22 @@
 
 
 @code {
-    string[] setNames = new string[] { "Beginner", "Intermediate", "Advanced", "Master", "Identity", "Holiday", "School", "Work", "Environment" };
+    public string[] setNames = new string[] { "Beginner", "Intermediate", "Advanced", "Master", "Identity", "Holiday", "School", "Work", "Environment" };
 
-    // determine which divs to hide in TenseMenu (ie whether to show the tense menu, the practice button or verb+vocab buttons)
-    bool tenseMenuHidden = true;
-    bool moduleSetHidden = true;
-    bool studySetHidden = true;
+    public bool tenseMenuHidden = true;
+    public bool moduleSetHidden = true;
+    public bool studySetHidden = true;
 
-    // index of currently selected set
     private int activeSetIndex { get; set; } = -1;
 
-    // determines the background colours of active / inactive set buttons
-    const string inactiveSetColour = "background:#D9D9D9";
-    const string activeSetColour = "background:#726EFF";
+    public const string activeSetColour = "background:#726EFF";
+    public const string inactiveSetColour = "background:#D9D9D9";
 
-    string[] setColours = new string[10] { inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, };
+    public string[] setColours = new string[10] { inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, };
 
-    void OnSetButtonPressed(int setIndexClicked)
+    public string indexPageStyle = "width: 100%";
+
+    public void OnSetButtonPressed(int setIndexClicked)
     {
         // if user clicks the active set, then hide the tenseMenu and update the colour / activeSetIndex
         if (activeSetIndex == setIndexClicked)
@@ -45,6 +44,7 @@
             activeSetIndex = -1;
             setColours[setIndexClicked] = inactiveSetColour;
             tenseMenuHidden = true;
+            indexPageStyle = "width: 100%";
         }
         // if user clicks non-active set, activate that set by showing tenseMenu and updating colours / activeSetIndex
         else if (activeSetIndex != setIndexClicked)
@@ -59,6 +59,7 @@
             activeSetIndex = setIndexClicked;
 
             tenseMenuHidden = false;
+            indexPageStyle = "width: 65%";
         }
 
         // activeSetIndex has now been updated to match the selected set, so make appropriate updates to other components
@@ -90,7 +91,7 @@
                 GLOBALS.selectedModuleName = setNames[activeSetIndex];
             }
         }
-        
+
     }
 }
 
