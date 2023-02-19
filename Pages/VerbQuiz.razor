@@ -1,6 +1,6 @@
 ﻿@inherits VerbQuizBase
 @page "/VerbQuiz"
-@using savoir.Data
+@using savoir.globals
 
 <PageTitle>Verb Quiz</PageTitle>
 
@@ -20,7 +20,17 @@
                         <input type="text" id="je" class="VerbQuiz__input" name="VerbQuiz__je" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[0]" @oninput="((e) => OnTextChange(e, 0))">
                     </td>
                     <td>
-                        <label id='je__result' class="result">@CorrectionsText(0)</label>
+                        @if (displayCorrections)
+                        {
+                            if (verbQuiz.userVerbs[0] == verbQuiz.conjugations[0])
+                            {
+                                <img class="correction-img" src="images/tick.png" />
+                            }
+                            else
+                            {
+                                <label id='je__result' class="result">@CorrectionsText(0)</label>
+                            }
+                        }
                     </td>
                 </tr>
 
@@ -32,7 +42,17 @@
                         <input type="text" id="tu" class="VerbQuiz__input" name="VerbQuiz__tu" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[1]" @oninput="((e) => OnTextChange(e, 1))">
                     </td>
                     <td>
-                        <label id='tu__result' class="result">@CorrectionsText(1)</label>
+                        @if (displayCorrections)
+                        {
+                            if (verbQuiz.userVerbs[1] == verbQuiz.conjugations[1])
+                            {
+                                <img class="correction-img" src="images/tick.png" />
+                            }
+                            else
+                            {
+                                <label id='tu__result' class="result">@CorrectionsText(1)</label>
+                            }
+                        }
                     </td>
                 </tr>
 
@@ -44,7 +64,17 @@
                         <input type="text" id="il" class="VerbQuiz__input" name="VerbQuiz__il" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[2]" @oninput="((e) => OnTextChange(e, 2))">
                     </td>
                     <td>
-                        <label id='il__result' class="result">@CorrectionsText(2)</label>
+                        @if (displayCorrections)
+                        {
+                            if (verbQuiz.userVerbs[2] == verbQuiz.conjugations[2])
+                            {
+                                <img class="correction-img" src="images/tick.png" />
+                            }
+                            else
+                            {
+                                <label id='il__result' class="result">@CorrectionsText(2)</label>
+                            }
+                        }
                     </td>
                 </tr>
 
@@ -56,7 +86,17 @@
                         <input type="text" id="nous" class="VerbQuiz__input" name="VerbQuiz__nous" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[3]" @oninput="((e) => OnTextChange(e, 3))">
                     </td>
                     <td>
-                        <label id='nous__result' class="result">@CorrectionsText(3)</label>
+                        @if (displayCorrections)
+                        {
+                            if (verbQuiz.userVerbs[3] == verbQuiz.conjugations[3])
+                            {
+                                <img class="correction-img" src="images/tick.png" />
+                            }
+                            else
+                            {
+                                <label id='nous__result' class="result">@CorrectionsText(3)</label>
+                            }
+                        }
                     </td>
                 </tr>
 
@@ -68,7 +108,17 @@
                         <input type="text" id="vous" class="VerbQuiz__input" name="VerbQuiz__vous" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[4]" @oninput="((e) => OnTextChange(e, 4))">
                     </td>
                     <td>
-                        <label id='vous__result' class="result">@CorrectionsText(4)</label>
+                        @if (displayCorrections)
+                        {
+                            if (verbQuiz.userVerbs[4] == verbQuiz.conjugations[4])
+                            {
+                                <img class="correction-img" src="images/tick.png" />
+                            }
+                            else
+                            {
+                                <label id='vous__result' class="result">@CorrectionsText(4)</label>
+                            }
+                        }
                     </td>
                 </tr>
 
@@ -80,7 +130,17 @@
                         <input type="text" id="ils" class="VerbQuiz__input" name="VerbQuiz__ils" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[5]" @oninput="((e) => OnTextChange(e, 5))">
                     </td>
                     <td>
-                        <label id='ils__result' class="result">@CorrectionsText(5)</label>
+                        @if (displayCorrections)
+                        {
+                            if (verbQuiz.userVerbs[5] == verbQuiz.conjugations[5])
+                            {
+                                <img class="correction-img" src="images/tick.png" />
+                            }
+                            else
+                            {
+                                <label id='ils__result' class="result">@CorrectionsText(5)</label>
+                            }
+                        }
                     </td>
                 </tr>
             </table>
@@ -162,8 +222,6 @@
 
     public void OnTextChange(ChangeEventArgs args, int i)
     {
-        selectedField = i;
-
         if (args.Value.ToString() is not null)
         {
             verbQuiz.userVerbs[i] = args.Value.ToString();

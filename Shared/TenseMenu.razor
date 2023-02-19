@@ -1,6 +1,6 @@
-﻿@using savoir.Data
+﻿@using savoir.globals
 
-<div class="TenseMenu" hidden="@TenseMenuHidden">
+<div class="TenseMenu" style="@TenseMenuStyle">
     <div class="TenseMenu__header">
         <h2>Tenses</h2>
         <p>Select the tenses you would like to practice</p>
@@ -114,6 +114,9 @@
     [Parameter]
     public bool ModuleSetHidden { get; set; }
 
+    [Parameter]
+    public string TenseMenuStyle { get; set; }
+
     // list of all available tenses
     public string[] AllTenses = new string[16] { "present", "imperfect", "simple past", "simple future", "conditional", "subjunctive", "imperfect subjunctive", "imperative", "past perfect", "pluperfect", "future perfect", "conditional perfect", "past subjunctive", "pluperfect subjunctive", "past anterior", "past imperative" };
 
@@ -136,7 +139,7 @@
         {
             TensesChecked[i] = !TensesChecked[i];
         }
-        
+
         UpdateTensesSelected();
     }
 

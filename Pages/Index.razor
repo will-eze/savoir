@@ -1,6 +1,6 @@
 ﻿@page "/"
 @using System
-@using savoir.Data
+@using savoir.globals
 
 <PageTitle>savoir</PageTitle>
 
@@ -19,6 +19,7 @@
     <button class="set-btn" style="@setColours[8]" @onclick="e => OnSetButtonPressed(8)">International & global dimension </button>
 </div>
 
+<TenseMenu TenseMenuHidden="@tenseMenuHidden" ModuleSetHidden="@moduleSetHidden" StudySetHidden="@studySetHidden" TenseMenuStyle="@tenseMenuStyle"/>
 
 @code {
     public string[] setNames = new string[] { "Beginner", "Intermediate", "Advanced", "Master", "Identity", "Holiday", "School", "Work", "Environment" };
@@ -34,7 +35,8 @@
 
     public string[] setColours = new string[10] { inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, };
 
-    public string indexPageStyle = "width: 100%";
+    public string indexPageStyle = "margin-right: 0%";
+    public string tenseMenuStyle = "margin-right: -24.9%";
 
     public void OnSetButtonPressed(int setIndexClicked)
     {
@@ -44,7 +46,8 @@
             activeSetIndex = -1;
             setColours[setIndexClicked] = inactiveSetColour;
             tenseMenuHidden = true;
-            indexPageStyle = "width: 100%";
+            indexPageStyle = "margin-right: 0%; transition: margin-right 0.2s";
+            tenseMenuStyle = "margin-right: -24.9%; transition: margin-right 0.2s";
         }
         // if user clicks non-active set, activate that set by showing tenseMenu and updating colours / activeSetIndex
         else if (activeSetIndex != setIndexClicked)
@@ -59,7 +62,8 @@
             activeSetIndex = setIndexClicked;
 
             tenseMenuHidden = false;
-            indexPageStyle = "width: 65%";
+            indexPageStyle = "margin-right: 25%; transition: margin-right 0.2s";
+            tenseMenuStyle = "margin-right: 0%; transition: margin-right 0.2s";
         }
 
         // activeSetIndex has now been updated to match the selected set, so make appropriate updates to other components
@@ -94,5 +98,3 @@
 
     }
 }
-
-<TenseMenu TenseMenuHidden="tenseMenuHidden" ModuleSetHidden="moduleSetHidden" StudySetHidden="studySetHidden"/>

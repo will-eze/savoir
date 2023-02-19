@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using savoir.Data;
+using savoir.globals;
 
 namespace savoir.Pages
 {

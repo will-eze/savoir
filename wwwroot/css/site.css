@@ -31,12 +31,12 @@ button{
 
 .set-btn {
     background-color: #D9D9D9;
-    padding: 20px 30px;
+    padding: 0px 30px;
     width: 22%;
-    height: 80px;
+    height: 90px;
     vertical-align: middle;
     border-radius: 15px;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     text-align: center;
     margin: 10px 30px 20px 0px;
     border: none;
@@ -75,6 +75,7 @@ label{
     z-index: 1; /* Stay on top */
     bottom: 0;
     right: 0;
+    width: 25%;
     height: 100%;
     background-color: #1A1916;
     padding: 30px;
@@ -111,7 +112,7 @@ label{
     height: var(--height);
     border-radius: var(--border-radius);
     background: #919191;
-    transition: backgorund 0.2s;
+    transition: background 0.2s;
     display: inline-block;
 }
 
@@ -165,6 +166,22 @@ a, a:hover, a:focus, a:active {
 
 .toggle__input:checked ~ .toggle__fill::after {
     transform: translateX(var(--height));
+}
+
+/* IMAGES */
+
+.VerbQuiz img {
+    width: 2em;
+    height: 2em;
+}
+
+.VerbQuiz__table correction-img {
+    float: left;
+}
+
+.VocabQuiz img {
+    width: 2.5em;
+    height: 2.5em;
 }
 
 /* VOCAB QUIZ */

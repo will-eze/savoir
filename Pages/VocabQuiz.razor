@@ -1,6 +1,6 @@
 ﻿@page "/VocabQuiz"
-@inherits VerbQuizBase
-@using savoir.Data
+@inherits VocabQuizBase
+@using savoir.globals
 
 <PageTitle>Vocab Quiz</PageTitle>
 
@@ -13,6 +13,17 @@
     </div>
     <div class="VocabQuiz__input">
         <input type="text" id="VocabQuiz__translation" disabled="@userInputDisabled" value="@vocabQuiz.userInput" @oninput="((e) => OnTextChange(e))" placeholder="Enter the translation..." autocomplete="off"/>
+        @if (displayTranslation)
+        {
+            if (vocabQuiz.userInput == vocabQuiz.vocabInfo[1])
+            {
+                <img class="correction-img" src="images/tick.png"/>
+            }
+            else
+            {
+                <img class="correction-img" src="images/cross.png"/>
+            }
+        }
         <span class="VocabQuiz__result"></span>
     </div>
     <div class="VocabQuiz__correctionBox">
@@ -50,19 +61,7 @@
             {
                 buttonLabelIndex = 1;
                 userInputDisabled = true;
-
-                if (vocabQuiz.userInput == vocabQuiz.vocabInfo[0])
-                {
-                    // do something --> correct answer by user
-                }
-                else
-                {
-                    // do something --> wrong answer by user
-
-                    displayTranslation = true;
-                }
-
-
+                displayTranslation = true;
             }
 
             // if NEXT button clicked
@@ -113,9 +112,9 @@
 
     public string correctionText()
     {
-        if (displayTranslation)
+        if (displayTranslation && vocabQuiz.vocabInfo[1] != vocabQuiz.userInput)
         {
-            return vocabQuiz.vocabInfo[0];
+            return vocabQuiz.vocabInfo[1];
         }
         else
         {
