@@ -5,6 +5,7 @@
 <PageTitle>Verb Quiz</PageTitle>
 
 <div class="VerbQuiz">
+    <AccentBox AccentMenuHidden="accentMenuHidden" OnClick="OnAccentClicked" />
     <div class="VerbQuiz__header" >
         <h2 id="VerbQuiz__infinitive" @onclick="DisplayEnglishTranslation">@topText</h2>
         <h3 id="VerbQuiz__tense">@verbQuiz.verbinfo[2]</h3>
@@ -150,7 +151,6 @@
     </div>
 </div>
 
-<AccentBox AccentMenuHidden="accentMenuHidden" OnClick="OnAccentClicked"/>
 
 @code {
     public VerbQuizBase verbQuiz; 

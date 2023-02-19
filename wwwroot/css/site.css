@@ -185,9 +185,11 @@ a, a:hover, a:focus, a:active {
 }
 
 /* VOCAB QUIZ */
-.VocabQuiz{
+.VocabQuiz {
     margin-left: 35px;
     margin-right: 35px;
+    text-align: center;
+    font-size: 1.3em
 }
 
 #VocabQuiz__module {
@@ -290,6 +292,34 @@ a, a:hover, a:focus, a:active {
     border: none;
     border-bottom: 1px solid #fff;
     padding-bottom: 0px;
+}
+
+/* ACCENT BOX */
+
+.AccentBox {
+    background: #C1BDFF;
+    width: 155px;
+    position: absolute;
+    border: 2px #000 solid;
+    right: 20%;
+    top: 40%;
+}
+
+.AccentBox__header {
+    background: #7b73fa;
+}
+
+.AccentBox__buttons button{
+    background: transparent;
+    border: none;
+    padding: 6px;
+}
+
+#AccentBox__close {
+    background: transparent;
+    border: none;
+    font-weight: bold;
+    text-align: right;
 }
 
 

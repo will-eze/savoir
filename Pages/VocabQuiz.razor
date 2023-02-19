@@ -5,6 +5,7 @@
 <PageTitle>Vocab Quiz</PageTitle>
 
 <div class="VocabQuiz">
+    <AccentBox AccentMenuHidden="accentMenuHidden" OnClick="OnAccentClicked" />
     <div class="VocabQuiz__header">
         <h2 id="VocabQuiz__module">@GLOBALS.selectedModuleName</h2>
     </div>
@@ -32,7 +33,6 @@
     <button type="submit" class="Quiz__submit" id="VocabQuiz__submit" @onclick="ResetVocab">@buttonLabels[buttonLabelIndex]</button>
 </div>
 
-<AccentBox AccentMenuHidden="accentMenuHidden" OnClick="OnAccentClicked" />
 
 @code {
     public VocabQuizBase vocabQuiz = new VocabQuizBase();
