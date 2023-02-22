@@ -247,18 +247,10 @@ a, a:hover, a:focus, a:active {
     background-color: #26b050;
 }
 
-.VocabQuiz__input table{
-    width: 100%;
-}
-.VocabQuiz__input td {
-    width: 33.33%;
-    border: 5px #fff solid
-}
-
-#VocabQuiz__icon__td{
-    text-align: left;
-    vertical-align: bottom;
-    padding-bottom: 0;
+.VocabQuiz__input img {
+    position: fixed;
+    margin-top: 55px;
+    margin-left: 15px;
 }
 
 
@@ -268,10 +260,12 @@ a, a:hover, a:focus, a:active {
     padding-left: 0;
     margin-left: 0;
 }
+
 #VerbQuiz__infinitive {
     margin-top: 15px;
     font-size: 2.3em;
     font-weight: bold;
+    cursor: pointer;
 }
 
 #VerbQuiz__tense{
