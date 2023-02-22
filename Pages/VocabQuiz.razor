@@ -13,22 +13,32 @@
         <p id="VocabQuiz__vocab">@vocabQuiz.wordShownToUser</p>
     </div>
     <div class="VocabQuiz__input">
-        <input type="text" id="VocabQuiz__translation" disabled="@userInputDisabled" value="@vocabQuiz.userInput" @oninput="((e) => OnTextChange(e))" placeholder="Enter the translation..." autocomplete="off"/>
-        @if (displayTranslation)
-        {
-            if (vocabQuiz.userInput == vocabQuiz.vocabInfo[1])
-            {
-                <img class="correction-img" src="images/tick.png"/>
-            }
-            else
-            {
-                <img class="correction-img" src="images/cross.png"/>
-            }
-        }
-        <span class="VocabQuiz__result"></span>
-    </div>
-    <div class="VocabQuiz__correctionBox">
-        <p id="VocabQuiz__correction">@correctionText()</p>
+        <table>
+            <tr>
+                <td>
+                    <input type="text" id="VocabQuiz__translation" disabled="@userInputDisabled" value="@vocabQuiz.userInput" @oninput="((e) => OnTextChange(e))" placeholder="Enter the translation..." autocomplete="off" />
+                </td>
+                <td id="VocabQuiz__icon__td">
+                    @if (displayTranslation)
+                    {
+                        if (vocabQuiz.userInput == vocabQuiz.vocabInfo[1])
+                        {
+                            <img class="correction-img" src="images/tick.png" />
+                        }
+                        else
+                        {
+                            <img class="correction-img" src="images/cross.png" />
+                        }
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p id="VocabQuiz__correction">@correctionText()</p>
+                </td>
+            </tr>
+        </table>
+
     </div>
     <button type="submit" class="Quiz__submit" id="VocabQuiz__submit" @onclick="ResetVocab">@buttonLabels[buttonLabelIndex]</button>
 </div>

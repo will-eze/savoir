@@ -31,12 +31,11 @@ button{
 
 .set-btn {
     background-color: #D9D9D9;
-    padding: 0px 30px;
     width: 22%;
-    height: 90px;
+    height: 95px;
     vertical-align: middle;
     border-radius: 15px;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     text-align: center;
     margin: 10px 30px 20px 0px;
     border: none;
@@ -75,7 +74,7 @@ label{
     z-index: 1; /* Stay on top */
     bottom: 0;
     right: 0;
-    width: 25%;
+    width: 26.5%;
     height: 100%;
     background-color: #1A1916;
     padding: 30px;
@@ -99,7 +98,7 @@ label{
     display: block;
     cursor: pointer;
     margin: 8px;
-    font-size: 20px;
+    font-size: 1.23em;
 }
 
 .toggle__input {
@@ -248,10 +247,28 @@ a, a:hover, a:focus, a:active {
     background-color: #26b050;
 }
 
+.VocabQuiz__input table{
+    width: 100%;
+}
+.VocabQuiz__input td {
+    width: 33.33%;
+    border: 5px #fff solid
+}
+
+#VocabQuiz__icon__td{
+    text-align: left;
+    vertical-align: bottom;
+    padding-bottom: 0;
+}
+
+
 /* VERB QUIZ */
-
-
-#VerbQuiz__infinitive{
+.VerbQuizz__clipboard {
+    text-align: left;
+    padding-left: 0;
+    margin-left: 0;
+}
+#VerbQuiz__infinitive {
     margin-top: 15px;
     font-size: 2.3em;
     font-weight: bold;
@@ -280,8 +297,6 @@ a, a:hover, a:focus, a:active {
 }
 
 .VerbQuiz__table td{
-    width: 33.33%;
-    text-align: center;
     vertical-align: middle;
     padding: 10px 0px 10px 0px;
 }
@@ -294,8 +309,8 @@ a, a:hover, a:focus, a:active {
     padding-bottom: 0px;
 }
 
-/* ACCENT BOX */
 
+/* ACCENT BOX */
 .AccentBox {
     background: #C1BDFF;
     width: 155px;
