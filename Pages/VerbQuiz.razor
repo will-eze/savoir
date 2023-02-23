@@ -26,9 +26,6 @@
                     <td>
                         <input type="text" id="je" class="VerbQuiz__input" name="VerbQuiz__je" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[0]" @oninput="((e) => OnTextChange(e, 0))">
                     </td>
-                    <td class="VerbQuizz__clipboard">
-                        <img src="images/copy.png" alt="Clipboard icon"/>
-                    </td>
                     <td>
 
                     </td>
@@ -53,9 +50,6 @@
                     </td>
                     <td>
                         <input type="text" id="tu" class="VerbQuiz__input" name="VerbQuiz__tu" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[1]" @oninput="((e) => OnTextChange(e, 1))">
-                    </td>
-                    <td class="VerbQuizz__clipboard">
-                        <img src="images/copy.png" alt="Clipboard icon" />
                     </td>
                     <td>
                         @if (selectedField == 0)
@@ -85,9 +79,6 @@
                     <td>
                         <input type="text" id="il" class="VerbQuiz__input" name="VerbQuiz__il" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[2]" @oninput="((e) => OnTextChange(e, 2))">
                     </td>
-                    <td class="VerbQuizz__clipboard">
-                        <img src="images/copy.png" alt="Clipboard icon" />
-                    </td>
                     <td>
                         @if (selectedField == 1)
                         {
@@ -115,9 +106,6 @@
                     </td>
                     <td>
                         <input type="text" id="nous" class="VerbQuiz__input" name="VerbQuiz__nous" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[3]" @oninput="((e) => OnTextChange(e, 3))">
-                    </td>
-                    <td class="VerbQuizz__clipboard">
-                        <img src="images/copy.png" alt="Clipboard icon" />
                     </td>
                     <td>
                         @if (selectedField == 2)
@@ -153,9 +141,6 @@
                             <img class="correction-img" src="images/copy.png" @onclick="(e => ClipboardClicked(4))" />
                         }
                     </td>
-                    <td class="VerbQuizz__clipboard">
-                        <img src="images/copy.png" alt="Clipboard icon" />
-                    </td>
                     <td>
                         @if (displayCorrections)
                         {
@@ -177,9 +162,6 @@
                     </td>
                     <td>
                         <input type="text" id="ils" class="VerbQuiz__input" name="VerbQuiz__ils" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[5]" @oninput="((e) => OnTextChange(e, 5))">
-                    </td>
-                    <td class="VerbQuizz__clipboard">
-                        <img src="images/copy.png" alt="Clipboard icon" />
                     </td>
                     <td>
                         @if (selectedField == 4)
