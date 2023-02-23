@@ -1,0 +1,48 @@
+﻿<tr>
+    <td>
+        <label for="@ID" class="VerbQuiz__pronouns">@subjectPronoun</label>
+    </td>
+    <td>
+        <input type="text" id="@ID" class="VerbQuiz__input" name="VerbQuiz__tu" disabled="@userInputDisabled" autocomplete="off" value="@userVerb" @oninput="@(e => TextChanged(e))">
+    </td>
+    <td>
+        @if (selectedField == index - 1 && selectedField >= 0)
+        {
+            <img class="correction-img" src="images/copy.png" @onclick="(e => ClipboardClicked())" />
+        }
+    </td>
+    <td>
+        @if (displayCorrections)
+        {
+            if (userVerb == conjugation)
+            {
+                <img class="correction-img" src="images/tick.png" />
+            }
+            else
+            {
+                <label id='tu__result' class="result">@conjugation</label>
+            }
+        }
+    </td>
+</tr>
+
+@code {
+    [Parameter] public string? userVerb { get; set; }
+    [Parameter] public string? conjugation { get; set; }
+    [Parameter] public string? ID { get; set; }
+    [Parameter] public string? subjectPronoun { get; set; }
+
+    [Parameter] public bool userInputDisabled { get; set; }
+    [Parameter] public bool displayCorrections { get; set; }
+
+    [Parameter] public int selectedField { get; set; }
+    [Parameter] public int index { get; set; }
+
+
+    [Parameter] public EventCallback OnClipboardClicked { get; set; }
+    private async Task ClipboardClicked() => await OnClipboardClicked.InvokeAsync();
+
+
+    [Parameter] public EventCallback<ChangeEventArgs> onTextChange { get; set; }
+    private async Task TextChanged(ChangeEventArgs args) => await onTextChange.InvokeAsync(args);
+}

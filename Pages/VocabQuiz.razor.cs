@@ -5,7 +5,7 @@ namespace savoir.Pages
 {
     public class VocabQuizBase : ComponentBase
     {
-        public string[] moduleInfo = File.ReadAllLines(GLOBALS.directory + $@"\Data\csv_files\{GLOBALS.selectedModuleName.ToLower()}\{GLOBALS.selectedModuleName.ToLower()}Vocab.csv");
+        public string[] moduleInfo = File.ReadAllLines(GLOBALS.directory + $@"\csv_files\{GLOBALS.selectedModuleName.ToLower()}\{GLOBALS.selectedModuleName.ToLower()}Vocab.csv");
 
         public string[] vocabInfo = new string[2];
 

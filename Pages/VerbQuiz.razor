@@ -19,170 +19,13 @@
                     <col span="1" style="width: 16.7%;">
                     <col span="1" style="width: 16.7%;">
                 </colgroup>
-                <tr>
-                    <td>
-                        <label for="je" class="VerbQuiz__pronouns">@textJe</label>
-                    </td>
-                    <td>
-                        <input type="text" id="je" class="VerbQuiz__input" name="VerbQuiz__je" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[0]" @oninput="((e) => OnTextChange(e, 0))">
-                    </td>
-                    <td>
-
-                    </td>
-                    <td>
-                        @if (displayCorrections)
-                        {
-                            if (verbQuiz.userVerbs[0] == verbQuiz.conjugations[0])
-                            {
-                                <img class="correction-img" src="images/tick.png" alt="Checkmark icon"/>
-                            }
-                            else
-                            {
-                                <label id='je__result' class="result">@CorrectionsText(0)</label>
-                            }
-                        }
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <label for="tu" class="VerbQuiz__pronouns">Tu</label>
-                    </td>
-                    <td>
-                        <input type="text" id="tu" class="VerbQuiz__input" name="VerbQuiz__tu" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[1]" @oninput="((e) => OnTextChange(e, 1))">
-                    </td>
-                    <td>
-                        @if (selectedField == 0)
-                        {
-                            <img class="correction-img" src="images/copy.png" @onclick="(e => ClipboardClicked(1))"/>
-                        }
-                    </td>
-                    <td>
-                        @if (displayCorrections)
-                        {
-                            if (verbQuiz.userVerbs[1] == verbQuiz.conjugations[1])
-                            {
-                                <img class="correction-img" src="images/tick.png" />
-                            }
-                            else
-                            {
-                                <label id='tu__result' class="result">@CorrectionsText(1)</label>
-                            }
-                        }
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <label for="il" class="VerbQuiz__pronouns">Il/elle/on</label>
-                    </td>
-                    <td>
-                        <input type="text" id="il" class="VerbQuiz__input" name="VerbQuiz__il" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[2]" @oninput="((e) => OnTextChange(e, 2))">
-                    </td>
-                    <td>
-                        @if (selectedField == 1)
-                        {
-                            <img class="correction-img" src="images/copy.png" @onclick="(e => ClipboardClicked(2))"/>
-                        }
-                    </td>
-                    <td>
-                        @if (displayCorrections)
-                        {
-                            if (verbQuiz.userVerbs[2] == verbQuiz.conjugations[2])
-                            {
-                                <img class="correction-img" src="images/tick.png" />
-                            }
-                            else
-                            {
-                                <label id='il__result' class="result">@CorrectionsText(2)</label>
-                            }
-                        }
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <label for="nous" class="VerbQuiz__pronouns">Nous</label>
-                    </td>
-                    <td>
-                        <input type="text" id="nous" class="VerbQuiz__input" name="VerbQuiz__nous" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[3]" @oninput="((e) => OnTextChange(e, 3))">
-                    </td>
-                    <td>
-                        @if (selectedField == 2)
-                        {
-                            <img class="correction-img" src="images/copy.png" @onclick="(e => ClipboardClicked(3))" />
-                        }
-                    </td>
-                    <td>
-                        @if (displayCorrections)
-                        {
-                            if (verbQuiz.userVerbs[3] == verbQuiz.conjugations[3])
-                            {
-                                <img class="correction-img" src="images/tick.png" />
-                            }
-                            else
-                            {
-                                <label id='nous__result' class="result">@CorrectionsText(3)</label>
-                            }
-                        }
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <label for="vous" class="VerbQuiz__pronouns">Vous</label>
-                    </td>
-                    <td>
-                        <input type="text" id="vous" class="VerbQuiz__input" name="VerbQuiz__vous"disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[4]" @oninput="((e) => OnTextChange(e, 4))">
-                    </td>
-                    <td>
-                        @if (selectedField == 3)
-                        {
-                            <img class="correction-img" src="images/copy.png" @onclick="(e => ClipboardClicked(4))" />
-                        }
-                    </td>
-                    <td>
-                        @if (displayCorrections)
-                        {
-                            if (verbQuiz.userVerbs[4] == verbQuiz.conjugations[4])
-                            {
-                                <img class="correction-img" src="images/tick.png" />
-                            }
-                            else
-                            {
-                                <label id='vous__result' class="result">@CorrectionsText(4)</label>
-                            }
-                        }
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <label for="ils" class="VerbQuiz__pronouns">Ils/elles</label>
-                    </td>
-                    <td>
-                        <input type="text" id="ils" class="VerbQuiz__input" name="VerbQuiz__ils" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[5]" @oninput="((e) => OnTextChange(e, 5))">
-                    </td>
-                    <td>
-                        @if (selectedField == 4)
-                        {
-                            <img class="correction-img" src="images/copy.png" @onclick="(e => ClipboardClicked(5))" />
-                        }
-                    </td>
-                    <td>
-                        @if (displayCorrections)
-                        {
-                            if (verbQuiz.userVerbs[5] == verbQuiz.conjugations[5])
-                            {
-                                <img class="correction-img" src="images/tick.png" />
-                            }
-                            else
-                            {
-                                <label id='ils__result' class="result">@CorrectionsText(5)</label>
-                            }
-                        }
-                    </td>
-                </tr>
+                
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[0]" conjugation="@verbQuiz.conjugations[0]" index="0" ID="@("je")" subjectPronoun="@textJe"     OnClipboardClicked="e => ClipboardClicked(0)" onTextChange="@(e => OnTextChange(e, 0))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" />
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[1]" conjugation="@verbQuiz.conjugations[1]" index="1" ID="@("tu")" subjectPronoun="Tu"          OnClipboardClicked="e => ClipboardClicked(1)" onTextChange="@(e => OnTextChange(e, 1))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[2]" conjugation="@verbQuiz.conjugations[2]" index="2" ID="@("il")" subjectPronoun="Il/Elle/On"  OnClipboardClicked="e => ClipboardClicked(2)" onTextChange="@(e => OnTextChange(e, 2))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[3]" conjugation="@verbQuiz.conjugations[3]" index="3" ID="@("nous")" subjectPronoun="Nous"      OnClipboardClicked="e => ClipboardClicked(3)" onTextChange="@(e => OnTextChange(e, 3))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[4]" conjugation="@verbQuiz.conjugations[4]" index="4" ID="@("vous")" subjectPronoun="Vous"      OnClipboardClicked="e => ClipboardClicked(4)" onTextChange="@(e => OnTextChange(e, 4))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[5]" conjugation="@verbQuiz.conjugations[5]" index="5" ID="@("ils")" subjectPronoun="Ils/Elles"  OnClipboardClicked="e => ClipboardClicked(5)" onTextChange="@(e => OnTextChange(e, 5))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
             </table>
 
             <input type="submit" class="Quiz__submit" id="VerbQuiz__submit" @onclick="ResetVerb">@buttonLabels[buttonLabelIndex]</input>
@@ -192,13 +35,14 @@
 
 
 @code {
-    public VerbQuizBase verbQuiz; 
+    public VerbQuizBase verbQuiz;
 
     public string[] buttonLabels = new string[2] { "Submit", "Next" };
     public int buttonLabelIndex = 0;
-    public bool userInputDisabled = false;
 
+    public bool userInputDisabled = false;
     public bool displayCorrections = false;
+
     public string textJe = "Je";
 
     public bool accentMenuHidden = true;
