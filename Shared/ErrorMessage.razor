@@ -1,0 +1,32 @@
+﻿<p style="@errorStyle">@errorText</p>
+
+@code {
+    [Parameter] public string? inactiveErrorText { get; set; }
+    [Parameter] public string? activeErrorText { get; set; }
+
+    public string inactiveErrorStyle = "color: #fff";
+    public string activeErrorStyle = "color: #f23f3f";
+
+    public string? errorText;
+    public string? errorStyle;
+
+    protected override void OnInitialized()
+    {
+        errorText = inactiveErrorText;
+        errorStyle = inactiveErrorStyle;
+        base.OnInitialized();
+    }
+
+    public async Task displayError()
+    {
+        errorText = activeErrorText;
+        errorStyle = activeErrorStyle;
+        StateHasChanged();
+
+        await Task.Delay(3000);
+
+        errorText = inactiveErrorText;
+        errorStyle = inactiveErrorStyle;
+        StateHasChanged();
+    }
+}

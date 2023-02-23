@@ -12,12 +12,21 @@
     <div class="VerbQuiz__inputs">
         <form onsubmit="return false" autocomplete="off">
             <table class="VerbQuiz__table">
+                <colgroup>
+                    <col span="1" style="width: 33.3%;">
+                    <col span="1" style="width: 33.3%;">
+                    <col span="1" style="width: 16.7%;">
+                    <col span="1" style="width: 16.7%;">
+                </colgroup>
                 <tr>
                     <td>
                         <label for="je" class="VerbQuiz__pronouns">@textJe</label>
                     </td>
                     <td>
                         <input type="text" id="je" class="VerbQuiz__input" name="VerbQuiz__je" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[0]" @oninput="((e) => OnTextChange(e, 0))">
+                    </td>
+                    <td>
+
                     </td>
                     <td>
                         @if (displayCorrections)
@@ -42,6 +51,12 @@
                         <input type="text" id="tu" class="VerbQuiz__input" name="VerbQuiz__tu" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[1]" @oninput="((e) => OnTextChange(e, 1))">
                     </td>
                     <td>
+                        @if (selectedField == 0)
+                        {
+                            <img class="correction-img" src="images/copy.png" @onclick="(e => ClipboardClicked(1))"/>
+                        }
+                    </td>
+                    <td>
                         @if (displayCorrections)
                         {
                             if (verbQuiz.userVerbs[1] == verbQuiz.conjugations[1])
@@ -62,6 +77,12 @@
                     </td>
                     <td>
                         <input type="text" id="il" class="VerbQuiz__input" name="VerbQuiz__il" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[2]" @oninput="((e) => OnTextChange(e, 2))">
+                    </td>
+                    <td>
+                        @if (selectedField == 1)
+                        {
+                            <img class="correction-img" src="images/copy.png" @onclick="(e => ClipboardClicked(2))"/>
+                        }
                     </td>
                     <td>
                         @if (displayCorrections)
@@ -86,6 +107,12 @@
                         <input type="text" id="nous" class="VerbQuiz__input" name="VerbQuiz__nous" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[3]" @oninput="((e) => OnTextChange(e, 3))">
                     </td>
                     <td>
+                        @if (selectedField == 2)
+                        {
+                            <img class="correction-img" src="images/copy.png" @onclick="(e => ClipboardClicked(3))" />
+                        }
+                    </td>
+                    <td>
                         @if (displayCorrections)
                         {
                             if (verbQuiz.userVerbs[3] == verbQuiz.conjugations[3])
@@ -105,7 +132,13 @@
                         <label for="vous" class="VerbQuiz__pronouns">Vous</label>
                     </td>
                     <td>
-                        <input type="text" id="vous" class="VerbQuiz__input" name="VerbQuiz__vous" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[4]" @oninput="((e) => OnTextChange(e, 4))">
+                        <input type="text" id="vous" class="VerbQuiz__input" name="VerbQuiz__vous"disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[4]" @oninput="((e) => OnTextChange(e, 4))">
+                    </td>
+                    <td>
+                        @if (selectedField == 3)
+                        {
+                            <img class="correction-img" src="images/copy.png" @onclick="(e => ClipboardClicked(4))" />
+                        }
                     </td>
                     <td>
                         @if (displayCorrections)
@@ -128,6 +161,12 @@
                     </td>
                     <td>
                         <input type="text" id="ils" class="VerbQuiz__input" name="VerbQuiz__ils" disabled="@userInputDisabled" autocomplete="off" value="@verbQuiz.userVerbs[5]" @oninput="((e) => OnTextChange(e, 5))">
+                    </td>
+                    <td>
+                        @if (selectedField == 4)
+                        {
+                            <img class="correction-img" src="images/copy.png" @onclick="(e => ClipboardClicked(5))" />
+                        }
                     </td>
                     <td>
                         @if (displayCorrections)
@@ -238,6 +277,7 @@
             }
         }
 
+        selectedField = i;
 
         if (i == 0)
         {
@@ -292,5 +332,14 @@
         await InvokeAsync(() => StateHasChanged());
 
         topText = verbQuiz.verbinfo[0];
+    }
+
+    public void ClipboardClicked(int i)
+    {
+        if (i >= 1 && i <= 5)
+        {
+            verbQuiz.userVerbs[i] = verbQuiz.userVerbs[i - 1];
+            selectedField = i;
+        }
     }
 }

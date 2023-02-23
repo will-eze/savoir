@@ -1,9 +1,10 @@
 ﻿@using savoir.globals
+@inject NavigationManager Navigation
 
 <div class="TenseMenu" style="@TenseMenuStyle">
     <div class="TenseMenu__header">
         <h2>Tenses</h2>
-        <p>Select the tenses you would like to practice</p>
+        <ErrorMessage @ref="errorMsg" activeErrorText="@("You must select at least one tense to practice.")" inactiveErrorText="@("Select the tenses you would like to practice")"/>
     </div>
     <div class="TenseMenu__toggleBox">
         <label class="toggle" for="present" style="display: block">
@@ -89,35 +90,24 @@
     </div>
     <div class="TenseMenu__buttons">
         <div class="TenseMenu__buttons_studySet" hidden="@StudySetHidden">
-            <button class="TenseMenu__buttons__practice">
-                <a class="TenseMenu__buttons__text" href="VerbQuiz">Practice</a>
-            </button>
+            <button class="TenseMenu__buttons__practice" @onclick="OnVerbQuizClick">Practice</button>
         </div>
         <div class="TenseMenu__buttons_moduleSet" hidden="@ModuleSetHidden">
-            <button class="TenseMenu__buttons__verbs">
-                <a class="TenseMenu__buttons__text" href="VerbQuiz">Verbs</a>
-                </button>
-            <button class="TenseMenu__buttons__verbs">
-                <a class="TenseMenu__buttons__text" href="VocabQuiz">Vocab</a>
-            </button>
+            <button class="TenseMenu__buttons__verbs" @onclick="OnVerbQuizClick">Verbs</button>
+            <button class="TenseMenu__buttons__verbs" @onclick="@(e => Navigation.NavigateTo("VocabQuiz"))">Vocab</button>
         </div>
     </div>
 </div>
 
 @code {
-    [Parameter]
-    public bool TenseMenuHidden { get; set; }
+    [Parameter] public bool TenseMenuHidden { get; set; }
+    [Parameter] public bool StudySetHidden { get; set; }
+    [Parameter] public bool ModuleSetHidden { get; set; }
 
-    [Parameter]
-    public bool StudySetHidden { get; set; }
+    [Parameter] public string TenseMenuStyle { get; set; }
 
-    [Parameter]
-    public bool ModuleSetHidden { get; set; }
+    ErrorMessage? errorMsg;
 
-    [Parameter]
-    public string TenseMenuStyle { get; set; }
-
-    // list of all available tenses
     public string[] AllTenses = new string[16] { "present", "imperfect", "simple past", "simple future", "conditional", "subjunctive", "imperfect subjunctive", "imperative", "past perfect", "pluperfect", "future perfect", "conditional perfect", "past subjunctive", "pluperfect subjunctive", "past anterior", "past imperative" };
 
     // list of tenses which should automatically be selected
@@ -126,20 +116,11 @@
     // stores the state of each checkbox
     public bool[] TensesChecked { get; set; } = new bool[16];
 
+    public bool displayError = false;
+
     private void CheckboxChanged(int i)
     {
-        // updates the fields storing the checkbox's states and the selected tenses
-
-        // if the field they're trying to deselect is the only active one, then don't let them deselect.
-        if (TensesChecked.Count(x => x == true) == 1 && TensesChecked[i] == true)
-        {
-            return;
-        }
-        else
-        {
-            TensesChecked[i] = !TensesChecked[i];
-        }
-
+        TensesChecked[i] = !TensesChecked[i];
         UpdateTensesSelected();
     }
 
@@ -179,6 +160,18 @@
             {
                 GLOBALS.TensesSelectedList.Add(AllTenses[i]);
             }
+        }
+    }
+
+    public async Task OnVerbQuizClick()
+    {
+        if (GLOBALS.TensesSelectedList.Count > 0)
+        {
+            Navigation.NavigateTo("VerbQuiz");
+        }
+        else
+        {
+            await errorMsg!.displayError();
         }
     }
 }

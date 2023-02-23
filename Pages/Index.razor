@@ -35,8 +35,14 @@
 
     public string[] setColours = new string[10] { inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, };
 
-    public string indexPageStyle = "margin-right: 0%";
-    public string tenseMenuStyle = "margin-right: -24.9%";
+    public const string indexPageActiveStyle = "margin-right: 0%; transition: margin-right 0.2s";
+    public const string indexPageInactiveStyle = "margin-right: 26.5%; transition: margin-right 0.2s";
+
+    public const string tenseMenuActiveStyle = "margin-right: -26.4%; transition: margin-right 0.2s";
+    public const string tenseMenuInactiveStyle = "margin-right: 0%; transition: margin-right 0.2s";
+
+    public string indexPageStyle = indexPageActiveStyle;
+    public string tenseMenuStyle = tenseMenuActiveStyle;
 
     public void OnSetButtonPressed(int setIndexClicked)
     {
@@ -46,8 +52,9 @@
             activeSetIndex = -1;
             setColours[setIndexClicked] = inactiveSetColour;
             tenseMenuHidden = true;
-            indexPageStyle = "margin-right: 0%; transition: margin-right 0.2s";
-            tenseMenuStyle = "margin-right: -24.9%; transition: margin-right 0.2s";
+
+            indexPageStyle = indexPageActiveStyle;
+            tenseMenuStyle = tenseMenuActiveStyle;
         }
         // if user clicks non-active set, activate that set by showing tenseMenu and updating colours / activeSetIndex
         else if (activeSetIndex != setIndexClicked)
@@ -62,8 +69,9 @@
             activeSetIndex = setIndexClicked;
 
             tenseMenuHidden = false;
-            indexPageStyle = "margin-right: 25%; transition: margin-right 0.2s";
-            tenseMenuStyle = "margin-right: 0%; transition: margin-right 0.2s";
+
+            indexPageStyle = indexPageInactiveStyle;
+            tenseMenuStyle = tenseMenuInactiveStyle;
         }
 
         // activeSetIndex has now been updated to match the selected set, so make appropriate updates to other components

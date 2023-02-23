@@ -36,7 +36,7 @@ button{
     height: 90px;
     vertical-align: middle;
     border-radius: 15px;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     text-align: center;
     margin: 10px 30px 20px 0px;
     border: none;
@@ -75,7 +75,7 @@ label{
     z-index: 1; /* Stay on top */
     bottom: 0;
     right: 0;
-    width: 25%;
+    width: 26.5%;
     height: 100%;
     background-color: #1A1916;
     padding: 30px;
@@ -173,6 +173,10 @@ a, a:hover, a:focus, a:active {
 .VerbQuiz img {
     width: 2em;
     height: 2em;
+}
+
+.VerbQuiz img:hover {
+    cursor: pointer;
 }
 
 .VerbQuiz__table correction-img {
