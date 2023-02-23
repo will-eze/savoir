@@ -28,7 +28,7 @@
                 <VerbInputRow userVerb="@verbQuiz.userVerbs[5]" conjugation="@verbQuiz.conjugations[5]" index="5" ID="@("ils")" subjectPronoun="Ils/Elles"  OnClipboardClicked="e => ClipboardClicked(5)" onTextChange="@(e => OnTextChange(e, 5))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
             </table>
 
-            <input type="submit" class="Quiz__submit" id="VerbQuiz__submit" @onclick="ResetVerb">@buttonLabels[buttonLabelIndex]</input>
+            <input type="submit" class="Quiz__submit" id="VerbQuiz__submit" @onclick="ResetVerb" @bind-value="@buttonLabels[buttonLabelIndex]" />
         </form> 
     </div>
 </div>
@@ -70,9 +70,7 @@
             if (buttonLabelIndex == 0)
             {
                 buttonLabelIndex = 1;
-
                 userInputDisabled = true;
-
                 displayCorrections = true;
             }
 
@@ -80,16 +78,14 @@
             else 
             {
                 buttonLabelIndex = 0;
-
                 userInputDisabled = false;
+                displayCorrections = false;
 
                 // reset the user input fields (which are bound to indexes of userVerbs)
                 for (int i = 0; i<=5; i++)
                 {
                     verbQuiz.userVerbs[i] = string.Empty;
                 }
-
-                displayCorrections = false;
 
                 // generate a new verb + tense
                 verbQuiz.RandomVerb();
@@ -98,27 +94,16 @@
         } 
     }
 
-    public string CorrectionsText(int i)
-    {
-        return (displayCorrections) ? verbQuiz.conjugations[i] : string.Empty;
-    }
-
     public void OnTextChange(ChangeEventArgs args, int i)
     {
-        if (args.Value.ToString() is not null)
-        {
-            verbQuiz.userVerbs[i] = args.Value.ToString();
-        }
+        verbQuiz.userVerbs[i] = args.Value!.ToString()!;
 
         // need to check last element of non-zero length array
-        if (verbQuiz.userVerbs[i].Length != 0)
+        if (verbQuiz.userVerbs[i].Length != 0 && verbQuiz.userVerbs[i].Contains('#'))
         {
-            if (verbQuiz.userVerbs[i].Contains('#'))
-            {
-                // if the user types an # symbol, display the accent box GUI and prevent further text input
-                accentMenuHidden = false;
-                userInputDisabled = true;
-            }
+            // if the user types an # symbol, display the accent box GUI and prevent further text input
+            accentMenuHidden = false;
+            userInputDisabled = true;
         }
 
         selectedField = i;
