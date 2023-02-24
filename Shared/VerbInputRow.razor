@@ -3,7 +3,7 @@
         <label for="@ID" class="VerbQuiz__pronouns">@subjectPronoun</label>
     </td>
     <td>
-        <input type="text" id="@ID" class="VerbQuiz__input" name="VerbQuiz__tu" disabled="@userInputDisabled" autocomplete="off" value="@userVerb" @oninput="@(e => TextChanged(e))">
+        <input type="text" id="@ID" class="VerbQuiz__input" @ref="textInput" @onkeydown="@(e => KeyboardEventHandler(e))" disabled="@userInputDisabled" autocomplete="off" value="@userVerb" @oninput="@(e => TextChanged(e))">
     </td>
     <td>
         @if (selectedField == index - 1 && selectedField >= 0)
@@ -14,7 +14,7 @@
     <td>
         @if (displayCorrections)
         {
-            if (userVerb == conjugation)
+            if (GetUserCorrect())
             {
                 <img class="correction-img" src="images/tick.png" />
             }
@@ -45,4 +45,26 @@
 
     [Parameter] public EventCallback<ChangeEventArgs> onTextChange { get; set; }
     private async Task TextChanged(ChangeEventArgs args) => await onTextChange.InvokeAsync(args);
+
+    public ElementReference textInput;
+
+
+    // this code deals with masculine;feminine found in small_conjugations.csv by ensuring the corrections are right.
+    public bool GetUserCorrect()
+    {
+        if (conjugation!.Contains(';'))
+        {
+            string[] possibleConjugations = conjugation.Split(';');
+            return possibleConjugations.Any(p => p == userVerb);
+        }
+        return conjugation == userVerb;
+    }
+
+    protected async Task KeyboardEventHandler(KeyboardEventArgs args)
+    {
+        if (args.CtrlKey && args.Key == "c")
+        {
+            await ClipboardClicked();
+        }
+    }
 }

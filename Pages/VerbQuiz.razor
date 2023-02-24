@@ -20,12 +20,12 @@
                     <col span="1" style="width: 16.7%;">
                 </colgroup>
                 
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[0]" conjugation="@verbQuiz.conjugations[0]" index="0" ID="@("je")" subjectPronoun="@textJe"     OnClipboardClicked="e => ClipboardClicked(0)" onTextChange="@(e => OnTextChange(e, 0))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" />
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[1]" conjugation="@verbQuiz.conjugations[1]" index="1" ID="@("tu")" subjectPronoun="Tu"          OnClipboardClicked="e => ClipboardClicked(1)" onTextChange="@(e => OnTextChange(e, 1))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[2]" conjugation="@verbQuiz.conjugations[2]" index="2" ID="@("il")" subjectPronoun="Il/Elle/On"  OnClipboardClicked="e => ClipboardClicked(2)" onTextChange="@(e => OnTextChange(e, 2))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[3]" conjugation="@verbQuiz.conjugations[3]" index="3" ID="@("nous")" subjectPronoun="Nous"      OnClipboardClicked="e => ClipboardClicked(3)" onTextChange="@(e => OnTextChange(e, 3))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[4]" conjugation="@verbQuiz.conjugations[4]" index="4" ID="@("vous")" subjectPronoun="Vous"      OnClipboardClicked="e => ClipboardClicked(4)" onTextChange="@(e => OnTextChange(e, 4))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[5]" conjugation="@verbQuiz.conjugations[5]" index="5" ID="@("ils")" subjectPronoun="Ils/Elles"  OnClipboardClicked="e => ClipboardClicked(5)" onTextChange="@(e => OnTextChange(e, 5))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[0]" @ref="verbInputRows[0]" conjugation="@verbQuiz.conjugations[0]" index="0" ID="@("je")"      subjectPronoun="@textJe"     OnClipboardClicked="e => ClipboardClicked(0)" onTextChange="@(e => OnTextChange(e, 0))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" />
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[1]" @ref="verbInputRows[1]" conjugation="@verbQuiz.conjugations[1]" index="1" ID="@("tu")"      subjectPronoun="Tu"          OnClipboardClicked="e => ClipboardClicked(1)" onTextChange="@(e => OnTextChange(e, 1))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[2]" @ref="verbInputRows[2]" conjugation="@verbQuiz.conjugations[2]" index="2" ID="@("il")"      subjectPronoun="Il/Elle/On"  OnClipboardClicked="e => ClipboardClicked(2)" onTextChange="@(e => OnTextChange(e, 2))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[3]" @ref="verbInputRows[3]" conjugation="@verbQuiz.conjugations[3]" index="3" ID="@("nous")"    subjectPronoun="Nous"        OnClipboardClicked="e => ClipboardClicked(3)" onTextChange="@(e => OnTextChange(e, 3))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[4]" @ref="verbInputRows[4]" conjugation="@verbQuiz.conjugations[4]" index="4" ID="@("vous")"    subjectPronoun="Vous"        OnClipboardClicked="e => ClipboardClicked(4)" onTextChange="@(e => OnTextChange(e, 4))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[5]" @ref="verbInputRows[5]" conjugation="@verbQuiz.conjugations[5]" index="5" ID="@("ils")"     subjectPronoun="Ils/Elles"   OnClipboardClicked="e => ClipboardClicked(5)" onTextChange="@(e => OnTextChange(e, 5))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField"/>
             </table>
 
             <input type="submit" class="Quiz__submit" id="VerbQuiz__submit" @onclick="ResetVerb" @bind-value="@buttonLabels[buttonLabelIndex]" />
@@ -36,6 +36,8 @@
 
 @code {
     public VerbQuizBase verbQuiz;
+
+    private VerbInputRow[] verbInputRows = new VerbInputRow[6] { new(), new(), new(), new(), new(), new() };
 
     public string[] buttonLabels = new string[2] { "Submit", "Next" };
     public int buttonLabelIndex = 0;
@@ -49,6 +51,10 @@
     public int selectedField = -1;
 
     public string topText;
+
+    public string[] subjectPronouns = new string[6] { "je", "tu", "il", "nous", "vous", "ils" };
+
+    private bool awaitingFocusJe = false;
 
     public VerbQuiz()
     {
@@ -90,6 +96,8 @@
                 // generate a new verb + tense
                 verbQuiz.RandomVerb();
                 topText = verbQuiz.verbinfo[0];
+
+                awaitingFocusJe = true;
             }
         } 
     }
@@ -163,12 +171,26 @@
         topText = verbQuiz.verbinfo[0];
     }
 
-    public void ClipboardClicked(int i)
+    public async Task ClipboardClicked(int i)
     {
         if (i >= 1 && i <= 5)
         {
             verbQuiz.userVerbs[i] = verbQuiz.userVerbs[i - 1];
             selectedField = i;
+            await verbInputRows[selectedField].textInput.FocusAsync();
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await verbInputRows[0].textInput.FocusAsync();
+        }
+        else if (awaitingFocusJe)
+        {
+            awaitingFocusJe = false;
+            await verbInputRows[0].textInput.FocusAsync();
         }
     }
 }

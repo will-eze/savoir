@@ -263,9 +263,11 @@ a, a:hover, a:focus, a:active {
 
 /* VERB QUIZ */
 
+/*
 td{
     border: 2px #fff solid;
 }
+*/
 
 .VerbQuizz__clipboard {
     text-align: left;

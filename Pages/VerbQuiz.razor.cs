@@ -38,7 +38,6 @@ namespace savoir.Pages
             // 1 -- GENERATE RANDOM VERB
             string verb = possibleVerbs[rnd.Next(0, possibleVerbs.Length)];
 
-
             // 2 -- FIND VERB INDEX in small_conjugations.csv
             string[] verbRecord = Array.Empty<string>();
 
