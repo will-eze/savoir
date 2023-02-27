@@ -1,0 +1,121 @@
+﻿@page "/"
+@inject HttpClient Http
+
+<PageTitle>savoir</PageTitle>
+
+<div class="IndexPage" style="@indexPageStyle">
+    <h2 class="sub-heading">General Sets</h2>
+    <button id="beginner" class="set-btn" style="@setColours[0]" @onclick="e => OnSetButtonPressed(0)">Beginner</button>
+    <button id="intermediate" class="set-btn" style="@setColours[1]" @onclick="e => OnSetButtonPressed(1)">Intermediate</button>
+    <button id="advanced" class="set-btn" style="@setColours[2]" @onclick="e => OnSetButtonPressed(2)">Advanced</button>
+    <button id="master" class="set-btn" style="@setColours[3]" @onclick="e => OnSetButtonPressed(3)">Master</button>
+
+    <h2 class="sub-heading">Module Sets</h2>
+    <button class="set-btn" style="@setColours[4]" @onclick="e => OnSetButtonPressed(4)">Identity & Culture</button>
+    <button class="set-btn" style="@setColours[5]" @onclick="e => OnSetButtonPressed(5)">Local area, holiday & travel</button>
+    <button class="set-btn" style="@setColours[6]" @onclick="e => OnSetButtonPressed(6)">School</button>
+    <button class="set-btn" style="@setColours[7]" @onclick="e => OnSetButtonPressed(7)">Future aspirations, study & work</button>
+    <button class="set-btn" style="@setColours[8]" @onclick="e => OnSetButtonPressed(8)">International & global dimension </button>
+</div>
+
+<TenseMenu TenseMenuHidden="@tenseMenuHidden" ModuleSetHidden="@moduleSetHidden" StudySetHidden="@studySetHidden" TenseMenuStyle="@tenseMenuStyle"/>
+
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        GLOBALS.all_sets_info = (await Http.GetStringAsync("csv_files/The Big 3/sets.csv")).Split('\n');
+        GLOBALS.sets_headers = GLOBALS.all_sets_info[0].Split(',');
+        GLOBALS.sets_info = GLOBALS.all_sets_info[1..];
+
+        GLOBALS.all_verbs_info = (await Http.GetStringAsync("csv_files/The Big 3/small_conjugations.csv")).Split('\n');
+        GLOBALS.verbs_headers = GLOBALS.all_verbs_info[0].Split(',');
+        GLOBALS.verbs_info = GLOBALS.all_verbs_info[1..];
+    }
+
+
+    public string[] setNames = new string[] { "Beginner", "Intermediate", "Advanced", "Master", "Identity", "Holiday", "School", "Work", "Environment" };
+
+    public bool tenseMenuHidden = true;
+    public bool moduleSetHidden = true;
+    public bool studySetHidden = true;
+
+    private int activeSetIndex { get; set; } = -1;
+
+    public const string activeSetColour = "background:#726EFF";
+    public const string inactiveSetColour = "background:#D9D9D9";
+
+    public string[] setColours = new string[10] { inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, };
+
+    public const string indexPageActiveStyle = "margin-right: 0%; transition: margin-right 0.2s";
+    public const string indexPageInactiveStyle = "margin-right: 25%; transition: margin-right 0.2s";
+
+    public const string tenseMenuActiveStyle = "margin-right: -26.9%; transition: margin-right 0.2s";
+    public const string tenseMenuInactiveStyle = "margin-right: 0%; transition: margin-right 0.2s";
+
+    public string indexPageStyle = indexPageActiveStyle;
+    public string tenseMenuStyle = tenseMenuActiveStyle;
+
+    public void OnSetButtonPressed(int setIndexClicked)
+    {
+        // if user clicks the active set, then hide the tenseMenu and update the colour / activeSetIndex
+        if (activeSetIndex == setIndexClicked)
+        {
+            activeSetIndex = -1;
+            setColours[setIndexClicked] = inactiveSetColour;
+            tenseMenuHidden = true;
+
+            indexPageStyle = indexPageActiveStyle;
+            tenseMenuStyle = tenseMenuActiveStyle;
+        }
+        // if user clicks non-active set, activate that set by showing tenseMenu and updating colours / activeSetIndex
+        else if (activeSetIndex != setIndexClicked)
+        {
+            setColours[setIndexClicked] = activeSetColour;
+
+            if (activeSetIndex != -1)
+            {
+                setColours[activeSetIndex] = inactiveSetColour;
+
+            }
+            activeSetIndex = setIndexClicked;
+
+            tenseMenuHidden = false;
+
+            indexPageStyle = indexPageInactiveStyle;
+            tenseMenuStyle = tenseMenuInactiveStyle;
+        }
+
+        // activeSetIndex has now been updated to match the selected set, so make appropriate updates to other components
+
+        if (activeSetIndex >= 0 && activeSetIndex <= 8)
+        {
+            foreach (string _data in GLOBALS.sets_info!)
+            {
+                if (_data.StartsWith(setNames[activeSetIndex]))
+                {
+                    string[] record = _data.Split(',');
+                    GLOBALS.VerbsSelectedList = record[1].Split('+').ToList();
+                }
+            }
+
+            // determine whether to show "Practice" or "Verb + Vocab" buttons on the TenseMenu page
+            if (activeSetIndex >= 0 && activeSetIndex <= 3)
+            {
+                studySetHidden = false;
+                moduleSetHidden = true;
+
+                GLOBALS.selectedModuleName = string.Empty;
+            }
+            else if (activeSetIndex >= 4 && activeSetIndex <= 9)
+            {
+                studySetHidden = true;
+                moduleSetHidden = false;
+
+                GLOBALS.selectedModuleName = setNames[activeSetIndex];
+            }
+        }
+
+    }
+}
+

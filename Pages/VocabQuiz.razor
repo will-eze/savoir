@@ -1,0 +1,121 @@
+﻿@page "/VocabQuiz"
+@inherits VocabQuizBase
+@inject HttpClient Http
+
+<PageTitle>Vocab Quiz</PageTitle>
+
+
+<div class="VocabQuiz">
+    <AccentBox AccentMenuHidden="@accentMenuHidden" OnClick="@OnAccentClicked" />
+
+    <div class="VocabQuiz__header">
+        <h2 id="VocabQuiz__module">@GLOBALS.selectedModuleName</h2>
+    </div>
+
+    <div class="VocabQuiz__bubble">
+        <p id="VocabQuiz__vocab">@vocabQuiz.wordShownToUser</p>
+    </div>
+
+    <form onsubmit="return false" autocomplete="off">
+        <div class="VocabQuiz__input">
+            <input type="text" id="VocabQuiz__translation" disabled="@userInputDisabled" value="@vocabQuiz.userInput" @oninput="((e) => OnTextChange(e))" placeholder="Enter the translation..." autocomplete="off" />
+            @if (displayTranslation) {
+                <img class="correction-img" src="@( (vocabQuiz.userInput == vocabQuiz.vocabInfo[1]) ? "images/tick.png" : "images/cross.png" )" />
+            }
+            <p id="VocabQuiz__correction">@correctionText()</p>
+        </div>
+        <input type="submit" class="Quiz__submit" id="VocabQuiz__submit" @onclick="ResetVocab">@buttonLabels[buttonLabelIndex]</input>
+    </form>
+</div>
+
+
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        vocabQuiz.moduleInfo = (await Http.GetStringAsync($"csv_files/{GLOBALS.selectedModuleName.ToLower()}/{GLOBALS.selectedModuleName.ToLower()}Vocab.csv")).Split('\n');
+        vocabQuiz.RandomVocab();
+    }
+
+    public VocabQuizBase vocabQuiz = new VocabQuizBase();
+
+    public string correctTranslation = string.Empty;
+
+    public string[] buttonLabels = new string[2] { "Submit", "Next" };
+    public int buttonLabelIndex = 0;
+    public bool userInputDisabled = false;
+
+    public bool displayTranslation = false;
+
+    public bool accentMenuHidden = true;
+
+    public void ResetVocab()
+    {
+        if (vocabQuiz.userInput != string.Empty)
+        {
+            // if SUBMIT button clicked
+            if (buttonLabelIndex == 0)
+            {
+                buttonLabelIndex = 1;
+                userInputDisabled = true;
+                displayTranslation = true;
+            }
+
+            // if NEXT button clicked
+            else
+            {
+                buttonLabelIndex = 0;
+                userInputDisabled = false;
+
+                vocabQuiz.RandomVocab();
+
+                vocabQuiz.userInput = string.Empty;
+                displayTranslation = false;
+            }
+        }
+    }
+
+    public void OnTextChange(ChangeEventArgs args)
+    {
+        if (args.Value.ToString() is not null)
+        {
+            vocabQuiz.userInput = args.Value.ToString();
+        }
+
+        if (vocabQuiz.userInput.Length != 0)
+        {
+            if (vocabQuiz.userInput.Contains('#'))
+            {
+                accentMenuHidden = false;
+                userInputDisabled = true;
+            }
+        }
+    }
+
+    public void OnAccentClicked(char accentClicked)
+    {
+        if (accentClicked == '#')
+        {
+            vocabQuiz.userInput = vocabQuiz.userInput.Replace("#", "");
+        }
+        else
+        {
+            vocabQuiz.userInput = vocabQuiz.userInput.Replace('#', accentClicked);
+        }
+
+        accentMenuHidden = true;
+        userInputDisabled = false;
+    }
+
+    public string correctionText()
+    {
+        if (displayTranslation && vocabQuiz.vocabInfo[1] != vocabQuiz.userInput)
+        {
+            return vocabQuiz.vocabInfo[1];
+        }
+        else
+        {
+            return string.Empty;
+        }
+    }
+}
