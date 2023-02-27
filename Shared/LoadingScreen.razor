@@ -1,0 +1,25 @@
+﻿@if (contentLoaded)
+{
+    @ChildContent
+}
+else
+{
+    <video autoplay muted id="logoAnimation">
+        <source src="images/logo-animation.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+}
+
+@code {
+
+    bool contentLoaded;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(4000);
+        contentLoaded = true;
+    }
+}
