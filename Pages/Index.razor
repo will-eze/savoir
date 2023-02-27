@@ -18,19 +18,43 @@
     <button class="set-btn" style="@setColours[8]" @onclick="e => OnSetButtonPressed(8)">International & global dimension </button>
 </div>
 
+
 <TenseMenu TenseMenuHidden="@tenseMenuHidden" ModuleSetHidden="@moduleSetHidden" StudySetHidden="@studySetHidden" TenseMenuStyle="@tenseMenuStyle"/>
 
 
 @code {
+    public bool finishedLoading = false;
+
     protected override async Task OnInitializedAsync()
     {
         GLOBALS.all_sets_info = (await Http.GetStringAsync("csv_files/The Big 3/sets.csv")).Split('\n');
+
+        for (int i = 0; i < GLOBALS.all_sets_info.Length; i++)
+        {
+            if (GLOBALS.all_sets_info[i].Contains('\r'))
+            {
+                GLOBALS.all_sets_info[i] = GLOBALS.all_sets_info[i].Replace("\r", "");
+            }
+        }
+
         GLOBALS.sets_headers = GLOBALS.all_sets_info[0].Split(',');
         GLOBALS.sets_info = GLOBALS.all_sets_info[1..];
 
         GLOBALS.all_verbs_info = (await Http.GetStringAsync("csv_files/The Big 3/small_conjugations.csv")).Split('\n');
+
+        for (int i = 0; i < GLOBALS.all_verbs_info.Length; i++)
+        {
+            if (GLOBALS.all_verbs_info[i].Contains('\r'))
+            {
+                GLOBALS.all_verbs_info[i] = GLOBALS.all_verbs_info[i].Replace("\r", "");
+            }
+        }
+
         GLOBALS.verbs_headers = GLOBALS.all_verbs_info[0].Split(',');
         GLOBALS.verbs_info = GLOBALS.all_verbs_info[1..];
+
+        await Task.Delay(3000);
+        finishedLoading = true;
     }
 
 
