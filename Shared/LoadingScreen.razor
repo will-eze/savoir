@@ -1,4 +1,6 @@
-﻿@if (contentLoaded)
+﻿@inject NavigationManager Navigation
+
+@if (contentLoaded)
 {
     @ChildContent
 }
@@ -15,11 +17,19 @@ else
     bool contentLoaded;
 
     [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    public RenderFragment? ChildContent { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(4000);
-        contentLoaded = true;
+        if (Navigation.Uri == Navigation.BaseUri)
+        {
+            await Task.Delay(4000);
+            contentLoaded = true;
+        }
+        else
+        {
+            contentLoaded = true;
+        }
+
     }
 }

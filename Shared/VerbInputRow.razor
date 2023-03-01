@@ -57,9 +57,9 @@
         if (conjugation!.Contains(';'))
         {
             string[] possibleConjugations = conjugation.Split(';');
-            return possibleConjugations.Any(p => p == userVerb);
+            return possibleConjugations.Any(p => p == userVerb!.Trim());
         }
-        return conjugation == userVerb;
+        return conjugation == userVerb!.Trim();
     }
 
 

@@ -9,7 +9,7 @@ namespace Savoir.Pages
         public string[] verbinfo = new string[3];
 
         // list of correct conjugations for currently selected verb
-        public string[] conjugations = new string[6] { "test1", "test2", "test3", "test4", "test5", "test6" };
+        public string[] conjugations = new string[6] { "", "", "", "", "", "" };
 
         // list of user conjugations for currently selected verb
         public string[] userVerbs = new string[6] { "", "", "", "", "", "" };
