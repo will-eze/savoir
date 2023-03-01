@@ -1,9 +1,11 @@
-﻿<tr>
+﻿
+
+<tr>
     <td>
-        <label for="@ID" class="VerbQuiz__pronouns">@subjectPronoun</label>
+        <label for="@($"{ID}_subject")" class="VerbQuiz__pronouns">@subjectPronoun</label>
     </td>
     <td>
-        <input type="text" id="@ID" class="VerbQuiz__input" @ref="textInput" @onkeypress="@(e => onKeyPress(e))" disabled="@userInputDisabled" autocomplete="off" value="@userVerb" @oninput="@(e => TextChanged(e))">
+        <input type="text" id="@ID" class="VerbQuiz__input" @onfocus="@(e => focusedIndexChanged())" disabled="@userInputDisabled" autocomplete="off" value="@userVerb" @oninput="@(e => TextChanged(e))">
     </td>
     <td>
         @if (selectedField == index - 1 && selectedField >= 0)
@@ -20,7 +22,7 @@
             }
             else
             {
-                <label id='tu__result' class="result">@conjugation</label>
+                <label id="@($"{ID}_result")" class="result">@conjugation</label>
             }
         }
     </td>
@@ -48,6 +50,9 @@
     [Parameter] public EventCallback<ChangeEventArgs> onTextChange { get; set; }
     private async Task TextChanged(ChangeEventArgs args) => await onTextChange.InvokeAsync(args);
 
+    [Parameter] public EventCallback onFocusedIndexChanged { get; set; }
+    private async Task focusedIndexChanged() => await onFocusedIndexChanged.InvokeAsync();
+
     public ElementReference textInput;
 
 
@@ -64,12 +69,4 @@
 
 
     public string myText = string.Empty;
-
-    protected async Task onKeyPress(KeyboardEventArgs args)
-    {
-        if (args.CtrlKey && args.Key.ToLower() == "c")
-        {
-            await ClipboardClicked();
-        }
-    }
 }

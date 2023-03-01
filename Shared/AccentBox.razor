@@ -1,9 +1,7 @@
-﻿<div class="AccentBox" hidden="@AccentMenuHidden">
+﻿<div class="AccentBox">
 
     <div class="AccentBox__header">
         Accents
-
-        <button id="AccentBox__close" @onclick="((e) => OnClick.InvokeAsync('#'))">X</button>
     </div>
 
     <div class="AccentBox__buttons">
@@ -27,8 +25,5 @@
 </div>
 
 @code {
-    [Parameter]
-    public bool AccentMenuHidden { get; set; }
-
     [Parameter] public EventCallback<char> OnClick { get; set; }
 }

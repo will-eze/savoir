@@ -23,6 +23,28 @@
     </div>
 
     <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        getCaretPosition = function (id) {
+            var el = document.getElementById(id);
+            var pos = 0;
+
+            if (el.selectionStart || el.selectionStart == '0') {
+                pos = el.selectionStart;
+            }
+
+            return pos;
+        };
+
+        setCaretPosition = function (id, pos) {
+            el = document.getElementById(id);
+            el.setSelectionRange(pos, pos);
+        };
+
+        focusElement = function(id) {
+            var el = document.getElementById(id);
+            el.focus();
+        };
+    </script>
 </body>
 
 </html>
