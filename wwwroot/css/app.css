@@ -347,6 +347,44 @@ td{
     text-align: right;
 }
 
+/* TIP BOX */
+.TipBox {
+    background-color: #FFFFE0;
+    bottom: 25px;
+    right: 25px;
+    position: fixed;
+    padding: 13px;
+    vertical-align: middle;
+    font-weight: bold;
+    color: #000;
+}
+
+/* CREDITS PAGE */
+
+.CreditsPage{
+    height: 100vh;
+}
+
+iframe {
+    border: none;
+    height: 100%;
+    width: 100%;
+}
+
+.CreditsPage__table {
+    width: 100%;
+    height: 90vh;
+}
+
+.CreditsPage__table td{
+    padding: 30px;
+}
+
+.CreditsPage__message{
+    font-size: 1.3em;
+}
+
+
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
 }
