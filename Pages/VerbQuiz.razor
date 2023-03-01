@@ -8,6 +8,7 @@
     <div class="VerbQuiz__header">
         <h2 id="VerbQuiz__infinitive" @onclick="DisplayEnglishTranslation">@topText</h2>
         <h3 id="VerbQuiz__tense">@verbQuiz.verbinfo[2]</h3>
+        <ErrorMessage @ref="errorMsg" activeErrorText="@("Blank fields are not allowed.")" inactiveErrorText="" />
     </div>
     <div class="VerbQuiz__inputs">
         <form onsubmit="return false" autocomplete="off">
@@ -35,6 +36,8 @@
 
 @code {
     public VerbQuizBase verbQuiz;
+
+    ErrorMessage? errorMsg;
 
     private VerbInputRow[] verbInputRows = new VerbInputRow[6] { new(), new(), new(), new(), new(), new() };
 
@@ -66,7 +69,7 @@
         topText = verbQuiz.verbinfo[0];
     }
 
-    public void ResetVerb()
+    public async Task ResetVerb()
     {
         // if all user input fields are filled, execute IF block
         if (verbQuiz.userVerbs.All(x => x != ""))
@@ -99,11 +102,15 @@
                 awaitingFocusJe = true;
             }
         }
+        else
+        {
+            await errorMsg!.displayError();
+        }
     }
 
     public void OnTextChange(ChangeEventArgs args, int i)
     {
-        verbQuiz.userVerbs[i] = args.Value!.ToString()!;
+        verbQuiz.userVerbs[i] = args.Value!.ToString()!.ToLower();
 
         // need to check last element of non-zero length array
         if (verbQuiz.userVerbs[i].Length != 0 && verbQuiz.userVerbs[i].Contains('#'))
