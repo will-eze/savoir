@@ -6,11 +6,10 @@
 }
 else
 {
-    <video id="logoAnimation" autoplay muted controls>
-        <source src="images/logoLoad.mp4" type="video/mp4">
-        <source src="images/logoLoad.webm" type="video/webm">
-        Your browser does not support the video tag.
-    </video>
+    <BlazoredVideo autoplay="autoplay" id="logoAnimation">
+
+        <source src="videos/logoLoad.mp4" type="video/mp4"/>
+    </BlazoredVideo>
 }
 
 @code {
@@ -24,7 +23,7 @@ else
     {
         if (Navigation.Uri == Navigation.BaseUri)
         {
-            await Task.Delay(4500);
+            await Task.Delay(4000);
             contentLoaded = true;
         }
         else
