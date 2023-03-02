@@ -6,7 +6,6 @@
 <PageTitle>Verb Quiz</PageTitle>
 
 <div class="VerbQuiz">
-    <AccentBox OnClick="OnAccentClicked" />
     <div class="VerbQuiz__header">
         <h2 id="VerbQuiz__infinitive" @onclick="DisplayEnglishTranslation">@topText</h2>
         <h3 id="VerbQuiz__tense">@verbQuiz.verbinfo[2]</h3>
@@ -33,6 +32,7 @@
             <input type="submit" class="Quiz__submit" id="VerbQuiz__submit" @onclick="ResetVerb" @bind-value="@buttonLabels[buttonLabelIndex]" />
         </form>
     </div>
+        <AccentBox OnClick="OnAccentClicked" />
 </div>
 
 @code {

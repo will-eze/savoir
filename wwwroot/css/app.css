@@ -324,10 +324,10 @@ td{
 .AccentBox {
     background: #C1BDFF;
     width: 155px;
-    position: absolute;
     border: 2px #000 solid;
-    right: 20%;
-    top: 40%;
+    bottom: 20px;
+    right: 20px;
+    position: fixed;
 }
 
 .AccentBox__header {
@@ -338,25 +338,6 @@ td{
     background: transparent;
     border: none;
     padding: 6px;
-}
-
-#AccentBox__close {
-    background: transparent;
-    border: none;
-    font-weight: bold;
-    text-align: right;
-}
-
-/* TIP BOX */
-.TipBox {
-    background-color: #FFFFE0;
-    bottom: 25px;
-    right: 25px;
-    position: fixed;
-    padding: 13px;
-    vertical-align: middle;
-    font-weight: bold;
-    color: #000;
 }
 
 /* CREDITS PAGE */
