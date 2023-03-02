@@ -1,11 +1,12 @@
 ﻿@page "/VocabQuiz"
 @inherits VocabQuizBase
 @inject HttpClient Http
+@inject IJSRuntime JS
 
 <PageTitle>Vocab Quiz</PageTitle>
 
 <div class="VocabQuiz">
-    <AccentBox AccentMenuHidden="@accentMenuHidden" OnClick="@OnAccentClicked" />
+    <AccentBox OnClick="@OnAccentClicked" />
 
     <div class="VocabQuiz__header">
         <h2 id="VocabQuiz__module">@GLOBALS.selectedModuleName</h2>
@@ -27,7 +28,6 @@
     </form>
 </div>
 
-<TipBox />
 
 @code {
     protected override async Task OnInitializedAsync()
@@ -52,8 +52,6 @@
     public bool userInputDisabled = false;
 
     public bool displayTranslation = false;
-
-    public bool accentMenuHidden = true;
 
     public void ResetVocab()
     {
@@ -88,30 +86,16 @@
         {
             vocabQuiz.userInput = args.Value.ToString()!;
         }
-
-        if (vocabQuiz.userInput!.Length != 0)
-        {
-            if (vocabQuiz.userInput.Contains('#'))
-            {
-                accentMenuHidden = false;
-                userInputDisabled = true;
-            }
-        }
     }
 
-    public void OnAccentClicked(char accentClicked)
+    public async Task OnAccentClicked(char accentClicked)
     {
-        if (accentClicked == '#')
-        {
-            vocabQuiz.userInput = vocabQuiz.userInput.Replace("#", "");
-        }
-        else
-        {
-            vocabQuiz.userInput = vocabQuiz.userInput.Replace('#', accentClicked);
-        }
+        int caretPos = await JS.InvokeAsync<int>("getCaretPosition", "VocabQuiz__translation");
 
-        accentMenuHidden = true;
-        userInputDisabled = false;
+        vocabQuiz.userInput = vocabQuiz.userInput.Insert(caretPos, accentClicked.ToString());
+
+        await JS.InvokeVoidAsync("focusElement", "VocabQuiz__translation");
+        await JS.InvokeVoidAsync("setCaretPosition", "VocabQuiz__translation", caretPos + 1);
     }
 
     public bool isUserCorrect()
