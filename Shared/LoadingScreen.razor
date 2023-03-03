@@ -23,13 +23,10 @@ else
         if (Navigation.Uri == Navigation.BaseUri && firstRender)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
-
             await LoadData();
-
             watch.Stop();
-
             long elapsedMs = watch.ElapsedMilliseconds;
-            int timeToDelay = Convert.ToInt32((elapsedMs < 4000) ? 4000 - elapsedMs : 0);
+            int timeToDelay = Convert.ToInt32((elapsedMs < 4200) ? 4200 - elapsedMs : 0);
 
             await Task.Delay(timeToDelay);
             contentLoaded = true;
