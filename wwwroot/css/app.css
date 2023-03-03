@@ -366,6 +366,17 @@ iframe {
 }
 
 
+#logoAnimationGIF {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
 }
@@ -408,16 +419,3 @@ iframe {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
-
-
-/* LOGO ANIMATION*/
-
-#logoAnimation {
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
