@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.Threading.Tasks.Sources;
 
 namespace Savoir.Pages
 {
     public class VocabQuizBase : ComponentBase
     {
-        public string[]? moduleInfo;
-
         public string[] vocabInfo = new string[2];
 
         public string userInput = string.Empty;
@@ -13,9 +12,35 @@ namespace Savoir.Pages
 
         public void RandomVocab()
         {
-            Random random = new Random();
+            Random rnd = new Random();
 
-            vocabInfo = moduleInfo![random.Next(0, moduleInfo.Length)].Split(',');
+            string[] possibleVocab = Array.Empty<string>();
+
+            foreach (string record in GLOBALS.sets_vocab_data!)
+            {
+                string[] temp = record.Split(',');
+
+                if (temp[0] == GLOBALS.selectedModuleName)
+                {
+                    possibleVocab = temp[1].Split('+');
+                }
+            }
+
+            string vocabEnglish = possibleVocab[rnd.Next(0, possibleVocab.Length)];
+
+            string vocabFrench = string.Empty;
+
+            foreach (string record in GLOBALS.all_vocab_data!)
+            {
+                string[] temp = record.Split(',');
+
+                if (temp[0] == vocabEnglish)
+                {
+                    vocabFrench = temp[1];
+                }
+            }
+
+            vocabInfo = new string[]{ vocabEnglish, vocabFrench };
             wordShownToUser = vocabInfo[0];
         }
     }

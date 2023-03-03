@@ -6,13 +6,21 @@ namespace Savoir
 {
     public class GLOBALS
     {
-        public static string[]? all_sets_info;
-        public static string[]? sets_headers;
-        public static string[]? sets_info;
+        public static string[]? all_verb_info;
+        public static string[]? all_verb_headers;
+        public static string[]? all_verb_data;
 
-        public static string[]? all_verbs_info;
-        public static string[]? verbs_headers;
-        public static string[]? verbs_info;
+        public static string[]? sets_verb_info;
+        public static string[]? sets_verb_headers;
+        public static string[]? sets_verb_data;
+
+        public static string[]? all_vocab_info;
+        public static string[]? all_vocab_headers;
+        public static string[]? all_vocab_data;
+
+        public static string[]? sets_vocab_info;
+        public static string[]? sets_vocab_headers;
+        public static string[]? sets_vocab_data;
 
         public static List<string> TensesSelectedList = new List<string>();
         public static List<string> VerbsSelectedList = new List<string>();

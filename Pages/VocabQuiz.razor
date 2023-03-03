@@ -30,19 +30,6 @@
 
 
 @code {
-    protected override async Task OnInitializedAsync()
-    {
-        vocabQuiz.moduleInfo = (await Http.GetStringAsync($"csv_files/{GLOBALS.selectedModuleName.ToLower()}Vocab.csv")).Split('\n');
-        for (int i = 0; i < vocabQuiz.moduleInfo.Length; i++)
-        {
-            if (vocabQuiz.moduleInfo[i].Contains('\r'))
-            {
-                vocabQuiz.moduleInfo[i] = vocabQuiz.moduleInfo[i].Replace("\r", "");    
-            }
-        }
-        vocabQuiz.RandomVocab();
-    }
-
     public VocabQuizBase vocabQuiz = new VocabQuizBase();
 
     public string correctTranslation = string.Empty;
@@ -52,6 +39,11 @@
     public bool userInputDisabled = false;
 
     public bool displayTranslation = false;
+
+    public VocabQuiz()
+    {
+        
+    }
 
     public void ResetVocab()
     {

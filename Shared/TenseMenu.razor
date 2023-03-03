@@ -95,6 +95,10 @@
             <button class="TenseMenu__buttons__verbs" @onclick="OnVerbQuizClick">Verbs</button>
             <button class="TenseMenu__buttons__verbs" @onclick="@(e => Navigation.NavigateTo("VocabQuiz"))">Vocab</button>
         </div>
+
+        <div class="TenseMenu__buttons_extraSet" hidden="@ExtraSetHidden">
+            <button class="TenseMenu__buttons__practice" @onclick="@(e => Navigation.NavigateTo("VocabQuiz"))">Practice</button>
+        </div>
     </div>
 </div>
 
@@ -102,6 +106,7 @@
     [Parameter] public bool TenseMenuHidden { get; set; }
     [Parameter] public bool StudySetHidden { get; set; }
     [Parameter] public bool ModuleSetHidden { get; set; }
+    [Parameter] public bool ExtraSetHidden { get; set; }
 
     [Parameter] public string TenseMenuStyle { get; set; }
 

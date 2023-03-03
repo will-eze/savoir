@@ -5,17 +5,33 @@
 
 <div class="IndexPage" style="@indexPageStyle">
     <h2 class="sub-heading">General Sets</h2>
-    <button id="beginner" class="set-btn" style="@setColours[0]" @onclick="e => OnSetButtonPressed(0)">Beginner</button>
-    <button id="intermediate" class="set-btn" style="@setColours[1]" @onclick="e => OnSetButtonPressed(1)">Intermediate</button>
-    <button id="advanced" class="set-btn" style="@setColours[2]" @onclick="e => OnSetButtonPressed(2)">Advanced</button>
-    <button id="master" class="set-btn" style="@setColours[3]" @onclick="e => OnSetButtonPressed(3)">Master</button>
+    
+    @if (finishedLoading)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            var temp_i = i;
+            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
+        }
 
-    <h2 class="sub-heading">Module Sets</h2>
-    <button class="set-btn" style="@setColours[4]" @onclick="e => OnSetButtonPressed(4)">Identity & Culture</button>
-    <button class="set-btn" style="@setColours[5]" @onclick="e => OnSetButtonPressed(5)">Local area, holiday & travel</button>
-    <button class="set-btn" style="@setColours[6]" @onclick="e => OnSetButtonPressed(6)">School</button>
-    <button class="set-btn" style="@setColours[7]" @onclick="e => OnSetButtonPressed(7)">Future aspirations, study & work</button>
-    <button class="set-btn" style="@setColours[8]" @onclick="e => OnSetButtonPressed(8)">International & global dimension </button>
+
+        <h2 class="sub-heading">Module Sets</h2>
+
+        for (int i = 4; i < 9; i++)
+        {
+            var temp_i = i;
+            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
+        }
+
+
+        <h2 class="sub-heading">Extra Sets</h2>
+
+        for (int i = 10; i < setNames!.Length; i++)
+        {
+            var temp_i = i;
+            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
+        }
+    }
 </div>
 
 
@@ -27,38 +43,37 @@
 
     protected override async Task OnInitializedAsync()
     {
-        GLOBALS.all_sets_info = (await Http.GetStringAsync("csv_files/The Big 3/sets.csv")).Split('\n');
+        List<string> setNamesList = new List<string>();
 
-        for (int i = 0; i < GLOBALS.all_sets_info.Length; i++)
+        foreach(string record in GLOBALS.sets_verb_data)
         {
-            if (GLOBALS.all_sets_info[i].Contains('\r'))
+            setNamesList.Add(record.Split(',')[0].Replace('/', ','));
+        }
+        foreach (string record in GLOBALS.sets_vocab_data)
+        {
+            // only add the module if it wasnt already added in sets_verb_data
+            // this prevents module sets being added twice
+            // semi bandaid solution
+            string moduleName = record.Split(',')[0].Replace('/', ',');
+            if (!setNamesList.Contains(moduleName))
             {
-                GLOBALS.all_sets_info[i] = GLOBALS.all_sets_info[i].Replace("\r", "");
+                setNamesList.Add(moduleName);
             }
         }
+        setNames = setNamesList.ToArray();
 
-        GLOBALS.sets_headers = GLOBALS.all_sets_info[0].Split(',');
-        GLOBALS.sets_info = GLOBALS.all_sets_info[1..];
-
-        GLOBALS.all_verbs_info = (await Http.GetStringAsync("csv_files/The Big 3/small_conjugations.csv")).Split('\n');
-
-        for (int i = 0; i < GLOBALS.all_verbs_info.Length; i++)
+        string[] tempSetColours = new string[GLOBALS.sets_verb_data.Length + GLOBALS.sets_vocab_data.Length - 1];
+        for (int i = 0; i < GLOBALS.sets_verb_data.Length + GLOBALS.sets_vocab_data.Length - 1; i++)
         {
-            if (GLOBALS.all_verbs_info[i].Contains('\r'))
-            {
-                GLOBALS.all_verbs_info[i] = GLOBALS.all_verbs_info[i].Replace("\r", "");
-            }
+            tempSetColours[i] = inactiveSetColour;
         }
+        setColours = tempSetColours;
 
-        GLOBALS.verbs_headers = GLOBALS.all_verbs_info[0].Split(',');
-        GLOBALS.verbs_info = GLOBALS.all_verbs_info[1..];
-
-        await Task.Delay(3000);
         finishedLoading = true;
     }
 
-
-    public readonly string[] setNames = { "Beginner", "Intermediate", "Advanced", "Master", "Identity", "Holiday", "School", "Work", "Environment" };
+    public string[]? setNames;
+    public string[]? setColours;
 
     public bool tenseMenuHidden = true;
     public bool moduleSetHidden = true;
@@ -68,8 +83,6 @@
 
     public const string activeSetColour = "background:#726EFF";
     public const string inactiveSetColour = "background:#D9D9D9";
-
-    public string[] setColours = new string[10] { inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, inactiveSetColour, };
 
     public const string indexPageActiveStyle = "margin-right: 0%; transition: margin-right 0.2s";
     public const string indexPageInactiveStyle = "margin-right: 25%; transition: margin-right 0.2s";
@@ -86,7 +99,7 @@
         if (activeSetIndex == setIndexClicked)
         {
             activeSetIndex = -1;
-            setColours[setIndexClicked] = inactiveSetColour;
+            setColours![setIndexClicked] = inactiveSetColour;
             tenseMenuHidden = true;
 
             indexPageStyle = indexPageActiveStyle;
@@ -95,7 +108,7 @@
         // if user clicks non-active set, activate that set by showing tenseMenu and updating colours / activeSetIndex
         else if (activeSetIndex != setIndexClicked)
         {
-            setColours[setIndexClicked] = activeSetColour;
+            setColours![setIndexClicked] = activeSetColour;
 
             if (activeSetIndex != -1)
             {
@@ -114,9 +127,9 @@
 
         if (activeSetIndex >= 0 && activeSetIndex <= 8)
         {
-            foreach (string _data in GLOBALS.sets_info!)
+            foreach (string _data in GLOBALS.sets_verb_info!)
             {
-                if (_data.StartsWith(setNames[activeSetIndex]))
+                if (_data.StartsWith(setNames![activeSetIndex]))
                 {
                     string[] record = _data.Split(',');
                     GLOBALS.VerbsSelectedList = record[1].Split('+').ToList();
@@ -136,7 +149,11 @@
                 studySetHidden = true;
                 moduleSetHidden = false;
 
-                GLOBALS.selectedModuleName = setNames[activeSetIndex];
+                GLOBALS.selectedModuleName = setNames![activeSetIndex];
+            }
+            else
+            {
+                
             }
         }
 

@@ -41,7 +41,7 @@ namespace Savoir.Pages
             // 2 -- FIND VERB INDEX in small_conjugations.csv
             string[] verbRecord = Array.Empty<string>();
 
-            foreach (string record in GLOBALS.verbs_info!)
+            foreach (string record in GLOBALS.all_verb_data!)
             {
                 if (record.Split(',')[0] == verb)
                 {
