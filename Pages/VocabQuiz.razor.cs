@@ -5,7 +5,7 @@ namespace Savoir.Pages
 {
     public class VocabQuizBase : ComponentBase
     {
-        public string[] vocabInfo = new string[2];
+        public string[] vocabInfo = new string[2] { string.Empty, string.Empty };
 
         public string userInput = string.Empty;
         public string wordShownToUser = string.Empty;
@@ -20,7 +20,7 @@ namespace Savoir.Pages
             {
                 string[] temp = record.Split(',');
 
-                if (temp[0] == GLOBALS.selectedModuleName)
+                if (temp[0].Replace('/', ',') == GLOBALS.selectedModuleName)
                 {
                     possibleVocab = temp[1].Split('+');
                 }
@@ -41,7 +41,7 @@ namespace Savoir.Pages
             }
 
             vocabInfo = new string[]{ vocabEnglish, vocabFrench };
-            wordShownToUser = vocabInfo[0];
+            wordShownToUser = vocabEnglish;
         }
     }
 }

@@ -26,7 +26,7 @@
 
         <h2 class="sub-heading">Extra Sets</h2>
 
-        for (int i = 10; i < setNames!.Length; i++)
+        for (int i = 9; i < setNames!.Length; i++)
         {
             var temp_i = i;
             <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
@@ -35,21 +35,21 @@
 </div>
 
 
-<TenseMenu TenseMenuHidden="@tenseMenuHidden" ModuleSetHidden="@moduleSetHidden" StudySetHidden="@studySetHidden" TenseMenuStyle="@tenseMenuStyle"/>
+<TenseMenu TenseMenuHidden="@tenseMenuHidden" ModuleSetHidden="@moduleSetHidden" StudySetHidden="@studySetHidden" ExtraSetHidden="@extraSetHidden" TenseMenuStyle="@tenseMenuStyle"/>
 
 
 @code {
     public bool finishedLoading = false;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         List<string> setNamesList = new List<string>();
 
-        foreach(string record in GLOBALS.sets_verb_data)
+        foreach(string record in GLOBALS.sets_verb_data!)
         {
             setNamesList.Add(record.Split(',')[0].Replace('/', ','));
         }
-        foreach (string record in GLOBALS.sets_vocab_data)
+        foreach (string record in GLOBALS.sets_vocab_data!)
         {
             // only add the module if it wasnt already added in sets_verb_data
             // this prevents module sets being added twice
@@ -78,6 +78,7 @@
     public bool tenseMenuHidden = true;
     public bool moduleSetHidden = true;
     public bool studySetHidden = true;
+    public bool extraSetHidden = true;
 
     private int activeSetIndex { get; set; } = -1;
 
@@ -127,7 +128,7 @@
 
         if (activeSetIndex >= 0 && activeSetIndex <= 8)
         {
-            foreach (string _data in GLOBALS.sets_verb_info!)
+            foreach (string _data in GLOBALS.sets_verb_data!)
             {
                 if (_data.StartsWith(setNames![activeSetIndex]))
                 {
@@ -135,27 +136,29 @@
                     GLOBALS.VerbsSelectedList = record[1].Split('+').ToList();
                 }
             }
-
-            // determine whether to show "Practice" or "Verb + Vocab" buttons on the TenseMenu page
-            if (activeSetIndex >= 0 && activeSetIndex <= 3)
-            {
-                studySetHidden = false;
-                moduleSetHidden = true;
-
-                GLOBALS.selectedModuleName = string.Empty;
-            }
-            else if (activeSetIndex >= 4 && activeSetIndex <= 9)
-            {
-                studySetHidden = true;
-                moduleSetHidden = false;
-
-                GLOBALS.selectedModuleName = setNames![activeSetIndex];
-            }
-            else
-            {
-                
-            }
         }
+
+        // determine whether to show "Practice" or "Verb + Vocab" buttons on the TenseMenu page
+        if (activeSetIndex >= 0 && activeSetIndex <= 3)
+        {
+            studySetHidden = false;
+            moduleSetHidden = true;
+            extraSetHidden = true;
+        }
+        else if (activeSetIndex >= 4 && activeSetIndex <= 9)
+        {
+            studySetHidden = true;
+            moduleSetHidden = false;
+            extraSetHidden = true;
+        }
+        else
+        {
+            studySetHidden = true;
+            moduleSetHidden = true;
+            extraSetHidden = false;
+        }
+
+        GLOBALS.selectedModuleName = setNames![activeSetIndex];
 
     }
 }

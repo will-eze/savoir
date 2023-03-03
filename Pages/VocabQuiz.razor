@@ -40,9 +40,9 @@
 
     public bool displayTranslation = false;
 
-    public VocabQuiz()
+    protected override void OnInitialized()
     {
-        
+        RandomVocab();
     }
 
     public void ResetVocab()
