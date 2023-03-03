@@ -42,7 +42,11 @@
 
     protected override void OnInitialized()
     {
-        RandomVocab();
+        vocabQuiz.RandomVocab();
+
+        vocabQuiz.userInput = string.Empty;
+        displayTranslation = false;
+        correctTranslation = string.Empty;
     }
 
     public void ResetVocab()

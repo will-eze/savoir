@@ -4,29 +4,59 @@
 <PageTitle>savoir</PageTitle>
 
 <div class="IndexPage" style="@indexPageStyle">
-    <h2 class="sub-heading">General Sets</h2>
-    
     @if (finishedLoading)
     {
-        for (int i = 0; i < 4; i++)
+        <h2 class="sub-heading">General Sets</h2>
+        for (int i = 0; i <= 3; i++)
         {
             var temp_i = i;
             <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
         }
-
 
         <h2 class="sub-heading">Module Sets</h2>
-
-        for (int i = 4; i < 9; i++)
+        for (int i = 4; i <= 8; i++)
         {
             var temp_i = i;
             <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
         }
 
-
         <h2 class="sub-heading">Extra Sets</h2>
+        for (int i = 9; i <= 12; i++)
+        {
+            var temp_i = i;
+            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
+        }
 
-        for (int i = 9; i < setNames!.Length; i++)
+        <h2 class="sub-heading">Fundamentals</h2>
+        for (int i = 13; i <= 16; i++)
+        {
+            var temp_i = i;
+            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
+        }
+
+        <h2 class="sub-heading">Conversation</h2>
+        for (int i = 17; i <= 19; i++)
+        {
+            var temp_i = i;
+            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
+        }
+
+        <h2 class="sub-heading">Number</h2>
+        for (int i = 20; i <= 22; i++)
+        {
+            var temp_i = i;
+            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
+        }
+
+        <h2 class="sub-heading">Calendar</h2>
+        for (int i = 23; i <= 26; i++)
+        {
+            var temp_i = i;
+            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
+        }
+
+        <h2 class="sub-heading">General Sets</h2>
+        for (int i = 27; i <= 28; i++)
         {
             var temp_i = i;
             <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
@@ -43,37 +73,28 @@
 
     protected override void OnInitialized()
     {
-        List<string> setNamesList = new List<string>();
-
-        foreach(string record in GLOBALS.sets_verb_data!)
+        int i = 0;
+        foreach (string record in GLOBALS.sets_verb_data!)
         {
-            setNamesList.Add(record.Split(',')[0].Replace('/', ','));
+            setNames![i] = record.Split(',')[0].Replace('/', ',');
+            i++;
         }
         foreach (string record in GLOBALS.sets_vocab_data!)
         {
-            // only add the module if it wasnt already added in sets_verb_data
-            // this prevents module sets being added twice
-            // semi bandaid solution
             string moduleName = record.Split(',')[0].Replace('/', ',');
-            if (!setNamesList.Contains(moduleName))
+            if (!setNames!.Contains(moduleName))
             {
-                setNamesList.Add(moduleName);
+                setNames![i] = moduleName;
+                i++;
             }
         }
-        setNames = setNamesList.ToArray();
-
-        string[] tempSetColours = new string[GLOBALS.sets_verb_data.Length + GLOBALS.sets_vocab_data.Length - 1];
-        for (int i = 0; i < GLOBALS.sets_verb_data.Length + GLOBALS.sets_vocab_data.Length - 1; i++)
-        {
-            tempSetColours[i] = inactiveSetColour;
-        }
-        setColours = tempSetColours;
 
         finishedLoading = true;
     }
 
-    public string[]? setNames;
-    public string[]? setColours;
+    private static int numberOfSets = GLOBALS.sets_verb_data!.Length + GLOBALS.sets_vocab_data!.Length - 5;
+    public string[] setNames = Enumerable.Repeat(string.Empty, numberOfSets).ToArray();
+    public string[] setColours = Enumerable.Repeat(inactiveSetColour, numberOfSets).ToArray();
 
     public bool tenseMenuHidden = true;
     public bool moduleSetHidden = true;
