@@ -7,9 +7,9 @@
 }
 else
 {
-    <BlazoredVideo Autoplay="autoplay" id="logoAnimation">
-        <source src="videos/logo-animation.mp4" type="video/mp4"/>
-    </BlazoredVideo>
+    <video autoplay="autoplay" muted id="logoAnimation">
+        <source src="videos/logo-animation.mp4" type="video/mp4" />
+    </video>
 }
 
 @code {
@@ -20,15 +20,11 @@ else
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (Navigation.Uri == Navigation.BaseUri && firstRender)
+        if (Navigation.Uri == Navigation.BaseUri)
         {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-            await LoadData();
-            watch.Stop();
-            long elapsedMs = watch.ElapsedMilliseconds;
-            int timeToDelay = Convert.ToInt32((elapsedMs < 4200) ? 4200 - elapsedMs : 0);
+            await LoadAllData();
 
-            await Task.Delay(timeToDelay);
+            await Task.Delay(4000);
             contentLoaded = true;
             StateHasChanged();
         }
@@ -36,38 +32,18 @@ else
         {
             contentLoaded = true;
         }
-
     }
 
-    private async Task LoadData()
+    private async Task LoadAllData()
     {
-        GLOBALS.sets_verb_info = HelperCleanArray((await Http.GetStringAsync("csv_files/sets_verb.csv")).Split('\n'));
-        GLOBALS.sets_verb_headers = GLOBALS.sets_verb_info[0].Split(',');
-        GLOBALS.sets_verb_data = GLOBALS.sets_verb_info[1..];
-
-        GLOBALS.all_verb_info = HelperCleanArray((await Http.GetStringAsync("csv_files/all_verb.csv")).Split('\n'));
-        GLOBALS.all_verb_headers = GLOBALS.all_verb_info[0].Split(',');
-        GLOBALS.all_verb_data = GLOBALS.all_verb_info[1..];
-
-        GLOBALS.all_vocab_info = HelperCleanArray((await Http.GetStringAsync("csv_files/all_vocab.csv")).Split('\n'));
-        GLOBALS.all_vocab_headers = GLOBALS.all_vocab_info[0].Split(',');
-        GLOBALS.all_vocab_data = GLOBALS.all_vocab_info[1..];
-
-        GLOBALS.sets_vocab_info = HelperCleanArray((await Http.GetStringAsync("csv_files/sets_vocab.csv")).Split('\n'));
-        GLOBALS.sets_vocab_headers = GLOBALS.sets_vocab_info[0].Split(',');
-        GLOBALS.sets_vocab_data = GLOBALS.sets_vocab_info[1..];
+        GLOBALS.all_verb_data = CleanCSV((await Http.GetStringAsync("csv_files/all_verb.csv")));
+        GLOBALS.sets_verb_data = CleanCSV((await Http.GetStringAsync("csv_files/sets_verb.csv")));
+        GLOBALS.all_vocab_data = CleanCSV((await Http.GetStringAsync("csv_files/all_vocab.csv")));
+        GLOBALS.sets_vocab_data = CleanCSV(await Http.GetStringAsync("csv_files/sets_vocab.csv"));
     }
 
-    private string[] HelperCleanArray(string[] oldArr)
+    private string[] CleanCSV(string csvData)
     {
-        for (int i = 0; i < oldArr.Length; i++)
-        {
-            if (oldArr[i].Contains('\r'))
-            {
-                oldArr[i] = oldArr[i].Replace("\r", "");
-            }
-        }
-
-        return oldArr;
+        return csvData.Split('\n').Select(x => x.Replace("\r", string.Empty)).ToArray()[1..];
     }
 }

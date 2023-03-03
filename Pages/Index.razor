@@ -139,26 +139,33 @@
         }
 
         // determine whether to show "Practice" or "Verb + Vocab" buttons on the TenseMenu page
-        if (activeSetIndex >= 0 && activeSetIndex <= 3)
-        {
-            studySetHidden = false;
-            moduleSetHidden = true;
-            extraSetHidden = true;
-        }
-        else if (activeSetIndex >= 4 && activeSetIndex <= 9)
-        {
-            studySetHidden = true;
-            moduleSetHidden = false;
-            extraSetHidden = true;
-        }
-        else
-        {
-            studySetHidden = true;
-            moduleSetHidden = true;
-            extraSetHidden = false;
-        }
 
-        GLOBALS.selectedModuleName = setNames![activeSetIndex];
+        if (activeSetIndex >= 0 && activeSetIndex <= setNames!.Length)
+        {
+            if (activeSetIndex >= 0 && activeSetIndex <= 3)
+            {
+                studySetHidden = false;
+                moduleSetHidden = true;
+                extraSetHidden = true;
+            }
+            else if (activeSetIndex >= 4 && activeSetIndex <= 9)
+            {
+                studySetHidden = true;
+                moduleSetHidden = false;
+                extraSetHidden = true;
+            }
+            else
+            {
+                studySetHidden = true;
+                moduleSetHidden = true;
+                extraSetHidden = false;
+            }
+
+            GLOBALS.selectedModuleName = setNames![activeSetIndex];
+        }
+        
+
+        
 
     }
 }
