@@ -118,7 +118,8 @@
 
     public void OnTextChange(ChangeEventArgs args, int i)
     {
-        verbQuiz.userVerbs[i] = args.Value!.ToString()!.ToLower();
+        verbQuiz.userVerbs[i] = args.Value!.ToString()!.ToLower().TrimStart();
+
         selectedField = i;
 
         if (i == 0)
@@ -184,6 +185,9 @@
             focusedIndex = i;
             selectedField = i;
             await JS.InvokeVoidAsync("focusElement", subjectPronouns[focusedIndex]);
+
+            int spaceIndex = (verbQuiz.userVerbs[i].Contains(" ")) ? verbQuiz.userVerbs[i].IndexOf(" ") : verbQuiz.userVerbs[i].Length;
+            await JS.InvokeVoidAsync("setCaretPosition", subjectPronouns[i], spaceIndex);
         }
     }
 

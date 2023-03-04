@@ -376,6 +376,10 @@ iframe {
     object-fit: cover;
 }
 
+#app {
+    overflow: hidden;
+}
+
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
