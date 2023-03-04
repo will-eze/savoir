@@ -20,7 +20,7 @@ else
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (Navigation.Uri == Navigation.BaseUri)
+        if (Navigation.Uri.Replace("#", string.Empty) == Navigation.BaseUri)
         {
             await LoadAllData();
 
