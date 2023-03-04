@@ -14,6 +14,7 @@ namespace Savoir
 
         public static List<string> TensesSelectedList = new List<string>();
         public static List<string> VerbsSelectedList = new List<string>();
+        public static List<string> PossibleVocabList = new List<string>();
 
         public static string selectedModuleName = string.Empty;
     }

@@ -147,7 +147,7 @@
 
         // activeSetIndex has now been updated to match the selected set, so make appropriate updates to other components
 
-        if (activeSetIndex >= 0 && activeSetIndex <= 8)
+        if (activeSetIndex >= 0 && activeSetIndex <= 10)
         {
             foreach (string _data in GLOBALS.sets_verb_data!)
             {
@@ -158,12 +158,23 @@
                 }
             }
         }
+        if (activeSetIndex >= 4 && activeSetIndex != 9 && activeSetIndex != 10)
+        {
+            foreach (string _data in GLOBALS.sets_vocab_data!)
+            {
+                if (_data.StartsWith(setNames![activeSetIndex].Replace(',', '/')))
+                {
+                    string[] record = _data.Split(',');
+                    GLOBALS.PossibleVocabList = record[1].Split('+').ToList();
+                }
+            }
+        }
 
         // determine whether to show "Practice" or "Verb + Vocab" buttons on the TenseMenu page
 
         if (activeSetIndex >= 0 && activeSetIndex <= setNames!.Length)
         {
-            if (activeSetIndex >= 0 && activeSetIndex <= 3)
+            if ((activeSetIndex >= 0 && activeSetIndex <= 3) || activeSetIndex == 9 || activeSetIndex == 10)
             {
                 studySetHidden = false;
                 moduleSetHidden = true;

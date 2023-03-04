@@ -30,7 +30,7 @@
 
 
 @code {
-    public VocabQuizBase vocabQuiz = new VocabQuizBase();
+    public VocabQuizBase vocabQuiz;
 
     public string correctTranslation = string.Empty;
 
@@ -40,8 +40,14 @@
 
     public bool displayTranslation = false;
 
-    protected override void OnInitialized()
+    public bool awaitingTextFocus = false;
+
+    public VocabQuiz()
     {
+        vocabQuiz = new VocabQuizBase();
+
+        vocabQuiz.possibleVocab = GLOBALS.PossibleVocabList.ToArray();
+
         vocabQuiz.RandomVocab();
 
         vocabQuiz.userInput = string.Empty;
@@ -72,6 +78,8 @@
                 vocabQuiz.userInput = string.Empty;
                 displayTranslation = false;
                 correctTranslation = string.Empty;
+
+                awaitingTextFocus = true;
             }
         }
     }
@@ -115,6 +123,19 @@
         {
             correctTranslation = vocabQuiz.vocabInfo[1];
             return false;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("focusElement", "VocabQuiz__translation");
+        }
+        else if (awaitingTextFocus)
+        {
+            awaitingTextFocus = false;
+            await JS.InvokeVoidAsync("focusElement", "VocabQuiz__translation");
         }
     }
 }
