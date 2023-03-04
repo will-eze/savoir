@@ -19,8 +19,8 @@ namespace Savoir.Pages
 
         public Dictionary<string, int> tenseStartingIndex = new();
 
-        public string[] possibleVerbs = new string[] { };
-        public string[] possibleTenses = new string[] { };
+        public string[] possibleVerbs = Array.Empty<string>();
+        public string[] possibleTenses = Array.Empty<string>();
 
         public VerbQuizBase()
         {
@@ -36,7 +36,7 @@ namespace Savoir.Pages
             Random rnd = new Random();
 
             // 1 -- GENERATE RANDOM VERB
-            string verb = possibleVerbs[rnd.Next(0, possibleVerbs.Length)];
+            string verb = possibleVerbs[rnd.Next(possibleVerbs.Length)];
 
             // 2 -- FIND VERB INDEX in small_conjugations.csv
             string[] verbRecord = Array.Empty<string>();

@@ -151,7 +151,7 @@
         {
             foreach (string _data in GLOBALS.sets_verb_data!)
             {
-                if (_data.StartsWith(setNames![activeSetIndex]))
+                if (_data.StartsWith(setNames![activeSetIndex].Replace(',', '/')))
                 {
                     string[] record = _data.Split(',');
                     GLOBALS.VerbsSelectedList = record[1].Split('+').ToList();
@@ -184,10 +184,6 @@
 
             GLOBALS.selectedModuleName = setNames![activeSetIndex];
         }
-        
-
-        
-
     }
 }
 

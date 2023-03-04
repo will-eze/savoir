@@ -80,7 +80,7 @@
     {
         if (args.Value!.ToString() is not null)
         {
-            vocabQuiz.userInput = args.Value.ToString()!;
+            vocabQuiz.userInput = args.Value.ToString()!.ToLower();
         }
     }
 
