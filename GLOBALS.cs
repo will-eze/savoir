@@ -6,9 +6,18 @@ namespace Savoir
 {
     public class GLOBALS
     {
+        public static string[]? all_verb_data_french;
+        public static string[]? sets_verb_data_french;
+        public static string[]? all_vocab_data_french;
+        public static string[]? sets_vocab_data_french;
+
+        public static string[]? all_verb_data_spanish;
+        public static string[]? sets_verb_data_spanish;
+        public static string[]? all_vocab_data_spanish;
+        public static string[]? sets_vocab_data_spanish;
+
         public static string[]? all_verb_data;
         public static string[]? sets_verb_data;
-
         public static string[]? all_vocab_data;
         public static string[]? sets_vocab_data;
 
