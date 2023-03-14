@@ -37,13 +37,13 @@ else
     private async Task LoadAllData()
     {
         GLOBALS.all_verb_data = CleanCSV((await Http.GetStringAsync("csv_files/all_verb.csv")));
-        GLOBALS.sets_verb_data = CleanCSV((await Http.GetStringAsync("csv_files/sets_verb.csv")));
+        GLOBALS.sets_verb_data = CleanCSV((await Http.GetStringAsync("csv_files/sets_verb.txt")));
         GLOBALS.all_vocab_data = CleanCSV((await Http.GetStringAsync("csv_files/all_vocab.csv")));
-        GLOBALS.sets_vocab_data = CleanCSV(await Http.GetStringAsync("csv_files/sets_vocab.csv"));
+        GLOBALS.sets_vocab_data = CleanCSV(await Http.GetStringAsync("csv_files/sets_vocab.txt"));
     }
 
     private string[] CleanCSV(string csvData)
     {
-        return csvData.Split('\n').Select(x => x.Replace("\r", string.Empty)).ToArray()[1..];
+        return csvData.Split('\n').Select(x => x.Replace("\r", string.Empty)).ToArray();
     }
 }

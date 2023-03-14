@@ -6,60 +6,16 @@
 <div class="IndexPage" style="@indexPageStyle">
     @if (finishedLoading)
     {
-        <h2 class="sub-heading">General Sets</h2>
-        for (int i = 0; i <= 3; i++)
+        int i = 0;
+        foreach (string header in setNamesDict.Keys)
         {
-            var temp_i = i;
-            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
-        }
-
-        <h2 class="sub-heading">Module Sets</h2>
-        for (int i = 4; i <= 8; i++)
-        {
-            var temp_i = i;
-            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
-        }
-
-        <h2 class="sub-heading">Extra Sets</h2>
-        for (int i = 9; i <= 12; i++)
-        {
-            var temp_i = i;
-            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
-        }
-
-        <h2 class="sub-heading">Fundamentals</h2>
-        for (int i = 13; i <= 16; i++)
-        {
-            var temp_i = i;
-            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
-        }
-
-        <h2 class="sub-heading">Conversation</h2>
-        for (int i = 17; i <= 19; i++)
-        {
-            var temp_i = i;
-            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
-        }
-
-        <h2 class="sub-heading">Number</h2>
-        for (int i = 20; i <= 22; i++)
-        {
-            var temp_i = i;
-            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
-        }
-
-        <h2 class="sub-heading">Calendar</h2>
-        for (int i = 23; i <= 26; i++)
-        {
-            var temp_i = i;
-            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
-        }
-
-        <h2 class="sub-heading">Location</h2>
-        for (int i = 27; i <= 28; i++)
-        {
-            var temp_i = i;
-            <button id="@(setNames![temp_i].ToLower())" class="set-btn" style="@setColours![temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setNames![temp_i]</button>
+            <h2 class="sub-heading">@header</h2>
+            foreach(string setName in setNamesDict[header])
+            {
+                int temp_i = i;
+                <button id="@setName.ToLower()" class="set-btn" style="@setColours[temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setName</button>
+                i++;
+            }
         }
     }
 </div>
@@ -73,28 +29,68 @@
 
     protected override void OnInitialized()
     {
-        int i = 0;
+        Dictionary<string, List<string>> tempSetNamesDict = new Dictionary<string, List<string>>();
+        List<string> tempSetNames = new List<string>();
+        int tempNumberOfSets = 0;
+        string tempCurrentHeader = string.Empty;
+
         foreach (string record in GLOBALS.sets_verb_data!)
         {
-            setNames![i] = record.Split(',')[0].Replace('/', ',');
-            i++;
-        }
-        foreach (string record in GLOBALS.sets_vocab_data!)
-        {
-            string moduleName = record.Split(',')[0].Replace('/', ',');
-            if (!setNames!.Contains(moduleName))
+            if (record.Contains('\"'))
             {
-                setNames![i] = moduleName;
-                i++;
+                string header = record.Replace("\"", string.Empty);
+                tempCurrentHeader = header;
+                if (!tempSetNamesDict.Keys.Contains(header))
+                {
+                    tempSetNamesDict.Add(header, new List<string>());
+                } 
+            }
+            else
+            {
+                string tempSetName = record.Split(',')[0].Replace('/', ',');
+                if (!tempSetNamesDict.Values.Any(x => x.Any(y => y == tempSetName)))
+                {
+                    tempSetNamesDict[tempCurrentHeader].Add(tempSetName);
+                    tempSetNames.Add(tempSetName);
+                    tempNumberOfSets++;
+                }
             }
         }
 
+        foreach (string record in GLOBALS.sets_vocab_data!)
+        {
+            if (record.Contains('\"'))
+            {
+                string header = record.Replace("\"", string.Empty);
+                tempCurrentHeader = header;
+                if (!tempSetNamesDict.Keys.Contains(header))
+                {
+                    tempSetNamesDict.Add(header, new List<string>());
+                }
+            }
+            else
+            {
+                string tempSetName = record.Split(',')[0].Replace('/', ',');
+                if (!tempSetNamesDict.Values.Any(x => x.Any(y => y == tempSetName)))
+                {
+                    tempSetNamesDict[tempCurrentHeader].Add(tempSetName);
+                    tempSetNames.Add(tempSetName);
+                    tempNumberOfSets++;
+                }
+                
+            }
+        }
+
+        setNamesDict = tempSetNamesDict;
+        setNames = tempSetNames.ToArray();
+        setColours = Enumerable.Repeat(inactiveSetColour, tempNumberOfSets).ToArray();
         finishedLoading = true;
     }
 
-    private static int numberOfSets = GLOBALS.sets_verb_data!.Length + GLOBALS.sets_vocab_data!.Length - 5;
-    public string[] setNames = Enumerable.Repeat(string.Empty, numberOfSets).ToArray();
-    public string[] setColours = Enumerable.Repeat(inactiveSetColour, numberOfSets).ToArray();
+    public string[] setNames = Array.Empty<string>();
+    public string[] setColours = Array.Empty<string>();
+
+    public Dictionary<string, List<string>> setNamesDict = new Dictionary<string, List<string>>();
 
     public bool tenseMenuHidden = true;
     public bool moduleSetHidden = true;
