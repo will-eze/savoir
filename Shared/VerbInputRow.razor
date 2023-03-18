@@ -28,8 +28,6 @@
     </td>
 </tr>
 
-<p2>@myText</p2>
-
 @code {
     [Parameter] public string? userVerb { get; set; }
     [Parameter] public string? conjugation { get; set; }
@@ -66,7 +64,4 @@
         }
         return conjugation == userVerb!.Trim();
     }
-
-
-    public string myText = string.Empty;
 }

@@ -1,36 +1,111 @@
-english,spanish
-ticket,entrada
-programme,programa de ordenador
-syrup,jarabe
-file,archivo de datos
-mail,correo/mensaje
-long time,mucho tiempo
-door,puerta
-kiosk,quiosco
-left,izquierda
-right,derecha
-climbing,escalada en rocas
-driver,conductor
-call,llamada telefónica
-channel/station,cadena de television
-a form,una ficha
-class register,lista
-tobacconist/stamp seller,estanco
-roundabout,glorieta/rotonda
-station,estación de trenes
-cheque,cheque
-very good,muy bueno/muy buena
+1,uno
+2,dos
+3,tres
+4,cuatro
+5,cinco
+6,seis
+7,siete
+8,ocho
+9,nueve
+10,diez
+11,once
+12,doce
+13,trece
+14,catorce
+15,quince
+16,dieciséis
+17,diecisiete
+18,dieciocho
+19,diecinueve
+20,veinte
+21,veintiuno
+22,veintidós
+23,veintitrés
+24,veinticuatro
+25,veinticinco
+26,veintiséis
+27,veintisiete
+28,veintiocho
+29,veintinueve
+30,treinta
+31,treinta y uno
+32,treinta y dos
+33,treinta y tres
+34,treinta y cuatro
+35,treinta y cinco
+36,treinta y seis
+37,treinta y siete
+38,treinta y ocho
+39,treinta y nueve
+40,cuarenta
+41,cuarenta y uno
+42,cuarenta y dos
+43,cuarenta y tres
+44,cuarenta y cuatro
+45,cuarenta y cinco
+46,cuarenta y seis
+47,cuarenta y siete
+48,cuarenta y ocho
+49,cuarenta y nueve
+50,cincuenta
+51,cincuenta y uno
+52,cincuenta y dos
+53,cincuenta y tres
+54,cincuenta y cuatro
+55,cincuenta y cinco
+56,cincuenta y seis
+57,cincuenta y siete
+58,cincuenta y ocho
+59,cincuenta y nueve
+60,sesenta
+61,sesenta y uno
+62,sesenta y dos
+63,sesenta y tres
+64,sesenta y cuatro
+65,sesenta y cinco
+66,sesenta y seis
+67,sesenta y siete
+68,sesenta y ocho
+69,sesenta y nueve
+70,setenta
+71,setenta y uno
+72,setenta y dos
+73,setenta y tres
+74,setenta y cuatro
+75,setenta y cinco
+76,setenta y seis
+77,setenta y siete
+78,setenta y ocho
+79,setenta y nueve
+80,ochenta
+81,ochenta y uno
+82,ochenta y dos
+83,ochenta y tres
+84,ochenta y cuatro
+85,ochenta y cinco
+86,ochenta y seis
+87,ochenta y siete
+88,ochenta y ocho
+89,ochenta y nueve
+90,noventa
+91,noventa y uno
+92,noventa y dos
+93,noventa y tres
+94,noventa y cuatro
+95,noventa y cinco
+96,noventa y seis
+97,noventa y siete
+98,noventa y ocho
+99,noventa y nueve
+100,cien
 1st floor,1o piso
-good,bueno/buena
-satisfactory,adecuado/adecuada
-poor/unsatisfactory,débil/poco/poca/satisfactorio/satisfactoria
-inadequate,inadecuado/inadecuada
 a €10 note,billete de diez libras esterlinas
 a €2 coin,moneda de dos libras esterlinas
 a bottle of,una botella de
 a box of,una caja de
 a dozen,una docena de
 a fast train,rápido/expreso
+a form,una ficha
 a fortnight,quince días
 a good deed,edic acción
 a jar of,un tarro de
@@ -60,6 +135,7 @@ actor/actress,actor/actriz
 addicted,adicto/adicta
 addiction,adicción/dependencia
 address,dirección
+adequate,adecuado/adecuada
 admission/entry fee,precio de entrada
 adopted,adoptivo/adoptiva
 adult/grown-up,adulto/adulta
@@ -69,6 +145,7 @@ adventurous,aventurero/aventurera
 advert,anuncio
 Africa,África
 after,después
+afternoon tea/picnic,merienda/té de la tarde/picnic
 afternoon/in the afternoon,tarde/por la tarde
 again,otra vez
 against,contra
@@ -131,6 +208,7 @@ Asia,Asia
 aspirins,aspirinas
 assembly,reunión
 at,a
+at (someone’s house),en casa de
 at home,en casa
 at midnight,a media noche
 at night,de la noche
@@ -184,6 +262,7 @@ based on/on account of,basarse en/fundarse en
 basement,bajos
 basketball,baloncesto
 Basque Country,País Vasco
+basura,rubbish/garbage
 bath,baño
 bath towel,toalla de baño
 bath tub,bañera
@@ -206,7 +285,8 @@ beginning,principio/comienzo
 behind,detrás
 Belgian,belga
 Belgium,Bélgica
-below,abajo
+belleza,beauty
+below (down),abajo
 belt,cinturón
 best wishes,saludos
 best-before date,fecha de consumo preferente
@@ -215,11 +295,13 @@ big/tall,grande
 bike,moto
 bike hire,alquiler de bicicletas
 bill,cuenta
+bill/invoice,factura/recibo/cuenta
 biology,biología
 birth,nacimiento
 birthday,cumpleaños
 birthplace,lugar de nacimiento
 biscuit,galleta
+biscuits,galletas/bizcochos
 black,negro/negra
 blog,blog
 blood,sangre
@@ -281,8 +363,8 @@ bus stop,parada de autobús
 business studies/economics,ciencias empresariales
 business/company/firm,empresa/compañía
 business/shop,comercio
-businesswoman,mujer de negocios
 businessman,hombre de negocios
+businesswoman,mujer de negocios
 busy,ocupado/ocupada
 but,pero
 butcher,carnicería
@@ -295,10 +377,13 @@ café,cafetería
 cake,pastel
 cake shop,pastelería
 calculator,calculadora
-call me,llámame/llámeme
+call,llamada telefónica
+call me (informal/formal),llámame/llámeme
 calm/peace,tranquilidad
+cambio climático,climate change
 camera,cámara de fotos
 camp site,camping
+campaña,campaign
 campsite,camping/área de acampada
 canal,canal
 cancer,cáncer
@@ -320,6 +405,7 @@ caretaker,portero/portera
 carnival,carnaval
 carpet,alfombra
 carrot,zanahoria
+cartón,cardboard
 cartoon,dibujos animados
 cash,Dinero/efectivo/metálico
 cashier,cajero/cajera
@@ -348,6 +434,7 @@ championship,campeonato
 change,cambio
 changeable,variable
 changing room,vestuario
+channel/station,cadena de television
 chapel,capilla
 character,carácter/personaje
 character trait,rasgo característico
@@ -360,6 +447,7 @@ cheese,queso
 chemist,farmacéutico/farmacéutica
 chemist’s,farmacia
 chemistry,química
+cheque,cheque
 cherry,cereza
 chess,ajedrez
 chestnut brown,castaño
@@ -369,8 +457,8 @@ chicken,pollo
 child,niño/niña
 chin,barbilla
 chips,patatas fritas
+chips/crisps,patatas fritas/crispas/crisps
 chocolate,chocolate
-single chocolate,bombón
 choice,opción
 choice/selection,surtido
 choir,coro
@@ -387,12 +475,14 @@ city,ciudad
 civil servant,funcionario
 clarinet,clarinete
 class,de segunda clase
+class register,lista
 class test/assessment,examen/prueba
 classical/classic,clásico/clásica
 classroom,aula
 clean,limpio/limpia
 clever,inteligente/listo/inteligente/lista
 climate,clima
+climbing,escalada en rocas
 clock/watch,reloj
 close,cercano/cercana
 closed,cerrado/cerrada
@@ -407,6 +497,7 @@ coast,costa
 coat,abrigo/chaqueta
 cocoa,cacao
 cod,bacalao
+coffee,café
 coffee break,café/parar a desayunar
 coin,moneda
 cold,frío
@@ -415,6 +506,7 @@ colleague,colega
 collection,colección
 colour,color
 comb,peine
+combustible,fuel
 comfortable,cómodo/cómoda
 comic,tebeo
 communication/message,comunicación/mensaje/recado
@@ -440,6 +532,7 @@ consciousness,conocimiento
 constipation,estreñimiento
 construction worker/building labourer,albañil
 contact,contacto
+contenedor,container
 conveyer belt,cinta transportadora
 cook,cocinero/cocinera
 cooked,cocinado/cocinada
@@ -450,6 +543,7 @@ core/compulsory subject,asignatura obligatoria
 corner,esquina
 corner shop,tienda de la esquina
 corridor,pasillo
+cosa,thing
 cotton,algodón
 cough,tos
 country,país
@@ -464,6 +558,8 @@ crockery,loza/vajilla
 crossing,cruce
 crossroads,druce
 cucumber,pepino
+culpa,fault/blame/guilt
+cultivo,crop
 cup,taza
 curly,rizado/rizada
 curriculum vitae,CV
@@ -481,8 +577,9 @@ damage,daño
 damage/pity/shame,pena
 dancing,baile
 Danish,danés/danéa
+daño,harm/damage
 dark,oscuro/oscura
-dark,moreno/morena
+dark (hair/skin),moreno/morena
 date of birth,fecha de nacimiento
 daughter,hija
 day,día
@@ -505,7 +602,10 @@ departure,salida
 dependent,depender de
 deposit,depósito
 depressed,deprimido/deprimida
+derechos,rights
+desarrollo,development
 design,diseño
+designer,diseñador/diseño
 designer fashion,ropa de diseño
 desk,mesa de trabajo/escritorio
 dessert,postre
@@ -520,6 +620,7 @@ diet,dieta
 dietary fibre,fibra dietética
 difficult,difícil
 dining car/restaurant car,vagón restaurante
+dining room,comedor/salón comedor
 direct,directo
 direction,dirección/sentido
 dirty,sucio/sucia
@@ -543,6 +644,7 @@ documents in support of an application,documentos en apoyo de la solicitud
 dog,perro
 doll,muñeca
 door,puerta
+door,puerta
 double lesson,clase doble
 double room,habitación doble
 double/twice,doble
@@ -555,6 +657,7 @@ dress,vestido
 dressed,vestido/vestidade
 drink,bebida
 drinking water,agua potable
+driver,conductor
 driver,conductor/conductora
 driving licence,carné de conducir
 drug,droga
@@ -564,6 +667,7 @@ drug dealer,traficante de drogas
 drugs,drogas
 drums/percussion,batería/edico
 drunk,borracho/borracha
+dry,seco/seca
 dubbed,doblada
 duck,pato
 during,durante
@@ -572,7 +676,6 @@ Dutch,holandés/holandéa
 duty office,presencia en oficina
 dyed,teñido/teñida
 dynamic,dinámico/dinámica
-e-mail,correo electrónico
 each,cada
 ear,oído
 early,temprano
@@ -586,12 +689,14 @@ egg,huevo
 electric shop,tienda eléctrica
 electrician,electricista
 email,email
+e-mail,correo electrónico
 emergency,emergencia
 emergency exit,salida de emergencia
 employee,empleado/empleada
 employer,empresario/empresaria
 en route,camino de
 enclosed,adjunto/adjunta
+encuesta,poll/survey
 end,fin
 end of work day,fin del día laboral
 engaged,estar prometido/estar prometida
@@ -599,6 +704,7 @@ engagement ring,anillo de compromise
 engine,motor
 engineer,ingeniero/ingeniera
 England,Inglaterra
+english,spanish
 Enjoy your meal!,¡que aproveche!
 enjoy your stay,disfrute la estancia
 enjoyment/pleasure,placer
@@ -615,10 +721,11 @@ environmentally unfriendly,que daña el medio ambiente
 Epiphany,día de reyes
 Epiphany/January 6th,Dia de Reyes
 equality,igualdad
-team,equipo
 equivalent of GCE A levels,bachillerato
 escalator,escalera mecánica
 escalope,escalope/filete
+escaso,scarce/meagre
+espacio,Space
 especially,especialmente
 essay,ensayo
 euro,euro
@@ -635,30 +742,33 @@ exactly,exactamente
 examination,examen
 except,salvo/excepto
 exchange,intercambio
+exchange bureau,oficina de cambio/casa de cambio/casa de cambio
 exchange rate,tipo de cambio
 excited,ilusionado/ilusionada
 exciting,emocionante
 excursion,excursión
 exercise book,cuaderno
 exercise/practice,ejercicio/práctica
-exit,salida
 exhaust fumes/emissions,gases de escape
 exhibition,exposición
+exit,salida
 expensive,caro/cara
 experience,experiencia
 experience of work,experiencia laboral/experiencia de trabajo
 experienced,con experiencia
 experiment,experimento
+extranjero,foreigner
 eyes,ojos
 face,cara
 factory,fábrica
 fair,justo/justa
-fair,rubio/rubia
+fair (hair/skin),rubio/rubia
+falta,lack
 family,familia
 famous,famoso/famosa
 fan,abanico
 fanatical about,fanático de
-far,lejos
+far (from),lejos
 fare,tarifa
 farm,granja
 farm house,alquería/caserío/casa de labranza
@@ -683,6 +793,7 @@ ferry,ferry
 festival/celebration,fiesta/celebración/festejo
 fiancé,novio/novia
 figure,cifra
+file,archivo de datos
 file,archivador
 film,película
 final,final
@@ -691,6 +802,7 @@ finger,dedo
 fireman/firewoman,bombero/bombera
 fireworks,fuegos artificiales
 first aid,primeros auxilios
+first class,primera clase/primera categoría
 first name,nombre
 first of all,lo primero
 fish,pescado
@@ -739,6 +851,7 @@ France,Francia
 free,gratis/gratuito/gratuita
 free time,tiempo libre
 free time opportunities,oportunidades de ocio
+free/available/vacant,vacante/desocupado
 French,francés/francéa
 Friday,viernes
 fried egg,huevo frito
@@ -753,6 +866,7 @@ fruit,fruta
 fruit juice,zumo de fruta
 fruit shop,frutería
 fruit tea,té de fruta
+fuego,fire
 full,lleno/llena
 full board,pensión completa
 full fat milk,leche con toda la nata
@@ -789,7 +903,9 @@ glasses,gafas
 glove,guante
 glue,pegamento
 goal,gol/meta
+gobierno,government
 God,Dios
+good,bueno/buena
 good evening,buenas tardes
 good luck,buena suerte
 goodbye,adiós
@@ -805,6 +921,7 @@ grandson,nieto
 grape,uva
 grapes,uvas
 grateful,agradecido/agradecida
+grave,serious
 gravy/sauce,salsa
 great,estupendo/estupenda
 Great Britain,Gran Bretaña
@@ -827,15 +944,16 @@ gym,gimnasio
 gymnastics,gimnasia
 habit,costumbre/hábito
 habit/bad habit,costumbre/vicio
+habitante,inhabitant
 hail,granizopedrisco
 hair,pelo
 hairdresser,peluquería
 hake,merluza
 half,medio
+half-,medio/media
 half board,media pensión
 half of,mitad/la
 half past,y media
-half-,medio/media
 hall,eligion
 ham,jamón
 hamburger,hamburguesa
@@ -876,6 +994,7 @@ hero/heroine,protagonista/
 hi,hola
 high speed train,AVE
 high/tall,alto/alta
+highest temperature,temperatura más alta/la temperatura mas alta
 hill,colina
 hired car,coche alquilado
 historic,histórico
@@ -938,6 +1057,7 @@ ice cream,helado
 ice cream parlour,heladería
 ice rink,pista de patinaje
 ice skating,patinaje sobre hielo
+ICT/computer science,informática/ciencias informáticas/ciencias de la computación
 ID card,DNI
 ideal,ideal
 identical twins,gemelos idénticos
@@ -951,8 +1071,8 @@ impatient,impaciente
 impolite,mal educado/mal educada/descortés
 impression,impresión
 in,en/dentro de
-in a good/bad mood,de buen/mal humor
 in a good mood,de buen humor
+in a good/bad mood,de buen/mal humor
 in advance,por adelantado
 in autumn,en otoño
 in communication with,en contacto con
@@ -963,12 +1083,17 @@ in my opinion,en mi opinión
 in spring,en primavera
 in summer,en verano
 in the country,en el campo
+in the east,en el este
 in the evening,de la tarde
 in the morning,de la mañana
+in the north,en el norte
 in the open air,al aire libre
+in the south,en el sur
+in the west,en el oeste
 in winter,en invierno
 in work/working,tener un empleo/trabajando
 in/by,en
+inadequate,inadecuado/inadecuada
 included,incluido
 independent,independiente
 indigestion,indigestión
@@ -981,9 +1106,11 @@ informative,infomativo/infomativa
 inhabitant,habitante
 injection/syringe,inyección/jeringa/jeringuilla
 injury,herida
+injusto,unjust/unfair
 ink cartridge,recambio
 ink eraser,goma de borrar para tinta
 inn,taberna
+inquietante,worrying/disturbing
 inside,dentro
 instructions for use,instrucciones de uso
 instructor,monitor/monitoa
@@ -1003,7 +1130,11 @@ island,isla
 it depends,depende
 it doesn’t matter,no importa nada
 it fits/suits you,te/le va bien/te/le queda bien
+it is freezing,se está congelando/esta helado/hace mucho frio
+it is lightning,es un rayo/es relámpago
 it is raining,llueve/esta lloviendo
+it is snowing,está nevando
+it is thundering,esta tronando/es un trueno
 it’s one o’clock,es la una
 it’s two o’clock/etc,son las dos/etc
 Italian,italiano/italiana
@@ -1027,6 +1158,7 @@ July,julio
 June,junio
 junk food,comida basura
 just now/straight away,ahora mismo
+justo,just/fair
 kebab,kebab/pincho
 key,llave
 key,tecla
@@ -1035,11 +1167,15 @@ kilogram,kilo/el
 kilometre,kilómetro
 kind,simpático/simpática
 kindergarten/play school/nursery school,parvulario/escuela infantil
+kiosk,quiosco
 kiss,beso
+kitchen,cocina
 knee,rodilla
 knife,cuchillo
+knowledge,conocimiento/conocimientos
 label,etiqueta
 laboratory,laboratorio
+ladrón,thief
 lake,lago
 lamb,carne de cordero
 language,idiomalengua
@@ -1057,6 +1193,7 @@ lazy,perezoso/perezosa
 league/division,liga
 leather,cuero/piel
 leaving certificate,certificado de despedida
+left,izquierda
 left luggage,consigna
 left-luggage locker,consigna automática
 left-luggage room,cuarto para dejar el eqiuipaje
@@ -1073,6 +1210,8 @@ letter of application,carta de solicitud
 lettuce,lechuga
 lettuce/salad,lechuga/ensalada
 level crossing,paso a nivel
+ley,law
+libertad,liberty/freedom
 library,biblioteca
 life,vida
 lift,ascensor
@@ -1091,6 +1230,7 @@ locked,cerrado/cerrada con llave
 loin,lomo
 lonely,solitario/solitaria
 long,largo/larga
+long time,mucho tiempo
 lorry,camión
 lorry driver,camionero/camionera
 lost,perdido/perdida
@@ -1107,6 +1247,7 @@ lung,pulmón
 mad/crazy,loco/loca
 magazine,revista
 magnificent,magnífico/magnífica
+mail,correo/mensaje
 main course,plato principal
 main railway station,estación de ferrocarril principal
 make up,maquillaje
@@ -1137,11 +1278,14 @@ mechanic,mecánico/mecánica
 media,medios de comunicación
 media studies,ciencias de la información
 medicine,medicina
+medio ambiente,environment
+medioambiental,environmental
 Mediterranean,mediterráneo/mediterránea
 Mediterranean Sea,Mar Mediterráneo
 meeting,eligio
 meeting/discussion,reunión/discusión
 melody/tune,melodía
+melon,melón
 melon/water melon,melón/sandía
 member,miembro/socio/ socia
 member of the family,miembro de la familia
@@ -1149,6 +1293,7 @@ memorial/monument,monumento
 memory,memoria
 menu,menú
 message,mensaje
+metre,metro/metros
 metro/underground railway,metro
 midnight,medianoche
 milk,leche
@@ -1171,6 +1316,7 @@ moped,ciclomotor
 more,más
 morning/in the morning,mañana/por la mañana
 mother,madre
+motorbike,moto/motocicleta
 motorway,autopista
 motorway junction,cruce de autopista
 motorway services,servicios en autopista
@@ -1191,6 +1337,8 @@ muesli,muesli
 mug,tazón
 multicultural,multicultural
 mum,edi
+mundial,global/world-wide
+mundo,world
 murder mystery/detective story,novela de misterio/novela policíaca
 museum,museo
 mushroom,champiñón
@@ -1202,9 +1350,11 @@ mussels,mejillones
 mustard,mostaza
 napkin,servilleta
 nationality,nacionalidad
+naturaleza,nature
 nature/countryside,naturalezacampo
 naughty,travieso/traviesa
 near,cerca de
+necesitados,needy people
 necessary,necesario/necesaria
 neck/throat,cuello/garganta
 necklace,collar
@@ -1238,8 +1388,8 @@ noise,ruido
 noisy,ruidoso/ruidosa
 non-alcoholic,no alcohólico/no alcohólica
 non-dispensing chemist,droguería
-non-smoker,no fumador/no fumadora
 nonsense,tonterías
+non-smoker,no fumador/no fumadora
 normal,normal
 north,norte
 North America,América del Norte
@@ -1321,6 +1471,7 @@ page,página
 paging,radiomensajería
 pain,dolor
 painter,pintor/pintora
+pájaro,bird
 palace,palacio
 pancake,crêpe
 pants/briefs,calzoncillos/bragas
@@ -1354,6 +1505,8 @@ peas,guisantes
 pedestrian,peatón
 pedestrian area,zona peatonal
 pedestrian crossing,paso de peatones
+peligro,danger
+peligroso,dangerous
 pen/ballpoint pen,pluma/bolígrafo/boli
 pencil,lápiz
 pencil case,estuche
@@ -1372,6 +1525,7 @@ pessimistic,pesimista
 pet,mascota/mascotanimal doméstico
 petrol,gasolina
 petrol station,gasolinera/estación de servicio
+petróleo,oil
 photo,foto/fotografía
 physical and sports education,ecuación física y deporte
 physics,física
@@ -1380,6 +1534,7 @@ picnic,merienda/picnic
 picnic area,área de servicios
 picture,cuadro
 picturesque,pintoresco/pintoresca
+pila,battery
 pillow,almohada
 pills/tablets,comprimidos/pastillas
 pineapple,piña
@@ -1398,17 +1553,23 @@ platform/track,vía
 play,obra de teatro
 player,jugador
 playground,patio de recreo
-please/please,por favor
+please (request)/please (polite),por favor
 pleased/satisfied,estar contento/estar contenta/estar satisfecho/estar satisfecha
 plum,ciruela
 plumber,fontanero/fontanera
+población,population
+pobre,poor
+pobreza,poverty
 pocket money,dinero para gastos personales/dinero de bolsillo
 police,policía
 police officer,agente de policía
 police station,comisaría de policía
+policeman,policía
+policewoman,mujer policía/policía
 polite,educado/educada/cortés
 pollution,contaminaciónpolución
 poor,pobre
+poor/unsatisfactory,débil/poco/poca/satisfactorio/satisfactoria
 pop,pop
 pop music,música pop
 pop star,estrella de música pop
@@ -1430,6 +1591,9 @@ potato,patata
 pound sterling,libra esterlina
 poverty,pobreza
 prawns,gambas
+preocupación,worry/anxiety
+preocupado,worried/anxious
+preocupante,worrying
 present,regalo
 press,prensa
 pressure to achieve good marks/grades,presión para sacar buenas notas
@@ -1447,14 +1611,17 @@ prison,cárcel
 private school,escuela privada/particular
 problem,problema
 procession,desfile
+productos químicos,chemicals
 profession/job/occupation,profesión/trabajo/empleo
 professional training,formación profesional
+programme,programa de ordenador
 programmer,Programador/Programadoa
 progress,progreso
 progress/improvement,progreso/mejoramiento
 projector,proyector
 promotion prospects,posibilidades de ascenso
 pronunciation,pronunciación
+propio,own
 province,provincia
 pub,pub/bar
 public,público/pública
@@ -1472,6 +1639,7 @@ quarter to,menos cuarto
 question,pregunta
 quickly,deprisa
 quiet,tranquilo/tranquila
+químico,chemical
 quiz show,programa concurso
 race/racing,carrera/carreras
 racist,racista
@@ -1489,13 +1657,16 @@ reading,lectura
 ready,listo/lista
 real/royal,real
 really,realmente
+recargable,rechargeable
 receipt,recibo
-receiver,receptor
+receiver (telephone),receptor
 recently,recientemente
 reception,recepción
 receptionist,recepcionista
+reciclaje,recycling
 recipe,receta
 recorder,flauta dulce
+recurso,resource
 recycling,reciclaje
 red,rojo/roja
 red,pelirrojo
@@ -1515,6 +1686,7 @@ religion,religión
 religion/Religious Studies,enseñanza religiosa
 remedy/medicine,remedio
 remote control,mando a distancia/telemando
+renovable,renewable
 rent,alquiler
 rent/hire,alquiler
 rented flat,piso alquilado
@@ -1524,6 +1696,7 @@ reply/answer,respuesta/contestación
 representative,representante
 reservation,reserva
 responsible,responsible
+rest day/day off,día libre/día de descanso/jornada de descanso
 restaurant,restaurante
 result,resultado
 retailer,comerciante
@@ -1531,6 +1704,7 @@ return,de ida y vuelta
 return ticket,billete de ida y vuelta
 rice,arroz
 rich,rico/rica
+right,derecha
 ring,anillo
 Rioja,Rioja/La
 river,río
@@ -1539,6 +1713,7 @@ road map,mapa de carreteras
 road/street,calle
 roast,asado
 robbery/theft,robo
+robo,theft/burglary
 rock,rock
 rock music,música rock
 role model,modelo/modela a imitar
@@ -1549,10 +1724,13 @@ romantic novel,novela romántica
 room,habitación/cuarto
 rotten,podrido/podrida
 round trip/excursion,viaje de ida y vuelta/excursión
+roundabout,glorieta/rotonda
 rubber,goma
 rubbish,basura
 rubbish bin,cubo de basura
 rugby,rugby
+ruido,noise
+ruidoso,noisy
 rule,regla/norma
 ruler,regla
 rules of the house,reglas de la casa/normas de la casa
@@ -1572,9 +1750,10 @@ same,igual
 sand,arena
 sandal,sandalia
 sandwich,bocadillo/sándwich
-sandwich/toasted sandwich,bocadillo/sandwich
 sandwich,bocadillo)
+sandwich/toasted sandwich,bocadillo/sandwich
 satellite TV,television via eligion
+satisfactory,adecuado/adecuada
 satisfied,satisfecho/a
 Saturday,sábado
 saucer,platillo
@@ -1606,6 +1785,7 @@ seaside resort,lugar turístico a orillas del mar
 season,estación
 seat,asiento
 seat belt,cinturón de seguridad
+second class,segunda clase/segundo curso/segunda categoría
 second job/side job,segundo trabajo
 secondary education,ESO
 secondary modern school,instituto de enseñanza secundaria
@@ -1616,8 +1796,8 @@ see you soon,hasta pronto
 see you tomorrow,hasta mañana
 self,uno mismo/una misma
 self-confident,segurode sí mismo/segura de sí misma
-self-service,de autoservicio
 selfish,egoísta
+self-service,de autoservicio
 semester,semestre
 semi-detached house,casa adosada/chalet adosado
 sensational,sensacional
@@ -1627,8 +1807,8 @@ September,septiembre/setiembre
 series,serie/ciclo
 serious,serio/seria
 service,servicio
-serviceincluded,servicioincluido
 service station,estación de servicio
+serviceincluded,servicioincluido
 set meal,menú del día
 several,varios/varioas
 sewing/tailoring,costura
@@ -1640,6 +1820,7 @@ shift work,trabajo por turnos
 shirt,camisa
 shoe,zapato
 shoe shop,zapatería
+shop,tienda
 shop keeper,tendero/tendera
 shop window,escaparate/vitrina
 shop/business,negocio/comercio
@@ -1654,6 +1835,7 @@ should/ought to,debería
 shoulder,hombro
 shower,ducha
 shy,tímido/tímida
+siblings,hermanos
 sight/place of interest,lugar de interés
 sign,señalletrero
 signature,firma
@@ -1665,6 +1847,7 @@ since/from,desde
 singer,cantante
 single,soltero/soltera
 single,de ida
+single chocolate,bombón
 single parent,padre sin parejamadre sin pareja
 single person,solterosoltera
 single room,habitación individual
@@ -1700,6 +1883,7 @@ soap,jabón
 soap,jabón
 soap opera,telenovela/culebrón
 society/company,sociedad
+sociology,sociología
 sock,calcetín
 soft,blando/blanda
 software,software
@@ -1709,8 +1893,8 @@ someone,alguien
 something,algo
 sometimes,a veces
 son,hijo
-son-in-law/daughter-in-law,yerno/yerna
 song,canción
+son-in-law/daughter-in-law,yerno/yerna
 soon,pronto/luego
 sought after,buscado/buscada
 soup,sopa
@@ -1731,6 +1915,7 @@ speciality,especialidad
 spectator,espectador/espectadora
 speed,velocidad
 speed limit,velocidad maxima
+spicey,picante/condimentado
 spinach,espinacas
 spoon,cuchara
 sport,deporte
@@ -1753,6 +1938,7 @@ standing,de pie
 star/celebrity,estrella
 starter,entrante
 state,estado
+station,estación de trenes
 stationer’s,papelería
 stay,estancia
 stay on the line,no cuelgue
@@ -1761,7 +1947,7 @@ step,paso
 stepfather,padrastro
 stepmother,madrastra
 stereo system,equipo estereofónico/estéreo
-still,todavía
+still (yet),todavía
 sting,picadura
 stomach,estómago
 storm,tormenta
@@ -1788,13 +1974,15 @@ subtitles,subtítulos
 suburb,suburbio/zona residencial
 suburban train,tren de cercanías
 success,éxito
+sucio,dirty
 sugar,azúcar
 suit,traje
 suitcase,maleta
 Summer,verano
-summersale,liquidaciónde verano
 summer camp,colonia de vacaciones
 summer holidays,vacaciones de verano
+summer sale,rebajas de verano/ofertas de verano/oferta de verano
+summersale,liquidaciónde verano
 sun,sol
 sun cream,bronceador
 sunburn,insolación
@@ -1823,7 +2011,7 @@ swimming trunks,bañador
 Swiss,suizo/suiza
 Switzerland,Suiza
 swollen,hinchado/hinchada
-T-shirt,camiseta
+syrup,jarabe
 table,mesa
 table cloth,mantel
 table tennis,tenis de mesa/ping pong
@@ -1840,6 +2028,7 @@ tea,té
 tea spoon,cucharilla
 teacher,edico/edica
 teacher,maestro/maestra
+team,equipo
 technician,técnico/técnica
 technology,tecnología
 teeth,muelas
@@ -1849,10 +2038,12 @@ telephone call,llamada de teléfono
 telephone card,tarjeta telefónica
 telephone directory/telephone book,guía telefónica
 television,elgado/televisor/televisión
+television set,televisión/aparato de televisión
 temperature,fiebre
 ten to (time),menos diez
 tennis,eligi
 tennis court,cancha de tenis
+tent,tienda/tienda de campaña/carpa
 term,trimestre
 terms of employment,condiciones de trabajo
 terrace,terraza
@@ -1864,7 +2055,9 @@ thank you very much,muchas gracias
 the English Channel,el Canal de la Mancha/el canal Inglés
 the next day,al día siguiente
 the Pyrenees,Pirineos/Los
+the sun is shining,el sol está brillando/el sol esta brillando/el sol esta brillando
 the web,web
+theatre,teatro
 theme park/amusement park,parque de atracciones
 then,entonces
 therapy,terapía
@@ -1878,13 +2071,16 @@ this/that,esto/esta
 though,aunque
 thrifty,económico/económica/ahorrativo/ahorrativa
 through,por/poa través de
+thunder storm,tormenta de truenos/tormenta
 Thursday,jueves
+ticket,entrada
 ticket,billete
 ticket inspector,revisorrevisora
 ticket machine,máquina de billetes
 ticket office,oficina/ventanilla de billetes
 tidy,ordenado/ordenada
 tie,corbata
+Tierra,Earth
 tights,medias
 till,caja
 time,vez
@@ -1895,6 +2091,7 @@ tired,fatigado/fatigada/cansado/cansada
 toast,tostado
 toasted cheese and ham sandwich,tostada de queso y bocadillo de jamón
 tobacco,tabaco
+tobacconist/stamp seller,estanco
 today,hoy
 together,junto/junta
 toilet,aseo/baño/servicio
@@ -1948,6 +2145,7 @@ trousers,pantalones
 trout,trucha
 trumpet,trompeta
 truth,verdad
+T-shirt,camiseta
 Tuesday,martes
 tuna,atún/bonito
 turkey,pavo
@@ -1994,12 +2192,15 @@ vegetable,verdura
 vegetables,verduras/hortalizas
 vegetarian,vegetariano/vegetariana
 vehicle,vehículo
+ventaja,advantage
 very,muy
+very good,muy bueno/muy buena
 vet,veterinario/veterinaria
 view,vista
 viewer,espectador
 village,pueblo
 vinegar,vinagre
+violencia,violence
 violent,violento/violenta
 violet,violeta
 violin,violín
@@ -2022,6 +2223,7 @@ wash basin,lavabo
 water,agua
 water melon,sandía
 water skiing,esquí náutico
+watermelon,sandía
 way,forma/manera
 WC,wáter/WC
 weak/bad at,débil
@@ -2041,6 +2243,7 @@ well-balanced,bien equilibrado/bien equilibrada
 well-cooked,muy hecho
 Welsh,galés/galéa
 west,oeste
+wet,húmedo/húmeda
 what a shame,qué pena
 What for?,¿Para qué?
 What?,¿Qué?
@@ -2057,8 +2260,9 @@ window,ventana
 windy,de mucho viento/ventoso
 wine,vino
 Winter,invierno
-wintersale,liquidaciónde invierno
 winter holidays,vacaciones de invierno
+winter sale,rebajas de invierno/ofertas de invierno/oferta de invierno
+wintersale,liquidaciónde invierno
 wise,sabio/sabia
 with,con
 with a view of/overlooking,tener vista a/dar a
@@ -2089,50 +2293,7 @@ young person,joven
 younger,menor
 youth club,club juvenil
 youth hostel,albergue juvenil
+zona peatonal,pedestrian zone/area
 zoo,zoo/parque zoológico
 FALSE,falso/falsa
 TRUE,verdadero/verdadera
-dry,seco/seca
-highest temperature,temperatura más alta/la temperatura mas alta
-in the east,en el este
-in the north,en el norte
-in the south,en el sur
-in the west,en el oeste
-it is freezing,se está congelando/esta helado/hace mucho frio
-it is lightning,es un rayo/es relámpago
-it is snowing,está nevando
-it is thundering,esta tronando/es un trueno
-the sun is shining,el sol está brillando/el sol esta brillando/el sol esta brillando
-thunder storm,tormenta de truenos/tormenta
-wet,húmedo/húmeda
-coffee,café
-dining room,comedor/salón comedor
-melon,melón
-rest day/day off,día libre/día de descanso/jornada de descanso
-afternoon tea/picnic,merienda/té de la tarde/picnic
-spicey,picante/condimentado
-policeman,policía
-policewoman,mujer policía/policía
-shop,tienda
-theatre,teatro
-free/available/vacant,vacante/desocupado
-kitchen,cocina
-tent,tienda/tienda de campaña/carpa
-motorbike,moto/motocicleta
-second class,segunda clase/segundo curso/segunda categoría
-first class,primera clase/primera categoría
-metre,metro/metros
-bill/invoice,factura/recibo/cuenta
-exchange bureau,oficina de cambio/casa de cambio/casa de cambio
-biscuits,galletas/bizcochos
-chips/crisps,patatas fritas/crispas/crisps
-knowledge,conocimiento/conocimientos
-television set,televisión/aparato de televisión
-watermelon,sandía
-summer sale,rebajas de verano/ofertas de verano/oferta de verano
-winter sale,rebajas de invierno/ofertas de invierno/oferta de invierno
-siblings,hermanos
-designer,diseñador/diseño
-adequate,adecuado/adecuada
-ICT/computer science,informática/ciencias informáticas/ciencias de la computación
-sociology,sociología

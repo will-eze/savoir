@@ -16,6 +16,44 @@ namespace Savoir
             { "sp", new[] { "present", "future", "imperfect", "preterite", "conditional", } }
         };
 
+        public static Dictionary<string, string[]> languageSubjectPronouns = new Dictionary<string, string[]>
+        {
+            { "fr", new[] { "Je", "Tu", "Il/Elle/On", "Nous", "Vous", "Ils/Elles" } },
+            { "sp", new[] { "Yo", "Tu", "El/Ella/Usted", "Nosotros", "Vosotros", "Ellos/Ellas/Ustedes"} }
+        };
+
+        public static Dictionary<string, char[]> languageAllAccents = new Dictionary<string, char[]>
+        {
+            { "fr", new[] { 'ç', 'é', 'è', 'ê', 'ë', 'â', 'à', 'î', 'ì', 'ï', 'ô', 'ò', 'û', 'ù', 'ü' } },
+            { "sp", new[] { 'ü', 'ñ', 'é', 'á', 'í', 'ó', 'ú', '¿', '¡' } }
+        };
+
+        public static Dictionary<char, char> allAccents = new Dictionary<char, char>
+        {
+            { 'ç', 'c' },
+            { 'é', 'e' },
+            { 'è', 'e' },
+            { 'ê', 'e' },
+            { 'ë', 'e' },
+            { 'â', 'a' },
+            { 'à', 'a' },
+            { 'î', 'i' },
+            { 'ì', 'i' },
+            { 'ï', 'i' },
+            { 'ô', 'o' },
+            { 'ò', 'o' },
+            { 'û', 'u' },
+            { 'ù', 'u' },
+            { 'ü', 'u' },
+            { 'ñ', 'n' },
+            { 'á', 'a' },
+            { 'í', 'i' },
+            { 'ó', 'o' },
+            { 'ú', 'u' },
+        };
+
+        public static List<string> allFilteredVerbs = new List<string>();
+
         public static string[]? all_verb_data;
         public static string[]? sets_verb_data;
         public static string[]? all_vocab_data;
@@ -51,6 +89,8 @@ namespace Savoir
                     UpdateData();
                     UpdateSetsData();
                     UpdateTenses();
+
+                    allFilteredVerbs = all_verb_data!.Select(x => RemoveAccents(x.Split(',')[0])).ToList();
                 }
             }
         }
@@ -124,14 +164,29 @@ namespace Savoir
                 }
             }
 
+            // update the selected tenses
+            TensesSelectedList.Clear();
             TensesChecked = Enumerable.Repeat(false, allTensesIndices.Keys.Count).ToArray();
             for (int i = 0; i < allTensesIndices.Keys.Count; i++)
             {
                 if (languageDefaultTenses[ActiveLanguage].Contains(allTensesIndices.Keys.ToArray()[i])) 
                 {
                     TensesChecked[i] = true;
+                    TensesSelectedList.Add(allTensesIndices.Keys.ToArray()[i]);
                 }
             }
+        }
+
+        private static string RemoveAccents(string s)
+        {
+            foreach (char ch in s)
+            {
+                if (allAccents.ContainsKey(ch))
+                {
+                    s = s.Replace(ch, allAccents[ch]);
+                }
+            }
+            return s;
         }
     }
 }

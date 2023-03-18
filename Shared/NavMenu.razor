@@ -93,12 +93,15 @@
             </div>
         </span>
 
-        <input id="search-box" type="text" placeholder="Search Verb or Tense...  (Coming Soon!)" disabled>
+        <input id="search-box" type="text" placeholder="Search Verb or Tense..." @bind-value="@userSearchText" @bind-value:event="oninput">
+
         <a href="Credits" id="navbar__credits">
             Credits
         </a>
     </nav>
 </div>
+
+<p2>@string.Join(',', searchResults.ToArray())</p2>
 
 @code {
     public async void SwapLanguages()
@@ -108,4 +111,46 @@
     }
 
     [Parameter] public EventCallback refreshBody { get; set; }
+
+    public string userSearchText = string.Empty;
+    List<string> searchResults => GLOBALS.allFilteredVerbs.ToArray().Where(x => x.StartsWith(userSearchText)).ToList();
+
+    public void SearchTextChanged(ChangeEventArgs args)
+    {
+        userSearchText = args.Value!.ToString()!.ToLower().TrimStart();
+    }
+
+    public Dictionary<string, string[]> GetVerbConjugations(string verb)
+    {
+        string[] verbRecord = Array.Empty<string>();
+
+        foreach (string record in GLOBALS.all_verb_data!)
+        {
+            if (record.Split(',')[0] == verb)
+            {
+                verbRecord = record.Split(',');
+            }
+        }
+
+        Dictionary<string, string[]> verbConjugations = new Dictionary<string, string[]>();
+
+        string[] tenses = GLOBALS.allTensesIndices.Keys.ToArray();
+        int[] tensesStartingIndex = GLOBALS.allTensesIndices.Values.ToArray();
+
+        for(int i = 0; i < GLOBALS.allTensesIndices.Keys.Count; i++)
+        {
+            string tense = tenses[i];
+            int startIndex = tensesStartingIndex[i];
+
+            string[] currentTenseConjugations = new string[6];
+            for (int j = 0; i <= 5; i++)
+            {
+                currentTenseConjugations[i] = verbRecord[startIndex + j];
+            }
+
+            verbConjugations.Add(tense, currentTenseConjugations);
+        }
+
+        return verbConjugations;
+    }
 }

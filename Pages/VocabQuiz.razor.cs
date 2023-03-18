@@ -5,8 +5,6 @@ namespace Savoir.Pages
 {
     public class VocabQuizBase : ComponentBase
     {
-        public string[] possibleVocab = Array.Empty<string>();
-
         public string[] vocabInfo = new string[2] { string.Empty, string.Empty };
 
         public string userInput = string.Empty;
@@ -16,7 +14,7 @@ namespace Savoir.Pages
         {
             Random rnd = new Random();
 
-            string vocabEnglish = possibleVocab[rnd.Next(0, possibleVocab.Length)];
+            string vocabEnglish = GLOBALS.PossibleVocabList[rnd.Next(0, GLOBALS.PossibleVocabList.Count)];
 
             string vocabFrench = string.Empty;
 
