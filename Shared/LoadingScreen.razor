@@ -20,10 +20,20 @@ else
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (Navigation.Uri.Replace("#", string.Empty) == Navigation.BaseUri)
+        if (Navigation.Uri.Replace("#", string.Empty) == Navigation.BaseUri && firstRender)
         {
-            await LoadAllData();
+            // firstly initialise GLOBALS / assign filler values to the dictionary of languageData
+            foreach (string language in GLOBALS.allLanguages)
+            {
+                string[][] temp = new string[][] { Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), Array.Empty<string>(), };
+                GLOBALS.languageData.Add(language, temp);
+            }
 
+            // then load all the data into GLOBALS.languageData
+            await LoadAllData();
+            // finally set the activeLanguage which updates all the active GLOBALS data 
+            GLOBALS.ActiveLanguage = "fr";
+            // then, once files are loaded, display the opening video and load the content.
             await Task.Delay(4000);
             contentLoaded = true;
             StateHasChanged();
@@ -36,17 +46,32 @@ else
 
     private async Task LoadAllData()
     {
-        GLOBALS.all_verb_data_french = CleanCSV((await Http.GetStringAsync("csv_files/French/all_verb.csv")))[1..];
-        GLOBALS.sets_verb_data_french = CleanCSV((await Http.GetStringAsync("csv_files/French/sets_verb.txt")));
-        GLOBALS.all_vocab_data_french = CleanCSV((await Http.GetStringAsync("csv_files/French/all_vocab.csv")))[1..];
-        GLOBALS.sets_vocab_data_french = CleanCSV(await Http.GetStringAsync("csv_files/French/sets_vocab.txt"));
+        // this func loads all the csvs into GLOBALS.languageData dictionary
 
-        GLOBALS.all_verb_data_spanish = CleanCSV((await Http.GetStringAsync("csv_files/Spanish/all_verb.csv")))[1..];
-        GLOBALS.all_vocab_data_spanish = CleanCSV((await Http.GetStringAsync("csv_files/Spanish/all_vocab.csv")))[1..];
+        // the file names for the data in each language
+        string[] fileNames = new string[4] { "all_verbs.csv", "all_vocab.csv", "sets_verbs.csv", "sets_vocab.csv" };
+        foreach (string language in GLOBALS.allLanguages)
+        {
+            for (int i = 0; i <= 3; i++)
+            {
+                string[] temp = CleanCSV((await Http.GetStringAsync($"csv_files/{language}/{fileNames[i]}")));
+
+                if (i == 0)
+                {
+                    GLOBALS.languageHeaders.Add(language, temp[0]);
+                }
+                GLOBALS.languageData[language][i] = temp[1..]!;
+            }
+        }
     }
 
     private string[] CleanCSV(string csvData)
     {
+        /*
+         * splits the data (string) into an array such that each element is a record.
+         * selects all elements in that array and replaces weird "\r" characters with an empty string (cleaning it out)
+         * converts result to a cleaned array
+        */
         return csvData.Split('\n').Select(x => x.Replace("\r", string.Empty)).ToArray();
     }
 }

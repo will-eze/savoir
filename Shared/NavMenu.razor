@@ -41,12 +41,24 @@
         <a href="">
             <img id="home-icon" src="images/logo-icon.png" />
         </a>
+
         <span class="languageSelection">
-            <img id="france-icon" src="images/france-icon.png"/>
+            <img id="france-icon" src="@($"images/{GLOBALS.ActiveLanguage}-icon.png")" @onclick="SwapLanguages"/>
         </span>
+
         <input id="search-box" type="text" placeholder="Search Verb or Tense...  (Coming Soon!)" disabled>
         <a href="Credits" id="navbar__credits">
             Credits
         </a>
     </nav>
 </div>
+
+@code {
+    public async void SwapLanguages()
+    {
+        GLOBALS.ActiveLanguage = (GLOBALS.ActiveLanguage == "fr") ? "sp" : "fr";
+        await refreshBody.InvokeAsync();
+    }
+
+    [Parameter] public EventCallback refreshBody { get; set; }
+}

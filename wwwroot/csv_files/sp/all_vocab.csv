@@ -407,7 +407,7 @@ coast,costa
 coat,abrigo/chaqueta
 cocoa,cacao
 cod,bacalao
-coffeebreak,café/parar a desayunar
+coffee break,café/parar a desayunar
 coin,moneda
 cold,frío
 cold sliced meat,fiambres/embutidos
@@ -606,6 +606,7 @@ enough,bastante
 entertainment,entretenimiento/diversion
 entertainment/things to do,distracción/entretenimiento
 enthusiasm,entusiasmo
+entrance,entrada
 envelope,sobre
 environment,medio ambiente
 environmental problem,problema del medio ambiente
@@ -614,7 +615,7 @@ environmentally unfriendly,que daña el medio ambiente
 Epiphany,día de reyes
 Epiphany/January 6th,Dia de Reyes
 equality,igualdad
-equipment,equipo
+team,equipo
 equivalent of GCE A levels,bachillerato
 escalator,escalera mecánica
 escalope,escalope/filete
@@ -640,6 +641,7 @@ exciting,emocionante
 excursion,excursión
 exercise book,cuaderno
 exercise/practice,ejercicio/práctica
+exit,salida
 exhaust fumes/emissions,gases de escape
 exhibition,exposición
 expensive,caro/cara
@@ -696,7 +698,7 @@ fishing rod,caña de pesca
 fishmonger’s,pescadería
 fit,sano/sana/en forma
 five past (time),y cinco
-FLA/foreign language I,lector/lectora
+FLA/foreign language,lector/lectora
 flamenco,flamenco
 flat,apartamentopiso
 flea market,rastro
@@ -1019,7 +1021,7 @@ job/post/position,trabajo/empleo/puesto
 joiner/carpenter,carpintero/carpintera
 journalist,periodista
 journey,viaje
-Journey/trip,viaje/trayecto
+journey/trip,viaje/trayecto
 juice,zumo
 July,julio
 June,junio
@@ -1234,7 +1236,7 @@ no school,no hay clase
 no sense of humour,sin sentido de humor
 noise,ruido
 noisy,ruidoso/ruidosa
-non – alcoholic,no alcohólico/no alcohólica
+non-alcoholic,no alcohólico/no alcohólica
 non-dispensing chemist,droguería
 non-smoker,no fumador/no fumadora
 nonsense,tonterías
@@ -2090,3 +2092,47 @@ youth hostel,albergue juvenil
 zoo,zoo/parque zoológico
 FALSE,falso/falsa
 TRUE,verdadero/verdadera
+dry,seco/seca
+highest temperature,temperatura más alta/la temperatura mas alta
+in the east,en el este
+in the north,en el norte
+in the south,en el sur
+in the west,en el oeste
+it is freezing,se está congelando/esta helado/hace mucho frio
+it is lightning,es un rayo/es relámpago
+it is snowing,está nevando
+it is thundering,esta tronando/es un trueno
+the sun is shining,el sol está brillando/el sol esta brillando/el sol esta brillando
+thunder storm,tormenta de truenos/tormenta
+wet,húmedo/húmeda
+coffee,café
+dining room,comedor/salón comedor
+melon,melón
+rest day/day off,día libre/día de descanso/jornada de descanso
+afternoon tea/picnic,merienda/té de la tarde/picnic
+spicey,picante/condimentado
+policeman,policía
+policewoman,mujer policía/policía
+shop,tienda
+theatre,teatro
+free/available/vacant,vacante/desocupado
+kitchen,cocina
+tent,tienda/tienda de campaña/carpa
+motorbike,moto/motocicleta
+second class,segunda clase/segundo curso/segunda categoría
+first class,primera clase/primera categoría
+metre,metro/metros
+bill/invoice,factura/recibo/cuenta
+exchange bureau,oficina de cambio/casa de cambio/casa de cambio
+biscuits,galletas/bizcochos
+chips/crisps,patatas fritas/crispas/crisps
+knowledge,conocimiento/conocimientos
+television set,televisión/aparato de televisión
+watermelon,sandía
+summer sale,rebajas de verano/ofertas de verano/oferta de verano
+winter sale,rebajas de invierno/ofertas de invierno/oferta de invierno
+siblings,hermanos
+designer,diseñador/diseño
+adequate,adecuado/adecuada
+ICT/computer science,informática/ciencias informáticas/ciencias de la computación
+sociology,sociología

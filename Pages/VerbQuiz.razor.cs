@@ -14,22 +14,8 @@ namespace Savoir.Pages
         // list of user conjugations for currently selected verb
         public string[] userVerbs = new string[6] { "", "", "", "", "", "" };
 
-        public string[] allTenses = new string[16] { "present", "imperfect", "simple past", "simple future", "conditional", "subjunctive", "imperfect subjunctive", "imperative", "past perfect", "pluperfect", "future perfect", "conditional perfect", "past subjunctive", "pluperfect subjunctive", "past anterior", "past imperative" };
-
-
-        public Dictionary<string, int> tenseStartingIndex = new();
-
         public string[] possibleVerbs = Array.Empty<string>();
         public string[] possibleTenses = Array.Empty<string>();
-
-        public VerbQuizBase()
-        {
-            for (int i = 0; i <= allTenses.Length - 1; i++)
-            {
-                tenseStartingIndex.Add(allTenses[i], 3 + i * 6);
-            }
-        }
-
 
         public void RandomVerb()
         {
@@ -59,7 +45,7 @@ namespace Savoir.Pages
 
                 for (int i = 0; i <= 5; i++)
                 {
-                    tenseConjugations[i] = verbRecord[tenseStartingIndex[_tense] + i];
+                    tenseConjugations[i] = verbRecord[GLOBALS.allTensesIndices[_tense] + i];
                 }
 
                 // only add a tense if it has atleast 1 subject's conjugation available

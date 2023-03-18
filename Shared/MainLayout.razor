@@ -1,7 +1,21 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager Navigation
+    
+<NavMenu refreshBody="@RefreshMainContents"/>
 
-<NavMenu/>
+<CascadingValue Value="@dummy">
+    <main class="container">
+        @Body
+    </main>
+</CascadingValue>
+        
+@code {
+    int dummy = 0;
 
-<main class="container">
-    @Body
-</main>
+    public void RefreshMainContents()
+    {
+        dummy = dummy + 3;
+        StateHasChanged();
+    }
+}
+
