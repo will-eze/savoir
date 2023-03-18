@@ -365,48 +365,6 @@ iframe {
     font-size: 1.3em;
 }
 
-/* LANG SELECTION PAGE*/
-.LanguageSelection__content {
-    background-color: #292929;
-    text-align: center;
-    width: 10%;
-    height: 15px;
-    padding: 10px;
-}
-
-.LanguageSelection__flags {
-    height: 100%;
-    vertical-align: middle;
-}
-
-.flags {
-    width: 20px;
-    margin: 0px 10px 0px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    border: 1px #000 solid;
-}
-
-.LanguageSelection__arrow {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-bottom: 7px solid black;
-    margin-left: 50px;
-}
-
-
-#logoAnimation {
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
 
 #app {
     overflow: hidden;

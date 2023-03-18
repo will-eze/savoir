@@ -36,6 +36,37 @@
             border-radius: 3px;
         }
 
+        .LanguageSelector {
+            position: absolute;
+            width: 150px;
+            height: 60px;
+        }
+
+        .LanguageSelector__body {
+            background-color: #292929;
+            border: 1px #000 solid;
+            border-radius: 8px;
+            height: 60px;
+        }
+
+        .flags {
+            width: 40%;
+            border-radius: 20px;
+            margin: 0px 6px 0px 6px;
+            cursor: pointer;
+        }
+
+        .LanguageSelector__arrow {
+            position: relative;
+            width: 0;
+            height: 0;
+            margin-left: 35px;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid black;
+            z-index: 1;
+        }
+
     </style>
     <nav class="navbar">
         <a href="">
@@ -44,6 +75,22 @@
 
         <span class="languageSelection">
             <img id="france-icon" src="@($"images/{GLOBALS.ActiveLanguage}-icon.png")" @onclick="SwapLanguages"/>
+
+            <div class="LanguageSelector">
+                <div class="LanguageSelector__header">
+                    <div class="LanguageSelector__arrow"></div>
+                </div>
+                <div class="LanguageSelector__body">
+                    <div class="LanguageSelector__content">
+                        <span id="LanguageSelector__french">
+                            <img class="flags" src="images/fr-icon.png" alt="French flag">
+                        </span>
+                        <span id="LanguageSelector__spanish">
+                            <img class="flags" src="images/sp-icon.png" alt="Spanish flag">
+                        </span>
+                    </div>
+                </div>
+            </div>
         </span>
 
         <input id="search-box" type="text" placeholder="Search Verb or Tense...  (Coming Soon!)" disabled>
