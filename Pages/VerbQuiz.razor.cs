@@ -14,15 +14,12 @@ namespace Savoir.Pages
         // list of user conjugations for currently selected verb
         public string[] userVerbs = new string[6] { "", "", "", "", "", "" };
 
-        public string[] possibleVerbs = Array.Empty<string>();
-        public string[] possibleTenses = Array.Empty<string>();
-
         public void RandomVerb()
         {
             Random rnd = new Random();
 
             // 1 -- GENERATE RANDOM VERB
-            string verb = possibleVerbs[rnd.Next(possibleVerbs.Length)];
+            string verb = GLOBALS.VerbsSelectedList[rnd.Next(GLOBALS.VerbsSelectedList.Count)];
 
             // 2 -- FIND VERB INDEX in small_conjugations.csv
             string[] verbRecord = Array.Empty<string>();
@@ -39,7 +36,7 @@ namespace Savoir.Pages
 
             Dictionary<string, string[]> allConjugations = new Dictionary<string, string[]>();
 
-            foreach (string _tense in possibleTenses)
+            foreach (string _tense in GLOBALS.TensesSelectedList)
             {
                 string[] tenseConjugations = new string[6] { "", "", "", "", "", "" };
 

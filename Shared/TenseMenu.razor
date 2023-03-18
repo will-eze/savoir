@@ -13,7 +13,7 @@
             int temp_i = i;
 
             <label class="toggle" for="@(tense.ToLower().Replace(" ", ""))" style="display: block">
-                <input style="vertical-align: middle" class="toggle__input" type="checkbox" checked="@GLOBALS.TensesChecked[temp_i]" @onchange="@((e) => CheckboxChanged(temp_i))" id="@(tense.ToLower().Replace(" ", ""))"/>
+                <input style="vertical-align: middle" class="toggle__input" type="checkbox" checked="@GLOBALS.TensesChecked![temp_i]" @onchange="@((e) => CheckboxChanged(temp_i))" id="@(tense.ToLower().Replace(" ", ""))"/>
                 <span style="vertical-align: middle" class="toggle__fill"></span>
                 @ToTitleCase(tense)
             </label>
@@ -41,7 +41,7 @@
     [Parameter] public bool VerbAndVocabSetShown { get; set; }
     [Parameter] public bool VocabSetShown { get; set; }
 
-    [Parameter] public string TenseMenuStyle { get; set; }
+    [Parameter] public string? TenseMenuStyle { get; set; }
 
     ErrorMessage? errorMsg;
 
@@ -49,7 +49,7 @@
 
     public void CheckboxChanged(int i)
     {
-        GLOBALS.TensesChecked[i] = !GLOBALS.TensesChecked[i];
+        GLOBALS.TensesChecked![i] = !GLOBALS.TensesChecked[i];
         UpdateTensesSelected();
     }
 
@@ -64,12 +64,14 @@
         // updates "TensesSelectedList" to match the Checkbox's states (stored in TensesChecked)
         GLOBALS.TensesSelectedList.Clear();
 
-        for (int i = 0; i <= 15; i++)
+        int i = 0;
+        foreach (string tense in GLOBALS.allTensesIndices.Keys.ToArray())
         {
-            if (GLOBALS.TensesChecked[i])
+            if (GLOBALS.TensesChecked![i])
             {
                 GLOBALS.TensesSelectedList.Add(GLOBALS.allTensesIndices.Keys.ToArray()[i]);
             }
+            i++;
         }
     }
 

@@ -21,12 +21,12 @@
                     <col span="1" style="width: 16.7%;">
                 </colgroup>
 
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[0]" conjugation="@verbQuiz.conjugations[0]" index="0" ID="@subjectPronouns[0]"      subjectPronoun="@textJe"    OnClipboardClicked="e => ClipboardClicked(0)" onTextChange="@(e => OnTextChange(e, 0))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(0))"/>
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[1]" conjugation="@verbQuiz.conjugations[1]" index="1" ID="@subjectPronouns[1]"      subjectPronoun="Tu"         OnClipboardClicked="e => ClipboardClicked(1)" onTextChange="@(e => OnTextChange(e, 1))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(1))"/>
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[2]" conjugation="@verbQuiz.conjugations[2]" index="2" ID="@subjectPronouns[2]"      subjectPronoun="Il/Elle/On" OnClipboardClicked="e => ClipboardClicked(2)" onTextChange="@(e => OnTextChange(e, 2))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(2))"/>
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[3]" conjugation="@verbQuiz.conjugations[3]" index="3" ID="@subjectPronouns[3]"      subjectPronoun="Nous"       OnClipboardClicked="e => ClipboardClicked(3)" onTextChange="@(e => OnTextChange(e, 3))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(3))"/>
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[4]" conjugation="@verbQuiz.conjugations[4]" index="4" ID="@subjectPronouns[4]"      subjectPronoun="Vous"       OnClipboardClicked="e => ClipboardClicked(4)" onTextChange="@(e => OnTextChange(e, 4))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(4))"/>
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[5]" conjugation="@verbQuiz.conjugations[5]" index="5" ID="@subjectPronouns[5]"      subjectPronoun="Ils/Elles"  OnClipboardClicked="e => ClipboardClicked(5)" onTextChange="@(e => OnTextChange(e, 5))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(5))"/>
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[0]" conjugation="@verbQuiz.conjugations[0]" index="0" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][0].Split('/')[0]"      subjectPronoun="@FirstSubjectPronoun"                                             OnClipboardClicked="e => ClipboardClicked(0)" onTextChange="@(e => OnTextChange(e, 0))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(0))"/>
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[1]" conjugation="@verbQuiz.conjugations[1]" index="1" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][1].Split('/')[0]"      subjectPronoun="@(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][1])"    OnClipboardClicked="e => ClipboardClicked(1)" onTextChange="@(e => OnTextChange(e, 1))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(1))"/>
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[2]" conjugation="@verbQuiz.conjugations[2]" index="2" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][2].Split('/')[0]"      subjectPronoun="@(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][2])"    OnClipboardClicked="e => ClipboardClicked(2)" onTextChange="@(e => OnTextChange(e, 2))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(2))"/>
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[3]" conjugation="@verbQuiz.conjugations[3]" index="3" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][3].Split('/')[0]"      subjectPronoun="@(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][3])"    OnClipboardClicked="e => ClipboardClicked(3)" onTextChange="@(e => OnTextChange(e, 3))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(3))"/>
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[4]" conjugation="@verbQuiz.conjugations[4]" index="4" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][4].Split('/')[0]"      subjectPronoun="@(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][4])"    OnClipboardClicked="e => ClipboardClicked(4)" onTextChange="@(e => OnTextChange(e, 4))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(4))"/>
+                <VerbInputRow userVerb="@verbQuiz.userVerbs[5]" conjugation="@verbQuiz.conjugations[5]" index="5" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][5].Split('/')[0]"      subjectPronoun="@(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][5])"    OnClipboardClicked="e => ClipboardClicked(5)" onTextChange="@(e => OnTextChange(e, 5))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(5))"/>
             </table>
 
             <input type="submit" class="Quiz__submit" id="VerbQuiz__submit" @onclick="ResetVerb" @bind-value="@buttonLabels[buttonLabelIndex]" />
@@ -46,27 +46,21 @@
     public bool userInputDisabled = false;
     public bool displayCorrections = false;
 
-    public string textJe = "Je";
+    public string FirstSubjectPronoun = ToTitleCase(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][0]);
 
     public int selectedField = -1;
     public int focusedIndex = -1;
 
     public string topText = string.Empty;
 
-    public string[] subjectPronouns = new string[6] { "je", "tu", "il", "nous", "vous", "ils" };
-
     private bool awaitingFocusJe = false;
 
     public VerbQuiz()
     {
         verbQuiz = new VerbQuizBase();
-        // on creating the VerbQuiz page, we use the set selected + tenses selected to store the possible verbs/tenses.
-        verbQuiz.possibleVerbs = GLOBALS.VerbsSelectedList.ToArray();
-        verbQuiz.possibleTenses = GLOBALS.TensesSelectedList.ToArray();
 
         verbQuiz.RandomVerb();
         topText = verbQuiz.verbinfo[0];
-
     }
 
     public void UpdateFocusedIndex(int i)
@@ -125,7 +119,7 @@
         if (i == 0)
         {
             // update the subject field "je" to "j' " if first letter is vowel
-            textJeChanged();
+            FirstSubjectPronounChanged();
         }
     }
 
@@ -133,37 +127,38 @@
     {
         if (selectedField >= 0 && selectedField <= 5)
         {
-            int caretPos = await JS.InvokeAsync<int>("getCaretPosition", subjectPronouns[focusedIndex]);
+            int caretPos = await JS.InvokeAsync<int>("getCaretPosition", GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][focusedIndex]);
 
             verbQuiz.userVerbs[focusedIndex] = verbQuiz.userVerbs[focusedIndex].Insert(caretPos, accentClicked.ToString());
             selectedField = focusedIndex;
 
-            await JS.InvokeVoidAsync("focusElement", subjectPronouns[selectedField]);
-            await JS.InvokeVoidAsync("setCaretPosition", subjectPronouns[selectedField], caretPos + 1);
+            await JS.InvokeVoidAsync("focusElement", GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][selectedField]);
+            await JS.InvokeVoidAsync("setCaretPosition", GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][selectedField], caretPos + 1);
         }
     }
 
-
-    public void textJeChanged()
+    public void FirstSubjectPronounChanged()
     {
-        char[] frenchVowels = { 'a', 'e', 'i', 'o', 'u', 'h', 'é', 'è', 'ê', 'ë', 'â', 'à', 'î', 'ì', 'ï', 'ô', 'ò', 'û', 'ù', 'ü' };
-
-        if (verbQuiz.userVerbs[0].Length > 0)
+        if (GLOBALS.ActiveLanguage == "fr")
         {
-            if (frenchVowels.Contains(verbQuiz.userVerbs[0][0]))
+            char[] frenchVowels = { 'a', 'e', 'i', 'o', 'u', 'h', 'é', 'è', 'ê', 'ë', 'â', 'à', 'î', 'ì', 'ï', 'ô', 'ò', 'û', 'ù', 'ü' };
+
+            if (verbQuiz.userVerbs[0].Length > 0)
             {
-                textJe = "J'";
+                if (frenchVowels.Contains(verbQuiz.userVerbs[0][0]))
+                {
+                    FirstSubjectPronoun = "J'";
+                }
+                else
+                {
+                    FirstSubjectPronoun = "Je";
+                }
             }
             else
             {
-                textJe = "Je";
+                FirstSubjectPronoun = "Je";
             }
         }
-        else
-        {
-            textJe = "Je";
-        }
-
     }
 
     public async Task DisplayEnglishTranslation()
@@ -184,25 +179,37 @@
             verbQuiz.userVerbs[i] = verbQuiz.userVerbs[i - 1];
             focusedIndex = i;
             selectedField = i;
-            await JS.InvokeVoidAsync("focusElement", subjectPronouns[focusedIndex]);
+            await JS.InvokeVoidAsync("focusElement", GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][focusedIndex].Split('/')[0]);
 
             int spaceIndex = (verbQuiz.userVerbs[i].Contains(" ")) ? verbQuiz.userVerbs[i].IndexOf(" ") : verbQuiz.userVerbs[i].Length;
-            await JS.InvokeVoidAsync("setCaretPosition", subjectPronouns[i], spaceIndex);
+            await JS.InvokeVoidAsync("setCaretPosition", GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][i].Split('/')[0], spaceIndex);
         }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
-        {
-            await JS.InvokeVoidAsync("focusElement", subjectPronouns[0]);
-            selectedField = 0;
-        }
-        else if (awaitingFocusJe)
+        if (firstRender || awaitingFocusJe)
         {
             awaitingFocusJe = false;
-            await JS.InvokeVoidAsync("focusElement", subjectPronouns[0]);
+            await JS.InvokeVoidAsync("focusElement", GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][0]);
             selectedField = 0;
         }
+    }
+
+    public static string ToTitleCase(string initialStr)
+    {
+        if (string.IsNullOrEmpty(initialStr))
+        {
+            return string.Empty;
+        }
+
+        var words = initialStr.Split(' ');
+
+        var t = string.Empty;
+        foreach (var word in words)
+        {
+            t += char.ToUpper(word[0]) + word.Substring(1) + ' ';
+        }
+        return t.Trim();
     }
 }
