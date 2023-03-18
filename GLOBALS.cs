@@ -90,7 +90,7 @@ namespace Savoir
                     UpdateSetsData();
                     UpdateTenses();
 
-                    allFilteredVerbs = all_verb_data!.Select(x => RemoveAccents(x.Split(',')[0]));
+                    allFilteredVerbs = all_verb_data!.Select(x => RemoveAccents(x.Split(',')[0])).ToList();
                 }
             }
         }
