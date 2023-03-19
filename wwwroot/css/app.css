@@ -105,6 +105,32 @@ html, body {
     border-bottom: 2px #000 solid;
 }
 
+
+/* SEARCH POPUP */
+
+.SearchContent {
+    margin: 0 auto;
+    background-color: #D9D9D9;
+    width: 90%;
+    text-align: center;
+    padding: 30px;
+    height: 80vh;
+    box-shadow: 5px 2px 6px 5px #000;
+    z-index: 1;
+    position: fixed;
+}
+
+.SearchContent__body {
+    margin: 0 auto;
+    width: 90%;
+    background-color: darkgrey;
+    overflow-x: scroll;
+}
+
+    .SearchContent__body td {
+        width: 10%;
+    }
+
 /* HOMEPAGE CONTENT */
 
 .IndexPage {
