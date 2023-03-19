@@ -12,6 +12,7 @@ html, body {
 
 .container {
     margin: 0px;
+    margin-top: 10%;
     max-width: 100%;
 }
 /* HOMEPAGE CONTENT */
@@ -323,21 +324,23 @@ td{
 /* ACCENT BOX */
 .AccentBox {
     background: #C1BDFF;
-    width: 155px;
+    width: 20%;
     border: 2px #000 solid;
     bottom: 20px;
     right: 20px;
     position: fixed;
+    font-size: 1.3em;
 }
 
 .AccentBox__header {
     background: #7b73fa;
+    font-size: 1.2em;
 }
 
 .AccentBox__buttons button {
     background: transparent;
     border: none;
-    padding: 6px;
+    margin: 2.5%;
 }
 
 /* CREDITS PAGE */
