@@ -1,77 +1,4 @@
 ﻿<div>
-    <style>
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1em;
-            background-color: #292929;
-            color: #fff;
-            position: fixed;
-            width: 100%;
-        }
-
-        .navbar input[type="text"] {
-            width: 30%;
-            padding: 0.5em;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            display: block;
-            margin: 0 auto;
-        }
-
-        #home-icon {
-            width: 60px;
-        }
-
-        #navbar__credits{
-            color: #a19d9d;
-            font-size: 0.9em;
-        }
-
-        #navbar__credits:hover{
-            color: #fff;
-        }
-
-        #flag-icon{
-            margin-left: 23px;
-            width: 40px;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        .LanguageSelector {
-            position: absolute;
-            width: 150px;
-            height: 60px;
-        }
-
-        .LanguageSelector__body {
-            background-color: #292929;
-            border: 1px #000 solid;
-            border-radius: 8px;
-            height: 60px;
-        }
-
-        .flags {
-            width: 40%;
-            border-radius: 20px;
-            margin: 0px 6px 0px 6px;
-            cursor: pointer;
-        }
-
-        .LanguageSelector__arrow {
-            position: relative;
-            width: 0;
-            height: 0;
-            margin-left: 35px;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 10px solid black;
-            z-index: 1;
-        }
-
-    </style>
     <nav class="navbar">
         <a href="">
             <img id="home-icon" src="images/logo-icon.png" />
@@ -97,7 +24,23 @@
             </div>
         </span>
 
-        <input id="search-box" type="text" placeholder="Search Verb or Tense..." @bind-value="@userSearchText" @bind-value:event="oninput">
+        <span class="Search">
+            <input id="search-box" type="text" placeholder="Search Verb or Tense..." @bind-value="@userSearchText" @bind-value:event="oninput">
+
+            <div class="SearchResultsBox">
+                <table class="SearchResults__table">
+                    <colgroup>
+                        <col span="5" style="width: 1000px;">
+                    </colgroup>
+                    <tr class="SearchResult">
+                        <td>
+                            one
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </span>
+
 
         <a href="Credits" id="navbar__credits">
             Credits

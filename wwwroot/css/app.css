@@ -15,6 +15,95 @@ html, body {
     margin-top: 120px;
     max-width: 100%;
 }
+
+
+/* NAV BAR */
+
+.navbar {
+    padding: 1em;
+    background-color: #292929;
+    color: #fff;
+    position: fixed;
+    width: 100%;
+}
+
+#home-icon {
+    width: 60px;
+}
+
+#navbar__credits {
+    color: #a19d9d;
+    font-size: 0.9em;
+}
+
+    #navbar__credits:hover {
+        color: #fff;
+    }
+
+#flag-icon {
+    margin-left: 23px;
+    width: 40px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.LanguageSelector {
+    position: absolute;
+    width: 150px;
+    height: 60px;
+}
+
+.LanguageSelector__body {
+    background-color: #292929;
+    border: 1px #000 solid;
+    border-radius: 8px;
+    height: 60px;
+}
+
+.flags {
+    width: 40%;
+    border-radius: 20px;
+    margin: 0px 6px 0px 6px;
+    cursor: pointer;
+}
+
+.LanguageSelector__arrow {
+    position: relative;
+    width: 0;
+    height: 0;
+    margin-left: 35px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid black;
+    z-index: 1;
+}
+
+.Search{
+    width: 30%;
+    margin: 0 auto;
+}
+
+.navbar input[type="text"] {
+    margin: 0 auto;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+.SearchResultsBox {
+    background-color: #DADADA;
+    width: 27%;
+    position: absolute;
+    z-index: 1;
+}
+
+.SearchResult td {
+    color: #000;
+    width: 100%;
+    border-bottom: 2px #000 solid;
+}
+
 /* HOMEPAGE CONTENT */
 
 .IndexPage {
@@ -318,12 +407,12 @@ a, a:hover, a:focus, a:active {
 /* ACCENT BOX */
 .AccentBox {
     background: #C1BDFF;
-    width: 10%;
+    width: 300px;
     border: 2px #000 solid;
     bottom: 20px;
     right: 20px;
     position: fixed;
-    font-size: 1.3em;
+    font-size: 1.5em;
 }
 
 .AccentBox__header {
