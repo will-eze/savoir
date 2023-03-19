@@ -9,14 +9,14 @@
             color: #fff;
         }
 
-            .navbar input[type="text"] {
-                width: 30%;
-                padding: 0.5em;
-                border-radius: 5px;
-                border: 1px solid #ccc;
-                display: block;
-                margin: 0 auto;
-            }
+        .navbar input[type="text"] {
+            width: 30%;
+            padding: 0.5em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            display: block;
+            margin: 0 auto;
+        }
 
         #home-icon {
             width: 60px;
@@ -30,10 +30,11 @@
         #navbar__credits:hover{
             color: #fff;
         }
-        #france-icon{
+        #flag-icon{
             margin-left: 23px;
             width: 40px;
             border-radius: 3px;
+            cursor: pointer;
         }
 
         .LanguageSelector {
@@ -74,19 +75,19 @@
         </a>
 
         <span class="languageSelection">
-            <img id="france-icon" src="@($"images/{GLOBALS.ActiveLanguage}-icon.png")" @onclick="SwapLanguages"/>
+            <img id="flag-icon" src="@($"images/{GLOBALS.ActiveLanguage}-icon.png")" @onclick="@(e => LanguageSelectorShown = !LanguageSelectorShown)"/>
 
-            <div class="LanguageSelector">
+            <div class="LanguageSelector" hidden="@(!LanguageSelectorShown)">
                 <div class="LanguageSelector__header">
                     <div class="LanguageSelector__arrow"></div>
                 </div>
                 <div class="LanguageSelector__body">
                     <div class="LanguageSelector__content">
                         <span id="LanguageSelector__french">
-                            <img class="flags" src="images/fr-icon.png" alt="French flag">
+                            <img class="flags" src="images/fr-icon.png" alt="French flag" @onclick="@(e => UpdateActiveLanguage("fr"))">
                         </span>
                         <span id="LanguageSelector__spanish">
-                            <img class="flags" src="images/sp-icon.png" alt="Spanish flag">
+                            <img class="flags" src="images/sp-icon.png" alt="Spanish flag" @onclick="@(e => UpdateActiveLanguage("sp"))">
                         </span>
                     </div>
                 </div>
@@ -101,29 +102,33 @@
     </nav>
 </div>
 
-<p2>@string.Join(',', searchResults.ToArray())</p2>
-
 @code {
-    public async void SwapLanguages()
+    // LANG SELECTOR CODE
+    public async void UpdateActiveLanguage(string newLang)
     {
-        GLOBALS.ActiveLanguage = (GLOBALS.ActiveLanguage == "fr") ? "sp" : "fr";
+        LanguageSelectorShown = false;
+        GLOBALS.ActiveLanguage = newLang;
         await refreshBody.InvokeAsync();
     }
 
     [Parameter] public EventCallback refreshBody { get; set; }
 
+    public bool LanguageSelectorShown = false;
+
+    // SEARCH BOX CODE
     public string userSearchText = string.Empty;
     List<string> searchResults => GLOBALS.allFilteredVerbs.ToArray().Where(x => x.StartsWith(userSearchText)).ToList();
 
     public void SearchTextChanged(ChangeEventArgs args)
     {
-        userSearchText = args.Value!.ToString()!.ToLower().TrimStart();
+        userSearchText = args.Value!.ToString()!.ToLower();
     }
 
     public Dictionary<string, string[]> GetVerbConjugations(string verb)
     {
         string[] verbRecord = Array.Empty<string>();
 
+        // find the verb's record in all_verb_data
         foreach (string record in GLOBALS.all_verb_data!)
         {
             if (record.Split(',')[0] == verb)
@@ -134,20 +139,24 @@
 
         Dictionary<string, string[]> verbConjugations = new Dictionary<string, string[]>();
 
+        // get all the tenses and their starting index in all_verb_data from GLOBALS info
         string[] tenses = GLOBALS.allTensesIndices.Keys.ToArray();
         int[] tensesStartingIndex = GLOBALS.allTensesIndices.Values.ToArray();
 
-        for(int i = 0; i < GLOBALS.allTensesIndices.Keys.Count; i++)
+        // iterate over all the tenses
+        for (int i = 0; i < GLOBALS.allTensesIndices.Keys.Count; i++)
         {
             string tense = tenses[i];
             int startIndex = tensesStartingIndex[i];
 
+            // use thet index to find the current tense conjugations
             string[] currentTenseConjugations = new string[6];
             for (int j = 0; i <= 5; i++)
             {
+                // add the conjugations to an array temporarily
                 currentTenseConjugations[i] = verbRecord[startIndex + j];
             }
-
+            // add the array to the dict of all conjugations
             verbConjugations.Add(tense, currentTenseConjugations);
         }
 
