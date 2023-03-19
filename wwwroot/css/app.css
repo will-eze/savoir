@@ -263,12 +263,6 @@ a, a:hover, a:focus, a:active {
 
 /* VERB QUIZ */
 
-/*
-td{
-    border: 2px #fff solid;
-}
-*/
-
 .VerbQuizz__clipboard {
     text-align: left;
     padding-left: 0;
@@ -365,11 +359,9 @@ iframe {
     font-size: 1.3em;
 }
 
-
 #app {
     overflow: hidden;
 }
-
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
