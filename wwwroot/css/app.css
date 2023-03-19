@@ -79,7 +79,7 @@ html, body {
 }
 
 .Search{
-    width: 30%;
+    width: 30.5%;
     margin: 0 auto;
 }
 
@@ -93,9 +93,10 @@ html, body {
 
 .SearchResultsBox {
     background-color: #DADADA;
-    width: 27%;
+    width: 30%;
     position: absolute;
     z-index: 1;
+    border-radius: 3px;
 }
 
 .SearchResult td {
