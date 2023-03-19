@@ -318,7 +318,7 @@ a, a:hover, a:focus, a:active {
 /* ACCENT BOX */
 .AccentBox {
     background: #C1BDFF;
-    width: 20%;
+    width: 10%;
     border: 2px #000 solid;
     bottom: 20px;
     right: 20px;
