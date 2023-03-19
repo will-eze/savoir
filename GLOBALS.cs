@@ -28,6 +28,12 @@ namespace Savoir
             { "sp", new[] { 'ü', 'ñ', 'é', 'á', 'í', 'ó', 'ú', '¿', '¡' } }
         };
 
+        public static Dictionary<string, int[]> languageAccentBoxDimensions = new Dictionary<string, int[]>
+        {
+            { "fr", new[] {3, 5} },
+            { "sp", new[] {3, 3} }
+        };
+
         public static Dictionary<char, char> allAccents = new Dictionary<char, char>
         {
             { 'ç', 'c' },

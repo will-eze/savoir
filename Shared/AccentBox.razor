@@ -5,10 +5,22 @@
     </div>
 
     <div class="AccentBox__buttons">
-        @foreach(char accent in GLOBALS.languageAllAccents[GLOBALS.ActiveLanguage])
-        {
-            <button id="@($"{accent}-id")" @onclick="(e => OnClick.InvokeAsync(accent))">@accent</button>
-        }
+        <table>
+            @for (int row = 0; row < GLOBALS.languageAccentBoxDimensions[GLOBALS.ActiveLanguage][0]; row++)
+            {
+                <tr>
+                    @for (int column = 0; column < GLOBALS.languageAccentBoxDimensions[GLOBALS.ActiveLanguage][1]; column++) 
+                    {
+                        int i = row * GLOBALS.languageAccentBoxDimensions[GLOBALS.ActiveLanguage][1] + column;
+                        char accent = GLOBALS.languageAllAccents[GLOBALS.ActiveLanguage][i];
+                        <td>
+                            <button id="@($"{accent}-id")" @onclick="(e => OnClick.InvokeAsync(accent))">@accent</button>
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+        
     </div>
 </div>
 
