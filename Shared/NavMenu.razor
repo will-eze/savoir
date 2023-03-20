@@ -96,7 +96,7 @@
         userSearchText = args.Value!.ToString()!.ToLower();
     }
 
-    List<string> searchResults => (userSearchText == string.Empty) ? new List<string>() : GLOBALS.allFilteredVerbs.Where(x => x.StartsWith(GLOBALS.RemoveAccents(userSearchText))).Select(x => GLOBALS.allFilteredVerbs.IndexOf(x)).Select(x => GLOBALS.allUnfilteredVerbs[x]).ToList();
+    List<string> searchResults => (userSearchText == string.Empty) ? new List<string>() : GLOBALS.allFilteredVerbs.Where(x => x.StartsWith(GLOBALS.RemoveAccents(userSearchText.ToLower()))).Select(x => GLOBALS.allFilteredVerbs.IndexOf(x)).Select(x => GLOBALS.allUnfilteredVerbs[x]).ToList();
 
     public Dictionary<string, string[]> GetVerbConjugations(string verb)
     {
