@@ -35,7 +35,9 @@
                     @foreach (string verb in searchResults)
                     {
                         <tr class="SearchResult" @onclick="e => DisplaySearchGUI(verb)">
-                            @verb
+                            <td>
+                                @verb
+                            </td>
                         </tr>
                     }
                     

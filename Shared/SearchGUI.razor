@@ -1,54 +1,59 @@
 ﻿<div class="SearchContent" hidden="@(!GLOBALS.displaySearchGUI)">
-    <div class="SearchContent__header">
-        @if (GLOBALS.displaySearchGUI && verbInfo.Length > 0)
-        {
-            <h2>@verbInfo[0]</h2>
-            @if (verbInfo[2] == "TRUE")
+    <div class="SearchContent__content" >
+        <div class="SearchContent__header">
+            <p class="SearchContent__close" @onclick="@(ResetGUI)">❌</p>
+            @if (GLOBALS.displaySearchGUI && verbInfo.Length > 0)
             {
-                <h2 style="color: #f23f3f;">Irregular</h2>
+                <span class="SearchContent__VerbInfo">@verbInfo[0]</span>
+                @if (verbInfo[2] == "TRUE")
+                {
+                    <span class="SearchContent__VerbInfo">
+                        <span>  • </span>
+                        <span style="color: #f23f3f;">Irregular</span>
+                    </span>
+
+                }
+                <h3 class="SearchContent__EnglishTranslation">@verbInfo[1]</h3>
             }
-            <h3>@verbInfo[1]</h3>
-        }
-        
-    </div>
-    <div class="SearchContent__body">
-        <table>
-            <thead>
-                <tr>
-                    <th>Pronoun</th>
 
-                    @foreach (string tense in GLOBALS.allTensesIndices.Keys)
-                    {
-                        <th>@GLOBALS.ToTitleCase(tense)</th>
-                    }
-                </tr>
-            </thead>
+        </div>
+        <div class="SearchContent__body">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="PronounColumn">Pronoun</th>
 
-            @if (GLOBALS.displaySearchGUI && verbConjugations.Count > 0)
-            {
-                <tbody>
-                    @foreach (string subject in GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage])
-                    {
-                        <tr>
-                            <td>
-                            @subject
-                            </td>
-                            @for (int i = 0; i < GLOBALS.allTensesIndices.Keys.Count; i++)
-                            {
-                                <td>
-                                    @verbConjugations[subject][i]
+                        @foreach (string tense in GLOBALS.allTensesIndices.Keys)
+                        {
+                            <th>@GLOBALS.ToTitleCase(tense)</th>
+                        }
+                    </tr>
+                </thead>
+
+                @if (GLOBALS.displaySearchGUI && verbConjugations.Count > 0)
+                {
+                    <tbody>
+                        @foreach (string subject in GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage])
+                        {
+                            <tr>
+                                <td class="PronounColumn">
+                                    @subject
                                 </td>
-                            }
-                        </tr>
-                    }
-                </tbody>
-            }
-        </table>
-    </div>
-    <div class="SearchContent__buttons">
-        <button class="Quiz__submit" @onclick="@(ResetGUI)">Done</button>
+                                @for (int i = 0; i < GLOBALS.allTensesIndices.Keys.Count; i++)
+                                {
+                                    <td>
+                                        @verbConjugations[subject][i]
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                }
+            </table>
+        </div>
     </div>
 </div>
+
 
 
 @code {
