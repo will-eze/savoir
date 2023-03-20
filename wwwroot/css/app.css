@@ -117,13 +117,16 @@ html, body {
 
 .SearchContent {
     background-color: #D9D9D9;
-    width: 90%;
+    width: 90vw;
+    height: 90vh;
     text-align: center;
     padding: 30px;
     box-shadow: 5px 2px 6px 5px #000;
     z-index: 2;
     position: fixed;
     color: #000;
+    overflow: scroll;
+    margin: 1% 1% 1%1%
 }
 
 .SearchContent__body {
@@ -133,7 +136,7 @@ html, body {
 }
 
 .SearchContent__body th{
-    width: 200px;
+    width: 30%;
 }
 
 
