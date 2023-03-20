@@ -108,33 +108,39 @@ html, body {
     font-size: 1.3em;
 }
 
+.SearchResults__table {
+    width: 100%;
+    overflow-x: scroll;
+}
+
 /* SEARCH POPUP */
 
 .SearchContent {
-    margin: 0 auto;
     background-color: #D9D9D9;
-    width: 90%;
+    width: 90vw;
+    height: 90vh;
     text-align: center;
     padding: 30px;
-    height: 80vh;
     box-shadow: 5px 2px 6px 5px #000;
     z-index: 2;
     position: fixed;
+    color: #000;
+    overflow: scroll;
+    margin: 1% 1% 1%1%
 }
 
 .SearchContent__body {
     margin: 0 auto;
-    width: 90%;
     background-color: darkgrey;
     overflow-x: scroll;
 }
 
-    .SearchContent__body td {
-        width: 10%;
-    }
+.SearchContent__body th{
+    width: 30%;
+}
+
 
 /* HOMEPAGE CONTENT */
-
 .IndexPage {
     margin-left: 70px;
     max-width: 90%;
