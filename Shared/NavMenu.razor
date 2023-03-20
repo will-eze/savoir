@@ -62,7 +62,6 @@
     public bool LanguageSelectorShown = false;
 
     // DISPLAY SEARCH INFO/POPUP CODE
-    public bool displaySearchGUI { get; set; } = false;
     public Dictionary<string, string[]> verbConjugations { get; set; } = new Dictionary<string, string[]>();
     public string[] verbInfo { get; set; } = Array.Empty<string>();
 
@@ -73,6 +72,7 @@
     {
         VerbConjugationsChanged.InvokeAsync(GetVerbConjugations(verb));
         VerbInfoChanged.InvokeAsync(GetVerbInfo(verb));
+        GLOBALS.displaySearchGUI = true;
     }
 
     // SEARCH BOX CODE

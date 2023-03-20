@@ -84,6 +84,8 @@ namespace Savoir
         public static bool[]? TensesChecked;
 
         public static string selectedModuleName = string.Empty;
+
+        public static bool displaySearchGUI = false;
             
         private static string _activeLanguage = string.Empty;
         public static string ActiveLanguage
