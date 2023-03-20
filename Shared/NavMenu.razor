@@ -25,13 +25,10 @@
         </span>
 
         <span class="Search">
-            <input id="search-box" type="text" placeholder="Search Verb or Tense..." @bind-value="@userSearchText" @bind-value:event="oninput">
+            <input id="search-box" type="text" placeholder="Search Verb..." @bind-value="@userSearchText" @bind-value:event="oninput">
 
             <div class="SearchResultsBox">
                 <table class="SearchResults__table">
-                    <colgroup>
-                        <col span="5" style="width: 1000px;">
-                    </colgroup>
 
                     @foreach (string verb in searchResults)
                     {
