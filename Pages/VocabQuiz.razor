@@ -102,6 +102,8 @@
 
     public bool isUserCorrect()
     {
+        char[] possibleApostrophes = new char[3] { '‘', '’', '\'' };
+
         string[] correctTranslations;
 
         if (vocabQuiz.vocabInfo[1].Contains('/'))
@@ -111,6 +113,11 @@
         else
         {
             correctTranslations = new string[1] { vocabQuiz.vocabInfo[1] };
+        }
+
+        foreach (char ch in possibleApostrophes)
+        {
+            vocabQuiz.userInput = vocabQuiz.userInput.Replace(ch, '’');
         }
 
         if (correctTranslations.Any(x => x == vocabQuiz.userInput))

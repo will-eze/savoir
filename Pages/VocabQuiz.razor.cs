@@ -16,6 +16,8 @@ namespace Savoir.Pages
 
             string vocabEnglish = GLOBALS.PossibleVocabList[rnd.Next(0, GLOBALS.PossibleVocabList.Count)];
 
+            vocabEnglish = "until";
+
             string vocabFrench = string.Empty;
 
             foreach (string record in GLOBALS.all_vocab_data!)

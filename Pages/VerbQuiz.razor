@@ -5,34 +5,33 @@
 
 <PageTitle>Verb Quiz</PageTitle>
 
-<div class="VerbQuiz">
+<div class="VerbQuiz" @onkeydown="@KeyPressed" @onkeyup="@KeyUp">
     <div class="VerbQuiz__header">
         <h2 id="VerbQuiz__infinitive" @onclick="DisplayEnglishTranslation">@topText</h2>
         <h3 id="VerbQuiz__tense">@verbQuiz.verbinfo[2]</h3>
         <ErrorMessage @ref="errorMsg" activeErrorText="@("Blank fields are not allowed.")" inactiveErrorText="" />
     </div>
     <div class="VerbQuiz__inputs">
-        <form onsubmit="return false" autocomplete="off">
-            <table class="VerbQuiz__table">
-                <colgroup>
-                    <col span="1" style="width: 33.3%;">
-                    <col span="1" style="width: 33.3%;">
-                    <col span="1" style="width: 16.7%;">
-                    <col span="1" style="width: 16.7%;">
-                </colgroup>
+        <table class="VerbQuiz__table">
+            <colgroup>
+                <col span="1" style="width: 33.3%;">
+                <col span="1" style="width: 33.3%;">
+                <col span="1" style="width: 16.7%;">
+                <col span="1" style="width: 16.7%;">
+            </colgroup>
 
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[0]" conjugation="@verbQuiz.conjugations[0]" index="0" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][0].Split('/')[0]" subjectPronoun="@FirstSubjectPronoun" OnClipboardClicked="e => ClipboardClicked(0)" onTextChange="@(e => OnTextChange(e, 0))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(0))" />
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[1]" conjugation="@verbQuiz.conjugations[1]" index="1" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][1].Split('/')[0]" subjectPronoun="@(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][1])" OnClipboardClicked="e => ClipboardClicked(1)" onTextChange="@(e => OnTextChange(e, 1))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(1))" />
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[2]" conjugation="@verbQuiz.conjugations[2]" index="2" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][2].Split('/')[0]" subjectPronoun="@(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][2])" OnClipboardClicked="e => ClipboardClicked(2)" onTextChange="@(e => OnTextChange(e, 2))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(2))" />
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[3]" conjugation="@verbQuiz.conjugations[3]" index="3" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][3].Split('/')[0]" subjectPronoun="@(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][3])" OnClipboardClicked="e => ClipboardClicked(3)" onTextChange="@(e => OnTextChange(e, 3))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(3))" />
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[4]" conjugation="@verbQuiz.conjugations[4]" index="4" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][4].Split('/')[0]" subjectPronoun="@(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][4])" OnClipboardClicked="e => ClipboardClicked(4)" onTextChange="@(e => OnTextChange(e, 4))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(4))" />
-                <VerbInputRow userVerb="@verbQuiz.userVerbs[5]" conjugation="@verbQuiz.conjugations[5]" index="5" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][5].Split('/')[0]" subjectPronoun="@(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][5])" OnClipboardClicked="e => ClipboardClicked(5)" onTextChange="@(e => OnTextChange(e, 5))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(5))" />
-            </table>
+            <VerbInputRow userVerb="@verbQuiz.userVerbs[0]" conjugation="@verbQuiz.conjugations[0]" index="0" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][0].Split('/')[0]" subjectPronoun="@FirstSubjectPronoun" OnClipboardClicked="e => ClipboardClicked(0)" onTextChange="@(e => OnTextChange(e, 0))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(0))" />
+            <VerbInputRow userVerb="@verbQuiz.userVerbs[1]" conjugation="@verbQuiz.conjugations[1]" index="1" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][1].Split('/')[0]" subjectPronoun="@(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][1])" OnClipboardClicked="e => ClipboardClicked(1)" onTextChange="@(e => OnTextChange(e, 1))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(1))" />
+            <VerbInputRow userVerb="@verbQuiz.userVerbs[2]" conjugation="@verbQuiz.conjugations[2]" index="2" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][2].Split('/')[0]" subjectPronoun="@(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][2])" OnClipboardClicked="e => ClipboardClicked(2)" onTextChange="@(e => OnTextChange(e, 2))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(2))" />
+            <VerbInputRow userVerb="@verbQuiz.userVerbs[3]" conjugation="@verbQuiz.conjugations[3]" index="3" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][3].Split('/')[0]" subjectPronoun="@(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][3])" OnClipboardClicked="e => ClipboardClicked(3)" onTextChange="@(e => OnTextChange(e, 3))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(3))" />
+            <VerbInputRow userVerb="@verbQuiz.userVerbs[4]" conjugation="@verbQuiz.conjugations[4]" index="4" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][4].Split('/')[0]" subjectPronoun="@(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][4])" OnClipboardClicked="e => ClipboardClicked(4)" onTextChange="@(e => OnTextChange(e, 4))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(4))" />
+            <VerbInputRow userVerb="@verbQuiz.userVerbs[5]" conjugation="@verbQuiz.conjugations[5]" index="5" ID="@GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][5].Split('/')[0]" subjectPronoun="@(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][5])" OnClipboardClicked="e => ClipboardClicked(5)" onTextChange="@(e => OnTextChange(e, 5))" userInputDisabled="userInputDisabled" displayCorrections="displayCorrections" selectedField="selectedField" onFocusedIndexChanged="@(e => UpdateFocusedIndex(5))" />
+        </table>
 
-            <input type="submit" class="Quiz__submit" id="VerbQuiz__submit" @onclick="ResetVerb" @bind-value="@buttonLabels[buttonLabelIndex]" />
-        </form>
+        <button class="Quiz__submit" id="VerbQuiz__submit" @onclick="ResetVerb">@buttonLabels[buttonLabelIndex]</button>
     </div>
-        <AccentBox OnClick="OnAccentClicked" />
+
+    <AccentBox OnClick="OnAccentClicked" />
 </div>
 
 @code {
@@ -40,20 +39,22 @@
 
     ErrorMessage? errorMsg;
 
-    public string[] buttonLabels = new string[2] { "Submit", "Next" };
-    public int buttonLabelIndex = 0;
+    private string[] buttonLabels = new string[2] { "Submit", "Next" };
+    private int buttonLabelIndex = 0;
 
-    public bool userInputDisabled = false;
-    public bool displayCorrections = false;
+    private bool userInputDisabled = false;
+    private bool displayCorrections = false;
 
-    public string FirstSubjectPronoun = GLOBALS.ToTitleCase(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][0]);
+    private string FirstSubjectPronoun = GLOBALS.ToTitleCase(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][0]);
 
-    public int selectedField = -1;
-    public int focusedIndex = -1;
+    private int selectedField = -1;
+    private int focusedIndex = -1;
 
-    public string topText = string.Empty;
+    private string topText = string.Empty;
 
     private bool awaitingFocusJe = false;
+
+    private bool keyDown = false;
 
     public VerbQuiz()
     {
@@ -107,6 +108,23 @@
         else
         {
             await errorMsg!.displayError();
+        }
+    }
+
+    public async Task KeyPressed(KeyboardEventArgs args)
+    {
+        if ((args.Code == "Enter" || args.Code == "NumpadEnter") && !keyDown)
+        {
+            keyDown = true;
+            await ResetVerb();
+        }
+    }
+
+    public void KeyUp(KeyboardEventArgs args)
+    {
+        if (args.Code == "Enter" || args.Code == "NumpadEnter")
+        {
+            keyDown = false;
         }
     }
 

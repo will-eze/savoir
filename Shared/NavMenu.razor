@@ -1,4 +1,6 @@
-﻿<div>
+﻿@inject NavigationManager Navigation
+
+<div>
     <nav class="navbar">
         <a href="">
             <img id="home-icon" src="images/logo-icon.png" />
@@ -55,6 +57,7 @@
     // LANG SELECTOR CODE
     public async void UpdateActiveLanguage(string newLang)
     {
+        Navigation.NavigateTo("/");
         LanguageSelectorShown = false;
         GLOBALS.ActiveLanguage = newLang;
         await refreshBody.InvokeAsync();
