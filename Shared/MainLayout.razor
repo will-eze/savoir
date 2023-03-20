@@ -3,12 +3,11 @@
     
 <NavMenu refreshBody="@RefreshMainContents" VerbConjugationsChanged="(args) => UpdateVerbConjugations(args)" VerbInfoChanged="(args) => UpdateVerbInfo(args)" />
 
-<SearchGUI verbConjugations="@verbConjugations" verbInfo="@verbInfo" displaySearchGUI="@displaySearchGUI"/>
+<SearchGUI verbConjugations="@verbConjugations" verbInfo="@verbInfo"/>
 
 <CascadingValue Value="@dummy">
     <main class="container">
         @Body
-        <p2>@displaySearchGUI</p2>
     </main>
 </CascadingValue>
 
@@ -34,7 +33,6 @@
     public void UpdateVerbInfo(string[] _verbInfo)
     {
         verbInfo = _verbInfo;
-        displaySearchGUI = true;
     }
 }
 

@@ -1,6 +1,6 @@
-﻿<div class="SearchContent" hidden="@(!displaySearchGUI)">
+﻿<div class="SearchContent" hidden="@(!GLOBALS.displaySearchGUI)">
     <div class="SearchContent__header">
-        @if (displaySearchGUI)
+        @if (GLOBALS.displaySearchGUI && verbInfo.Length > 0)
         {
             <h2>@verbInfo[0]</h2>
             @if (verbInfo[2] == "TRUE")
@@ -24,7 +24,7 @@
                 </tr>
             </thead>
 
-            @if (displaySearchGUI)
+            @if (GLOBALS.displaySearchGUI && verbConjugations.Count > 0)
             {
                 <tbody>
                     @foreach (string subject in GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage])
@@ -46,13 +46,19 @@
         </table>
     </div>
     <div class="SearchContent__buttons">
-        <button class="Quiz__submit" @onclick="@(e => displaySearchGUI = false)">Done</button>
+        <button class="Quiz__submit" @onclick="@(ResetGUI)">Done</button>
     </div>
 </div>
 
 
 @code {
-    [Parameter] public bool displaySearchGUI { get; set; } = false;
     [Parameter] public Dictionary<string, string[]> verbConjugations { get; set; } = new Dictionary<string, string[]>();
     [Parameter] public string[] verbInfo { get; set; } = Array.Empty<string>();
+
+    public void ResetGUI()
+    {
+        GLOBALS.displaySearchGUI = false;
+        verbConjugations.Clear();
+        verbInfo = Array.Empty<string>();
+    }
 }
