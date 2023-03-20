@@ -1,6 +1,7 @@
 ﻿<div class="SearchContent" hidden="@(!GLOBALS.displaySearchGUI)">
     <div class="SearchContent__content" >
         <div class="SearchContent__header">
+            <p class="SearchContent__close" @onclick="@(ResetGUI)">❌</p>
             @if (GLOBALS.displaySearchGUI && verbInfo.Length > 0)
             {
                 <span class="SearchContent__VerbInfo">@verbInfo[0]</span>
@@ -18,12 +19,9 @@
         </div>
         <div class="SearchContent__body">
             <table>
-                <colgroup>
-                    <col style="width:20%">
-                </colgroup>
                 <thead>
                     <tr>
-                        <th>Pronoun</th>
+                        <th class="PronounColumn">Pronoun</th>
 
                         @foreach (string tense in GLOBALS.allTensesIndices.Keys)
                         {
@@ -38,7 +36,7 @@
                         @foreach (string subject in GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage])
                         {
                             <tr>
-                                <td>
+                                <td class="PronounColumn">
                                     @subject
                                 </td>
                                 @for (int i = 0; i < GLOBALS.allTensesIndices.Keys.Count; i++)
@@ -52,9 +50,6 @@
                     </tbody>
                 }
             </table>
-        </div>
-        <div class="SearchContent__buttons">
-            <button class="Quiz__submit" @onclick="@(ResetGUI)">Done</button>
         </div>
     </div>
 </div>
