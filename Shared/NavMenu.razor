@@ -27,7 +27,7 @@
         </span>
 
         <span class="Search">
-            <input id="search-box" type="text" placeholder="Search Verb..." @onfocus="@(e => searchHasFocus = true)" @onblur="@(e => searchHasFocus = false)" @bind-value="@userSearchText" @bind-value:event="oninput">
+            <input id="search-box" type="text" placeholder="Search Verb..." @onfocus="@(e => searchHasFocus = true)" @onblur="@SearchLostFocus" @bind-value="@userSearchText" @bind-value:event="oninput">
 
             <div class="SearchResultsBox" hidden="@(!searchHasFocus)">
                 <table class="SearchResults__table">
@@ -52,6 +52,12 @@
 
 @code {
     private bool searchHasFocus = false;
+
+    private async Task SearchLostFocus()
+    {
+        await Task.Delay(400);
+        searchHasFocus = false;
+    }
 
     // LANG SELECTOR CODE
     public async void UpdateActiveLanguage(string newLang)
