@@ -46,7 +46,7 @@
     public bool userInputDisabled = false;
     public bool displayCorrections = false;
 
-    public string FirstSubjectPronoun = ToTitleCase(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][0]);
+    public string FirstSubjectPronoun = GLOBALS.ToTitleCase(GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][0]);
 
     public int selectedField = -1;
     public int focusedIndex = -1;
@@ -194,22 +194,5 @@
             await JS.InvokeVoidAsync("focusElement", GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage][0]);
             selectedField = 0;
         }
-    }
-
-    public static string ToTitleCase(string initialStr)
-    {
-        if (string.IsNullOrEmpty(initialStr))
-        {
-            return string.Empty;
-        }
-
-        var words = initialStr.Split(' ');
-
-        var t = string.Empty;
-        foreach (var word in words)
-        {
-            t += char.ToUpper(word[0]) + word.Substring(1) + ' ';
-        }
-        return t.Trim();
     }
 }

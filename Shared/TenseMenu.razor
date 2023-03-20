@@ -15,7 +15,7 @@
             <label class="toggle" for="@(tense.ToLower().Replace(" ", ""))" style="display: block">
                 <input style="vertical-align: middle" class="toggle__input" type="checkbox" checked="@GLOBALS.TensesChecked![temp_i]" @onchange="@((e) => CheckboxChanged(temp_i))" id="@(tense.ToLower().Replace(" ", ""))"/>
                 <span style="vertical-align: middle" class="toggle__fill"></span>
-                @ToTitleCase(tense)
+                @GLOBALS.ToTitleCase(tense)
             </label>
         }
 
@@ -85,22 +85,5 @@
         {
             await errorMsg!.displayError();
         }
-    }
-
-    public string ToTitleCase(string initialStr)
-    {
-        if (string.IsNullOrEmpty(initialStr))
-        {
-            return string.Empty;
-        }
-
-        var words = initialStr.Split(' ');
-
-        var t = string.Empty;
-        foreach (var word in words)
-        {
-            t += char.ToUpper(word[0]) + word.Substring(1) + ' ';
-        }
-        return t.Trim();
     }
 }

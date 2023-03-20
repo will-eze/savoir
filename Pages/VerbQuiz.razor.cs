@@ -22,15 +22,7 @@ namespace Savoir.Pages
             string verb = GLOBALS.VerbsSelectedList[rnd.Next(GLOBALS.VerbsSelectedList.Count)];
 
             // 2 -- FIND VERB INDEX in small_conjugations.csv
-            string[] verbRecord = Array.Empty<string>();
-
-            foreach (string record in GLOBALS.all_verb_data!)
-            {
-                if (record.Split(',')[0] == verb)
-                {
-                    verbRecord = record.Split(',');
-                }
-            }
+            string[] verbRecord = GLOBALS.all_verb_data![GLOBALS.allFilteredVerbs.FindIndex(x => x == verb)].Split(',');
 
             // 3 -- FIND ALL CONJUGATIONS FOR THE VERB IN THE SELECTED / POSSIBLE TENSES
 

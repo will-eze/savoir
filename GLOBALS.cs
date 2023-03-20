@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Reflection.PortableExecutable;
 using System.Data;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace Savoir
 {
@@ -58,6 +59,7 @@ namespace Savoir
             { 'ú', 'u' },
         };
 
+        public static List<string> allUnfilteredVerbs = new List<string>();
         public static List<string> allFilteredVerbs = new List<string>();
 
         public static string[]? all_verb_data;
@@ -96,6 +98,7 @@ namespace Savoir
                     UpdateSetsData();
                     UpdateTenses();
 
+                    allUnfilteredVerbs = all_verb_data!.Select(x => x.Split(',')[0]).ToList();
                     allFilteredVerbs = all_verb_data!.Select(x => RemoveAccents(x.Split(',')[0])).ToList();
                 }
             }
@@ -183,16 +186,31 @@ namespace Savoir
             }
         }
 
-        private static string RemoveAccents(string s)
+        public static string RemoveAccents(string input)
         {
-            foreach (char ch in s)
+            string output = string.Empty;
+            foreach (char ch in input)
             {
-                if (allAccents.ContainsKey(ch))
-                {
-                    s = s.Replace(ch, allAccents[ch]);
-                }
+                output += (allAccents.ContainsKey(ch)) ? allAccents[ch] : ch;
             }
-            return s;
+            return output;
+        }
+
+        public static string ToTitleCase(string initialStr)
+        {
+            if (string.IsNullOrEmpty(initialStr))
+            {
+                return string.Empty;
+            }
+
+            var words = initialStr.Split(' ');
+
+            var t = string.Empty;
+            foreach (var word in words)
+            {
+                t += char.ToUpper(word[0]) + word.Substring(1) + ' ';
+            }
+            return t.Trim();
         }
     }
 }

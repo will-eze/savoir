@@ -32,21 +32,24 @@
                     <colgroup>
                         <col span="5" style="width: 1000px;">
                     </colgroup>
-                    <tr class="SearchResult">
-                        <td>
-                            one
-                        </td>
-                    </tr>
+
+                    @foreach (string verb in searchResults)
+                    {
+                        <tr class="SearchResult" @onclick="e => DisplaySearchGUI(verb)">
+                            @verb
+                        </tr>
+                    }
+                    
                 </table>
             </div>
         </span>
-
 
         <a href="Credits" id="navbar__credits">
             Credits
         </a>
     </nav>
 </div>
+
 
 @code {
     // LANG SELECTOR CODE
@@ -61,51 +64,68 @@
 
     public bool LanguageSelectorShown = false;
 
+    // DISPLAY SEARCH INFO/POPUP CODE
+    public bool displaySearchGUI { get; set; } = false;
+    public Dictionary<string, string[]> verbConjugations { get; set; } = new Dictionary<string, string[]>();
+    public string[] verbInfo { get; set; } = Array.Empty<string>();
+
+    [Parameter] public EventCallback<Dictionary<string, string[]>> VerbConjugationsChanged { get; set; }
+    [Parameter] public EventCallback<string[]> VerbInfoChanged { get; set; }
+
+    public void DisplaySearchGUI(string verb)
+    {
+        VerbConjugationsChanged.InvokeAsync(GetVerbConjugations(verb));
+        VerbInfoChanged.InvokeAsync(GetVerbInfo(verb));
+    }
+
     // SEARCH BOX CODE
     public string userSearchText = string.Empty;
-    List<string> searchResults => GLOBALS.allFilteredVerbs.ToArray().Where(x => x.StartsWith(userSearchText)).ToList();
 
     public void SearchTextChanged(ChangeEventArgs args)
     {
         userSearchText = args.Value!.ToString()!.ToLower();
     }
 
+    List<string> searchResults => (userSearchText == string.Empty) ? new List<string>() : GLOBALS.allFilteredVerbs.Where(x => x.StartsWith(GLOBALS.RemoveAccents(userSearchText))).Select(x => GLOBALS.allFilteredVerbs.IndexOf(x)).Select(x => GLOBALS.allUnfilteredVerbs[x]).ToList();
+
     public Dictionary<string, string[]> GetVerbConjugations(string verb)
     {
-        string[] verbRecord = Array.Empty<string>();
+        // gets the verb's record
+        string[] verbRecord = GLOBALS.all_verb_data![GLOBALS.allUnfilteredVerbs.FindIndex(x => x == verb)].Split(',');
 
-        // find the verb's record in all_verb_data
-        foreach (string record in GLOBALS.all_verb_data!)
-        {
-            if (record.Split(',')[0] == verb)
-            {
-                verbRecord = record.Split(',');
-            }
-        }
+        // get all the tenses and their starting index in all_verb_data from GLOBALS info
+        string[] subjects = GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage];
+        int[] tensesStartingIndex = GLOBALS.allTensesIndices.Values.ToArray();
 
         Dictionary<string, string[]> verbConjugations = new Dictionary<string, string[]>();
 
-        // get all the tenses and their starting index in all_verb_data from GLOBALS info
-        string[] tenses = GLOBALS.allTensesIndices.Keys.ToArray();
-        int[] tensesStartingIndex = GLOBALS.allTensesIndices.Values.ToArray();
-
-        // iterate over all the tenses
-        for (int i = 0; i < GLOBALS.allTensesIndices.Keys.Count; i++)
+        // iterate over all the subjects for the language
+        for (int i = 0; i < subjects.Length; i++)
         {
-            string tense = tenses[i];
-            int startIndex = tensesStartingIndex[i];
+            // define an array which will store the conjugations for every tense for this subject
+            string[] currentSubjectConjugations = new string[GLOBALS.allTensesIndices.Keys.Count];
 
-            // use thet index to find the current tense conjugations
-            string[] currentTenseConjugations = new string[6];
-            for (int j = 0; i <= 5; i++)
+            // populate the array by using the csv data
+            for (int k = 0; k < currentSubjectConjugations.Length; k++)
             {
-                // add the conjugations to an array temporarily
-                currentTenseConjugations[i] = verbRecord[startIndex + j];
+                currentSubjectConjugations[k] = verbRecord[tensesStartingIndex[k] + i];
             }
-            // add the array to the dict of all conjugations
-            verbConjugations.Add(tense, currentTenseConjugations);
+
+            // add the array to the verbConjugations
+            verbConjugations.Add(subjects[i], currentSubjectConjugations);
         }
 
+        // maps "subject" (directly seen in GLOBALS.languageSubjectPronouns) to string[] of conjugations, with the same order of tenses as seen in GLOBALS.allTensesIndices
         return verbConjugations;
+    }
+
+    public string[] GetVerbInfo(string verb)
+    {
+        string[] verbRecord = GLOBALS.all_verb_data![GLOBALS.allUnfilteredVerbs.FindIndex(x => x == verb)].Split(',');
+
+        // [verbInfinitive, Translation, TRUE if irregular, FALSE if regular verb.]
+        string[] verbInfo = { verbRecord[0], verbRecord[1], verbRecord[2] };
+
+        return verbInfo;
     }
 }

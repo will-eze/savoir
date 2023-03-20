@@ -1,0 +1,58 @@
+﻿<div class="SearchContent" hidden="@(!displaySearchGUI)">
+    <div class="SearchContent__header">
+        @if (displaySearchGUI)
+        {
+            <h2>@verbInfo[0]</h2>
+            @if (verbInfo[2] == "TRUE")
+            {
+                <h2 style="color: #f23f3f;">Irregular</h2>
+            }
+            <h3>@verbInfo[1]</h3>
+        }
+        
+    </div>
+    <div class="SearchContent__body">
+        <table>
+            <thead>
+                <tr>
+                    <th>Pronoun</th>
+
+                    @foreach (string tense in GLOBALS.allTensesIndices.Keys)
+                    {
+                        <th>@GLOBALS.ToTitleCase(tense)</th>
+                    }
+                </tr>
+            </thead>
+
+            @if (displaySearchGUI)
+            {
+                <tbody>
+                    @foreach (string subject in GLOBALS.languageSubjectPronouns[GLOBALS.ActiveLanguage])
+                    {
+                        <tr>
+                            <td>
+                            @subject
+                            </td>
+                            @for (int i = 0; i < GLOBALS.allTensesIndices.Keys.Count; i++)
+                            {
+                                <td>
+                                    @verbConjugations[subject][i]
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            }
+        </table>
+    </div>
+    <div class="SearchContent__buttons">
+        <button class="Quiz__submit" @onclick="@(e => displaySearchGUI = false)">Done</button>
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public bool displaySearchGUI { get; set; } = false;
+    [Parameter] public Dictionary<string, string[]> verbConjugations { get; set; } = new Dictionary<string, string[]>();
+    [Parameter] public string[] verbInfo { get; set; } = Array.Empty<string>();
+}
