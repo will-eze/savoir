@@ -28,7 +28,7 @@
         </span>
 
         <span class="Search">
-            <input id="search-box" type="text" placeholder="Search Verb..." @onfocus="@(e => displaySearchResults = true)" @onblur="@searchResultLostFocus" @bind-value="@userSearchText" @bind-value:event="oninput">
+            <input id="search-box" type="text" placeholder="Search Verbs..." @onfocus="@(e => displaySearchResults = true)" @onblur="@searchResultLostFocus" @bind-value="@userSearchText" @bind-value:event="oninput">
 
             <div class="SearchResultsBox" hidden="@(!displaySearchResults || searchResults.Count == 0)">
                 <table class="SearchResults__table">
@@ -97,7 +97,7 @@
         userSearchText = args.Value!.ToString()!.ToLower();
     }
 
-    List<string> searchResults => (userSearchText == string.Empty) ? new List<string>() : GLOBALS.allFilteredVerbs.Where(x => x.StartsWith(GLOBALS.RemoveAccents(userSearchText.ToLower()))).Select(x => GLOBALS.allFilteredVerbs.IndexOf(x)).Select(x => GLOBALS.allUnfilteredVerbs[x]).ToList();
+    List<string> searchResults => (userSearchText == string.Empty) ? new List<string>() : GLOBALS.allFilteredVerbs.Where(x => x.StartsWith(GLOBALS.RemoveAccents(userSearchText.ToLower()))).Select(x => GLOBALS.allFilteredVerbs.IndexOf(x)).Select(x => (GLOBALS.allUnfilteredVerbs[x])).ToList();
 
     public Dictionary<string, string[]> GetVerbConjugations(string verb)
     {
