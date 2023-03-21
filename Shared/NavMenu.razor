@@ -1,4 +1,5 @@
 ﻿@inject NavigationManager Navigation
+@inject IJSRuntime JS
 
 <div>
     <nav class="navbar">
@@ -27,15 +28,15 @@
         </span>
 
         <span class="Search">
-            <input id="search-box" type="text" placeholder="Search Verb..." @onfocus="@(e => searchHasFocus = true)" @onblur="@SearchLostFocus" @bind-value="@userSearchText" @bind-value:event="oninput">
+            <input id="search-box" type="text" placeholder="Search Verb..." @onfocus="@(e => displaySearchResults = true)" @onblur="@searchResultLostFocus" @bind-value="@userSearchText" @bind-value:event="oninput">
 
-            <div class="SearchResultsBox" hidden="@(!searchHasFocus)">
+            <div class="SearchResultsBox" hidden="@(!displaySearchResults || searchResults.Count == 0)">
                 <table class="SearchResults__table">
 
                     @foreach (string verb in searchResults)
                     {
                         <tr class="SearchResult" @onclick="e => DisplaySearchGUI(verb)">
-                            <td>
+                            <td id="SearchResult__table_definition">
                                 @verb
                             </td>
                         </tr>
@@ -53,12 +54,12 @@
 
 
 @code {
-    private bool searchHasFocus = false;
+    private bool displaySearchResults = false;
 
-    private async Task SearchLostFocus()
+    public async Task searchResultLostFocus()
     {
-        await Task.Delay(400);
-        searchHasFocus = false;
+        await Task.Delay(100);
+        displaySearchResults = false;
     }
 
     // LANG SELECTOR CODE
