@@ -1,5 +1,5 @@
 ﻿<div class="SearchContent" hidden="@(!GLOBALS.displaySearchGUI)">
-    <div class="SearchContent__content" @onclick="@(e => GLOBALS.displaySearchGUI = true)">
+    <div class="SearchContent__content" >
         <div class="SearchContent__header">
             <p class="SearchContent__close" @onclick="@(ResetGUI)">❌</p>
             @if (GLOBALS.displaySearchGUI && verbInfo.Length > 0)
