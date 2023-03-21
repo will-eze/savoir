@@ -112,6 +112,11 @@ html, body {
     font-size: 1.3em;
 }
 
+.SearchResult:hover {
+    background-color: #595959;
+    color: #fff;
+}
+
 .SearchResults__table {
     width: 100%;
     overflow-x: scroll;
@@ -130,7 +135,6 @@ html, body {
     right: 0;
     bottom: 0;
     left: 0;
-    height: 100vh;
     background-color: rgba(26, 25, 22, 0.9);
     min-height: 1000vh;
     z-index: 2;
@@ -528,9 +532,14 @@ a, a:hover, a:focus, a:active {
     margin: 2.5%;
 }
 
-/* CREDITS PAGE */
+.AccentBox__buttons button:hover {
+    background-color: #7b73fa;
+}
 
-.CreditsPage{
+
+
+/* CREDITS PAGE */
+.CreditsPage {
     height: 100vh;
 }
 
