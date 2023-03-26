@@ -1,2 +1,0 @@
-C:\Users\obimy\source\repos\savoir-master\obj\Release\net7.0\browser-wasm\PubTmp\Out\testEnvironments.json
-C:\Users\obimy\source\repos\savoir-master\obj\Release\net7.0\browser-wasm\PubTmp\Out\web.config

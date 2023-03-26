@@ -1,2 +1,0 @@
-C:\Users\obimy\source\repos\temp-release\testEnvironments.json
-C:\Users\obimy\source\repos\temp-release\web.config
