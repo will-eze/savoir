@@ -1,0 +1,146 @@
+﻿@page "/VocabQuiz"
+@inherits VocabQuizBase
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<PageTitle>Vocab Quiz</PageTitle>
+
+<div class="VocabQuiz">
+    <AccentBox OnClick="@OnAccentClicked" />
+
+    <div class="VocabQuiz__header">
+        <h2 id="VocabQuiz__module">@GLOBALS.selectedModuleName</h2>
+    </div>
+
+    <div class="VocabQuiz__bubble">
+        <p id="VocabQuiz__vocab">@vocabQuiz.wordShownToUser</p>
+    </div>
+
+    <form onsubmit="return false" autocomplete="off">
+        <div class="VocabQuiz__input">
+            <input type="text" id="VocabQuiz__translation" disabled="@userInputDisabled" value="@vocabQuiz.userInput" @oninput="((e) => OnTextChange(e))" placeholder="Enter the translation..." autocomplete="off" />
+            @if (displayTranslation) {
+                <img class="correction-img" src="@( (isUserCorrect()) ? "images/tick.png" : "images/cross.png" )" />
+            }
+            <p id="VocabQuiz__correction">@correctTranslation</p>
+        </div>
+        <input type="submit" class="Quiz__submit" id="VocabQuiz__submit" @onclick="ResetVocab">@buttonLabels[buttonLabelIndex]</input>
+    </form>
+</div>
+
+
+@code {
+    public VocabQuizBase vocabQuiz;
+
+    public string correctTranslation = string.Empty;
+
+    public string[] buttonLabels = new string[2] { "Submit", "Next" };
+    public int buttonLabelIndex = 0;
+    public bool userInputDisabled = false;
+
+    public bool displayTranslation = false;
+
+    public bool awaitingTextFocus = false;
+
+    public VocabQuiz()
+    {
+        vocabQuiz = new VocabQuizBase();
+
+        vocabQuiz.RandomVocab();
+
+        vocabQuiz.userInput = string.Empty;
+        displayTranslation = false;
+        correctTranslation = string.Empty;
+    }
+
+    public void ResetVocab()
+    {
+        if (vocabQuiz.userInput != string.Empty)
+        {
+            // if SUBMIT button clicked
+            if (buttonLabelIndex == 0)
+            {
+                buttonLabelIndex = 1;
+                userInputDisabled = true;
+                displayTranslation = true;
+            }
+
+            // if NEXT button clicked
+            else
+            {
+                buttonLabelIndex = 0;
+                userInputDisabled = false;
+
+                vocabQuiz.RandomVocab();
+
+                vocabQuiz.userInput = string.Empty;
+                displayTranslation = false;
+                correctTranslation = string.Empty;
+
+                awaitingTextFocus = true;
+            }
+        }
+    }
+
+    public void OnTextChange(ChangeEventArgs args)
+    {
+        if (args.Value!.ToString() is not null)
+        {
+            vocabQuiz.userInput = args.Value.ToString()!;
+        }
+    }
+
+    public async Task OnAccentClicked(char accentClicked)
+    {
+        int caretPos = await JS.InvokeAsync<int>("getCaretPosition", "VocabQuiz__translation");
+
+        vocabQuiz.userInput = vocabQuiz.userInput.Insert(caretPos, accentClicked.ToString());
+
+        await JS.InvokeVoidAsync("focusElement", "VocabQuiz__translation");
+        await JS.InvokeVoidAsync("setCaretPosition", "VocabQuiz__translation", caretPos + 1);
+    }
+
+    public bool isUserCorrect()
+    {
+        char[] possibleApostrophes = new char[3] { '‘', '’', '\'' };
+
+        string[] correctTranslations;
+
+        if (vocabQuiz.vocabInfo[1].Contains('/'))
+        {
+            correctTranslations = vocabQuiz.vocabInfo[1].Split('/');
+        }
+        else
+        {
+            correctTranslations = new string[1] { vocabQuiz.vocabInfo[1] };
+        }
+
+        foreach (char ch in possibleApostrophes)
+        {
+            vocabQuiz.userInput = vocabQuiz.userInput.Replace(ch, '’');
+        }
+
+        if (correctTranslations.Any(x => x == vocabQuiz.userInput))
+        {
+            return true;
+        }
+        else
+        {
+            correctTranslation = vocabQuiz.vocabInfo[1];
+            return false;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("focusElement", "VocabQuiz__translation");
+        }
+        else if (awaitingTextFocus)
+        {
+            awaitingTextFocus = false;
+            await JS.InvokeVoidAsync("focusElement", "VocabQuiz__translation");
+        }
+    }
+}

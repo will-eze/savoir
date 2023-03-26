@@ -1,0 +1,38 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager Navigation
+    
+<NavMenu refreshBody="@RefreshMainContents" VerbConjugationsChanged="(args) => UpdateVerbConjugations(args)" VerbInfoChanged="(args) => UpdateVerbInfo(args)" />
+
+<SearchGUI verbConjugations="@verbConjugations" verbInfo="@verbInfo"/>
+
+<CascadingValue Value="@dummy">
+    <main class="container">
+        @Body
+    </main>
+</CascadingValue>
+
+@code {
+    int dummy = 0;
+
+    public void RefreshMainContents()
+    {
+        dummy = dummy + 3;
+        StateHasChanged();
+    }
+
+
+    public Dictionary<string, string[]> verbConjugations = new Dictionary<string, string[]>();
+    public string[] verbInfo = Array.Empty<string>();
+    public bool displaySearchGUI = false;
+
+    public void UpdateVerbConjugations(Dictionary<string, string[]> _verbConjugations)
+    {
+        verbConjugations = _verbConjugations;
+    }
+
+    public void UpdateVerbInfo(string[] _verbInfo)
+    {
+        verbInfo = _verbInfo;
+    }
+}
+

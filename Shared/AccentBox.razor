@@ -1,0 +1,29 @@
+﻿<div class="AccentBox" id="AccentBox__id">
+
+    <div class="AccentBox__header">
+        Accents
+    </div>
+
+    <div class="AccentBox__buttons">
+        <table>
+            @for (int row = 0; row < GLOBALS.languageAccentBoxDimensions[GLOBALS.ActiveLanguage][0]; row++)
+            {
+                <tr>
+                    @for (int column = 0; column < GLOBALS.languageAccentBoxDimensions[GLOBALS.ActiveLanguage][1]; column++) 
+                    {
+                        int i = row * GLOBALS.languageAccentBoxDimensions[GLOBALS.ActiveLanguage][1] + column;
+                        char accent = GLOBALS.languageAllAccents[GLOBALS.ActiveLanguage][i];
+                        <td>
+                            <button id="@($"{accent}-id")" @onclick="(e => OnClick.InvokeAsync(accent))">@accent</button>
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+        
+    </div>
+</div>
+
+@code {
+    [Parameter] public EventCallback<char> OnClick { get; set; }
+}

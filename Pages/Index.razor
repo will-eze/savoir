@@ -1,0 +1,165 @@
+﻿@page "/"
+@inject HttpClient Http
+
+<PageTitle>savoir</PageTitle>
+
+<div class="IndexPage" style="@indexPageStyle">
+
+    <!--arbitrary, true statement because I can't figure out how to add the resetting statement "int i = 0" without it-->
+    @if(1 == 1)
+    {
+        int i = 0;
+        foreach (string header in GLOBALS.setNamesDict!.Keys)
+        {
+            <h2 class="sub-heading">@header</h2>
+            foreach (string setName in GLOBALS.setNamesDict[header])
+            {
+                int temp_i = i;
+                <button id="@setName.ToLower()" class="set-btn" style="@setColours?[temp_i]" @onclick="e => OnSetButtonPressed(temp_i)">@setName</button>
+                i++;
+            }
+        }
+    }
+</div>
+
+<TenseMenu VerbAndVocabSetShown="@VerbAndVocabSetShown" VerbSetShown="@VerbSetShown" VocabSetShown="@VocabSetShown" TenseMenuStyle="@tenseMenuStyle"/>
+
+@code {
+    public bool VerbAndVocabSetShown = true;
+    public bool VerbSetShown = true;
+    public bool VocabSetShown = true;
+
+    private int activeSetIndex { get; set; } = -1;
+
+    public const string activeSetColour = "background:#726EFF";
+    public const string inactiveSetColour = "background:#D9D9D9";
+
+    public string[]? setColours = Array.Empty<string>();
+
+    public const string indexPageActiveStyle = "margin-right: 0%; transition: margin-right 0.2s";
+    public const string indexPageInactiveStyle = "margin-right: 25%; transition: margin-right 0.2s";
+
+    public const string tenseMenuActiveStyle = "margin-right: -26.9%; transition: margin-right 0.2s";
+    public const string tenseMenuInactiveStyle = "margin-right: 0%; transition: margin-right 0.2s";
+
+    public string indexPageStyle = indexPageActiveStyle;
+    public string tenseMenuStyle = tenseMenuActiveStyle;
+
+
+    protected override void OnInitialized()
+    {
+        setColours = Enumerable.Repeat(inactiveSetColour, GLOBALS.numberOfSets).ToArray();
+    }
+
+    public void OnSetButtonPressed(int setIndexClicked)
+    {
+        // if user clicks the active set, then hide the tenseMenu and update the colour / activeSetIndex
+        if (activeSetIndex == setIndexClicked)
+        {
+            activeSetIndex = -1;
+            setColours![setIndexClicked] = inactiveSetColour;
+
+            indexPageStyle = indexPageActiveStyle;
+            tenseMenuStyle = tenseMenuActiveStyle;
+        }
+        // if user clicks non-active set, activate that set by showing tenseMenu and updating colours / activeSetIndex
+        else if (activeSetIndex != setIndexClicked)
+        {
+            setColours![setIndexClicked] = activeSetColour;
+
+            if (activeSetIndex != -1)
+            {
+                setColours[activeSetIndex] = inactiveSetColour;
+
+            }
+            activeSetIndex = setIndexClicked;
+
+            indexPageStyle = indexPageInactiveStyle;
+            tenseMenuStyle = tenseMenuInactiveStyle;
+        }
+
+        if (activeSetIndex >= 0)
+        {
+            string setName = GLOBALS.setNames![activeSetIndex];
+
+            // activeSetIndex has now been updated to match the selected set, so make appropriate updates to other components
+
+            if (GLOBALS.setNamesVerb!.Contains(setName))
+            {
+                foreach (string _data in GLOBALS.sets_verb_data!)
+                {
+                    if (_data.StartsWith(GLOBALS.setNames![activeSetIndex].Replace(',', '/')))
+                    {
+                        string[] record = _data.Split(',');
+                        GLOBALS.VerbsSelectedList = record[2].Split('+').ToList();
+                    }
+                }
+            }
+            // if the active set is only a verb set:
+            if (GLOBALS.setNamesVocab!.Contains(setName))
+            {
+                foreach (string _data in GLOBALS.sets_vocab_data!)
+                {
+                    if (_data.StartsWith(GLOBALS.setNames![activeSetIndex].Replace(',', '/')))
+                    {
+                        string[] record = _data.Split(',');
+                        GLOBALS.PossibleVocabList = record[2].Split('+').ToList();
+                    }
+                }
+            }
+
+            // determine whether to show "Practice" or "Verb + Vocab" buttons on the TenseMenu page
+
+            if (activeSetIndex >= 0 && activeSetIndex <= GLOBALS.setNames!.Length)
+            {
+
+                if (GLOBALS.setNamesVerb!.Contains(setName) && GLOBALS.setNamesVocab!.Contains(setName))
+                {
+                    VerbSetShown = false;
+                    VerbAndVocabSetShown = true;
+                    VocabSetShown = false;
+                }
+                else
+                {
+                    if (GLOBALS.setNamesVerb!.Contains(setName))
+                    {
+                        VerbSetShown = true;
+                        VerbAndVocabSetShown = false;
+                        VocabSetShown = false;
+                    }
+                    else if (GLOBALS.setNamesVocab!.Contains(setName))
+                    {
+                        VerbSetShown = false;
+                        VerbAndVocabSetShown = false;
+                        VocabSetShown = true;
+                    }
+                }
+
+                GLOBALS.selectedModuleName = GLOBALS.setNames![activeSetIndex];
+            }
+        }
+    }
+
+    private int _dummyVar;
+    [CascadingParameter] public int DummyVar
+    {
+        get { return _dummyVar; }
+        set
+        {
+            // whenever the page is rendered again from the parent component (ie if user changes language), this occurs
+            _dummyVar = value;
+
+            setColours = Enumerable.Repeat(inactiveSetColour, GLOBALS.numberOfSets).ToArray();
+
+            // if app has been initialised AND a set was selected
+            if (setColours!.Length > 0 && activeSetIndex >= 0)
+            {
+                activeSetIndex = -1;
+
+                indexPageStyle = indexPageActiveStyle;
+                tenseMenuStyle = tenseMenuActiveStyle;
+            }
+        }
+    }
+}
+

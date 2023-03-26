@@ -1,0 +1,67 @@
+﻿
+
+<tr>
+    <td>
+        <label for="@($"{ID}_subject")" class="VerbQuiz__pronouns">@subjectPronoun</label>
+    </td>
+    <td>
+        <input type="text" id="@ID" class="VerbQuiz__input" @onfocus="@(e => focusedIndexChanged())" disabled="@userInputDisabled" autocomplete="off" value="@userVerb" @oninput="@(e => TextChanged(e))">
+    </td>
+    <td>
+        @if (selectedField == index - 1 && selectedField >= 0)
+        {
+            <img class="correction-img" src="images/copy.png" @onclick="(e => ClipboardClicked())" />
+        }
+    </td>
+    <td>
+        @if (displayCorrections)
+        {
+            if (GetUserCorrect())
+            {
+                <img class="correction-img" src="images/tick.png" />
+            }
+            else
+            {
+                <label id="@($"{ID}_result")" class="result">@conjugation</label>
+            }
+        }
+    </td>
+</tr>
+
+@code {
+    [Parameter] public string? userVerb { get; set; }
+    [Parameter] public string? conjugation { get; set; }
+    [Parameter] public string? ID { get; set; }
+    [Parameter] public string? subjectPronoun { get; set; }
+
+    [Parameter] public bool userInputDisabled { get; set; }
+    [Parameter] public bool displayCorrections { get; set; }
+
+    [Parameter] public int selectedField { get; set; }
+    [Parameter] public int index { get; set; }
+
+
+    [Parameter] public EventCallback OnClipboardClicked { get; set; }
+    private async Task ClipboardClicked() => await OnClipboardClicked.InvokeAsync();
+
+
+    [Parameter] public EventCallback<ChangeEventArgs> onTextChange { get; set; }
+    private async Task TextChanged(ChangeEventArgs args) => await onTextChange.InvokeAsync(args);
+
+    [Parameter] public EventCallback onFocusedIndexChanged { get; set; }
+    private async Task focusedIndexChanged() => await onFocusedIndexChanged.InvokeAsync();
+
+    public ElementReference textInput;
+
+
+    // this code deals with masculine;feminine found in all_verb.csv by ensuring the corrections are right.
+    public bool GetUserCorrect()
+    {
+        if (conjugation!.Contains(';'))
+        {
+            string[] possibleConjugations = conjugation.Split(';');
+            return possibleConjugations.Any(p => p == userVerb!.Trim());
+        }
+        return conjugation == userVerb!.Trim();
+    }
+}

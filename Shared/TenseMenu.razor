@@ -1,0 +1,89 @@
+﻿@inject NavigationManager Navigation
+
+<div class="TenseMenu" style="@TenseMenuStyle">
+    <div class="TenseMenu__header">
+        <h2>Tenses</h2>
+        <ErrorMessage @ref="errorMsg" activeErrorText="@("You must select at least one tense to practice.")" inactiveErrorText="@("Select the tenses you would like to practice")" />
+    </div>
+    <div class="TenseMenu__toggleBox">
+
+        @for(int i = 0; i < GLOBALS.allTensesIndices.Keys.Count; i++)
+        {
+            string tense = GLOBALS.allTensesIndices.Keys.ToArray()[i];
+            int temp_i = i;
+
+            <label class="toggle" for="@(tense.ToLower().Replace(" ", ""))" style="display: block">
+                <input style="vertical-align: middle" class="toggle__input" type="checkbox" checked="@GLOBALS.TensesChecked![temp_i]" @onchange="@((e) => CheckboxChanged(temp_i))" id="@(tense.ToLower().Replace(" ", ""))"/>
+                <span style="vertical-align: middle" class="toggle__fill"></span>
+                @GLOBALS.ToTitleCase(tense)
+            </label>
+        }
+
+    </div>
+    <div class="TenseMenu__buttons">
+        <div class="TenseMenu__buttons_studySet" hidden="@(!VerbSetShown)">
+            <button class="TenseMenu__buttons__practice" @onclick="OnVerbQuizClick">Practice</button>
+        </div>
+        <div class="TenseMenu__buttons_moduleSet" hidden="@(!VerbAndVocabSetShown)">
+            <button class="TenseMenu__buttons__verbs" @onclick="OnVerbQuizClick">Verbs</button>
+            <button class="TenseMenu__buttons__verbs" @onclick="@(e => Navigation.NavigateTo("VocabQuiz"))">Vocab</button>
+        </div>
+
+        <div class="TenseMenu__buttons_extraSet" hidden="@(!VocabSetShown)">
+            <button class="TenseMenu__buttons__practice" @onclick="@(e => Navigation.NavigateTo("VocabQuiz"))">Practice</button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public bool TenseMenuHidden { get; set; }
+    [Parameter] public bool VerbSetShown { get; set; }
+    [Parameter] public bool VerbAndVocabSetShown { get; set; }
+    [Parameter] public bool VocabSetShown { get; set; }
+
+    [Parameter] public string? TenseMenuStyle { get; set; }
+
+    ErrorMessage? errorMsg;
+
+    public bool displayError = false;
+
+    public void CheckboxChanged(int i)
+    {
+        GLOBALS.TensesChecked![i] = !GLOBALS.TensesChecked[i];
+        UpdateTensesSelected();
+    }
+
+    public TenseMenu()
+    {
+        // initial update of TensesSelectedList --> to ensure that it's up-to-date even if the user makes no checkbox changes.
+        UpdateTensesSelected();
+    }
+
+    private void UpdateTensesSelected()
+    {
+        // updates "TensesSelectedList" to match the Checkbox's states (stored in TensesChecked)
+        GLOBALS.TensesSelectedList.Clear();
+
+        int i = 0;
+        foreach (string tense in GLOBALS.allTensesIndices.Keys.ToArray())
+        {
+            if (GLOBALS.TensesChecked![i])
+            {
+                GLOBALS.TensesSelectedList.Add(GLOBALS.allTensesIndices.Keys.ToArray()[i]);
+            }
+            i++;
+        }
+    }
+
+    public async Task OnVerbQuizClick()
+    {
+        if (GLOBALS.TensesSelectedList.Count > 0)
+        {
+            Navigation.NavigateTo("VerbQuiz");
+        }
+        else
+        {
+            await errorMsg!.displayError();
+        }
+    }
+}
