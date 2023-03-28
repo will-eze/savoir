@@ -130,7 +130,7 @@ html, body {
 
 .SearchContent {
     padding: 20px;
-    position: fixed;
+    position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
