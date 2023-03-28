@@ -2,6 +2,8 @@
 @inherits VocabQuizBase
 @inject HttpClient Http
 @inject IJSRuntime JS
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@using Newtonsoft.Json
 
 <PageTitle>Vocab Quiz</PageTitle>
 
@@ -30,7 +32,7 @@
 
 
 @code {
-    public VocabQuizBase vocabQuiz;
+    public VocabQuizBase vocabQuiz = new VocabQuizBase();
 
     public string correctTranslation = string.Empty;
 
@@ -41,17 +43,6 @@
     public bool displayTranslation = false;
 
     public bool awaitingTextFocus = false;
-
-    public VocabQuiz()
-    {
-        vocabQuiz = new VocabQuizBase();
-
-        vocabQuiz.RandomVocab();
-
-        vocabQuiz.userInput = string.Empty;
-        displayTranslation = false;
-        correctTranslation = string.Empty;
-    }
 
     public void ResetVocab()
     {
@@ -129,6 +120,19 @@
             correctTranslation = vocabQuiz.vocabInfo[1];
             return false;
         }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (GLOBALS.PossibleVocabList.Count == 0)
+        {
+            GLOBALS.VerbsSelectedList = JsonConvert.DeserializeObject<List<string>>(await sessionStorage.GetItemAsync<string>("possibleVerbs"))!;
+            GLOBALS.TensesSelectedList = JsonConvert.DeserializeObject<List<string>>(await sessionStorage.GetItemAsync<string>("possibleTenses"))!;
+            GLOBALS.PossibleVocabList = JsonConvert.DeserializeObject<List<string>>(await sessionStorage.GetItemAsync<string>("possibleVocab"))!;
+            GLOBALS.selectedModuleName = await sessionStorage.GetItemAsync<string>("selectedModuleName")!;
+        }
+
+        vocabQuiz.RandomVocab();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
