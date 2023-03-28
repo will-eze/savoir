@@ -11,9 +11,9 @@
     <link rel="icon" type="image/png" href="favicon.ico" />
 </head>
 
-<body>
+<body onbeforeunload="callDotNetFunctionFromJS('PageAboutToBeReloaded')">
     <div id="app">
-        <div id="loadingMessage">
+        <div class="loadingMessage">
             téléchargement des fichiers...
         </div>
     </div>
@@ -50,6 +50,10 @@
         getFocusedElement = function () {
             return document.activeElement.id;
         };
+
+        callDotNetFunctionFromJS = function(functionName) {
+            DotNet.invokeMethodAsync('Savoir', functionName);
+        }
     </script>
 </body>
 

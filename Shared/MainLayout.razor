@@ -1,5 +1,7 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager Navigation
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
+@using Newtonsoft.Json
     
 <NavMenu refreshBody="@RefreshMainContents" VerbConjugationsChanged="(args) => UpdateVerbConjugations(args)" VerbInfoChanged="(args) => UpdateVerbInfo(args)" />
 
@@ -33,6 +35,30 @@
     public void UpdateVerbInfo(string[] _verbInfo)
     {
         verbInfo = _verbInfo;
+    }
+
+
+    [JSInvokable]
+    public static async void PageAboutToBeReloaded()
+    {
+        if (callLoadDataIntoStorage is not null)
+        {
+            await callLoadDataIntoStorage.Invoke();
+        }
+    }
+
+    private static Func<Task>? callLoadDataIntoStorage;
+
+    protected override void OnInitialized()
+    {
+        callLoadDataIntoStorage = LoadDataIntoStorage;
+    }
+
+    public async Task LoadDataIntoStorage()
+    {
+        await sessionStorage.SetItemAsync("possibleVerbs", JsonConvert.SerializeObject(GLOBALS.VerbsSelectedList));
+        await sessionStorage.SetItemAsync("possibleTenses", JsonConvert.SerializeObject(GLOBALS.TensesSelectedList));
+        await sessionStorage.SetItemAsync("possibleVocab", JsonConvert.SerializeObject(GLOBALS.PossibleVocabList));
     }
 }
 

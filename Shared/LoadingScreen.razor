@@ -22,9 +22,19 @@ else
             object-fit: cover;
         }
     </style>
-    <video autoplay="autoplay" muted id="logoAnimation">
-        <source src="videos/logo-animation.mp4" type="video/mp4" />
-    </video>
+
+    if (Navigation.Uri.Replace("#", string.Empty) == Navigation.BaseUri)
+    {
+        <video autoplay="autoplay" muted id="logoAnimation">
+            <source src="videos/logo-animation.mp4" type="video/mp4" />
+        </video>
+    }
+    else
+    {
+        <div class="loadingMessage">
+            téléchargement des fichiers...
+        </div>
+    }
 }
 
 @code {
@@ -35,7 +45,7 @@ else
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (Navigation.Uri.Replace("#", string.Empty) == Navigation.BaseUri && firstRender)
+        if (firstRender)
         {
             // firstly initialise GLOBALS / assign filler values to the dictionary of languageData
             foreach (string language in GLOBALS.allLanguages)
@@ -49,13 +59,12 @@ else
             // finally set the activeLanguage which updates all the active GLOBALS data 
             GLOBALS.ActiveLanguage = "fr";
             // then, once files are loaded, display the opening video and load the content.
-            await Task.Delay(4000);
+            if (Navigation.Uri.Replace("#", string.Empty) == Navigation.BaseUri)
+            {
+                await Task.Delay(4000);
+            }
             contentLoaded = true;
             StateHasChanged();
-        }
-        else
-        {
-            contentLoaded = true;
         }
     }
 
