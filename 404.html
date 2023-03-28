@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" class="notranslate" translate="no">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="google" value="notranslate">
+    <title>savoir</title>
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="favicon.ico" />
+</head>
+
+<body onbeforeunload="callDotNetFunctionFromJS('PageAboutToBeReloaded')">
+    <div id="app">
+        <div class="loadingMessage">
+            téléchargement des fichiers...
+        </div>
+    </div>
+
+    <div>
+        <a href="/" id="blazor-error-ui">
+            An error has occurred. Click to navigate to home page.
+        </a>
+    </div>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        getCaretPosition = function (id) {
+            var el = document.getElementById(id);
+            var pos = 0;
+
+            if (el.selectionStart || el.selectionStart == '0') {
+                pos = el.selectionStart;
+            }
+
+            return pos;
+        };
+
+        setCaretPosition = function (id, pos) {
+            el = document.getElementById(id);
+            el.setSelectionRange(pos, pos);
+        };
+
+        focusElement = function(id) {
+            var el = document.getElementById(id);
+            el.focus();
+        };
+
+        getFocusedElement = function () {
+            return document.activeElement.id;
+        };
+
+        callDotNetFunctionFromJS = function(functionName) {
+            DotNet.invokeMethodAsync('Savoir', functionName);
+        }
+    </script>
+</body>
+
+</html>
