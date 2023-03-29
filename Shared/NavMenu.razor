@@ -54,6 +54,7 @@
 
 
 @code {
+
     private bool displaySearchResults = false;
 
     public async Task searchResultLostFocus()
@@ -65,7 +66,7 @@
     // LANG SELECTOR CODE
     public async void UpdateActiveLanguage(string newLang)
     {
-        Navigation.NavigateTo("/savoir/");
+        Navigation.NavigateTo("/");
         LanguageSelectorShown = false;
         GLOBALS.ActiveLanguage = newLang;
         await refreshBody.InvokeAsync();

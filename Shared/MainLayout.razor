@@ -60,6 +60,7 @@
         await sessionStorage.SetItemAsync("possibleTenses", JsonConvert.SerializeObject(GLOBALS.TensesSelectedList));
         await sessionStorage.SetItemAsync("possibleVocab", JsonConvert.SerializeObject(GLOBALS.PossibleVocabList));
         await sessionStorage.SetItemAsync("selectedModuleName", GLOBALS.selectedModuleName);
+        await sessionStorage.SetItemAsync("activeLanguage", GLOBALS.ActiveLanguage);
     }
 }
 

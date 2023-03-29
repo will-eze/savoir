@@ -1,5 +1,6 @@
 ﻿@inject NavigationManager Navigation
 @inject HttpClient Http
+@inject Blazored.SessionStorage.ISessionStorageService sessionStorage
 
 @if (contentLoaded)
 {
@@ -56,8 +57,18 @@ else
 
             // then load all the data into GLOBALS.languageData
             await LoadAllData();
-            // finally set the activeLanguage which updates all the active GLOBALS data 
-            GLOBALS.ActiveLanguage = "fr";
+            // finally set the activeLanguage which updates all the active GLOBALS data.
+            try
+            {
+                GLOBALS.ActiveLanguage = await sessionStorage.GetItemAsync<string>("activeLanguage")!;
+            }
+            catch (Exception ex)
+            {
+                GLOBALS.ActiveLanguage = "fr";
+            }
+
+
+            
             // then, once files are loaded, display the opening video and load the content.
             if (Navigation.Uri.Replace("#", string.Empty) == Navigation.BaseUri)
             {
