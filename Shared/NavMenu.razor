@@ -65,7 +65,7 @@
     // LANG SELECTOR CODE
     public async void UpdateActiveLanguage(string newLang)
     {
-        Navigation.NavigateTo("/");
+        Navigation.NavigateTo("/savoir/");
         LanguageSelectorShown = false;
         GLOBALS.ActiveLanguage = newLang;
         await refreshBody.InvokeAsync();
